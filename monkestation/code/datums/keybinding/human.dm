@@ -7,7 +7,10 @@
 /datum/keybinding/emote/down(client/user)
 	. = ..()
 	if(ishuman(user.mob))
-		user.mob.emote(name)
+		var/mob/living/carbon/human/Player = user.mob
+		Player.emote(name)
+		spawn(10)
+			Player.emote_cooling_down = FALSE
 
 /datum/keybinding/emote/fart
 	key = "Shift-F"
@@ -18,7 +21,10 @@
 
 /datum/keybinding/emote/fart/down(client/user)
 	if(ishuman(user.mob) && user.mob.stat == CONSCIOUS)
-		..()
+		var/mob/living/carbon/human/Player = user.mob
+		if(!Player.emote_cooling_down)
+			Player.emote_cooling_down = TRUE
+			..()
 
 /datum/keybinding/emote/scream
 	key = "Shift-R"
@@ -29,9 +35,11 @@
 
 /datum/keybinding/emote/scream/down(client/user)
 	if(ishuman(user.mob) && user.mob.stat == CONSCIOUS)
-		var/mob/living/carbon/human/Emoter = user.mob
-		Emoter.adjustOxyLoss(5)
-		..()
+		var/mob/living/carbon/human/Player = user.mob
+		if(!Player.emote_cooling_down)
+			Player.emote_cooling_down = TRUE
+			Player.adjustOxyLoss(5)
+			..()
 
 /datum/keybinding/emote/clap
 	key = "Unbound"
@@ -42,10 +50,10 @@
 
 /datum/keybinding/emote/clap/down(client/user)
 	if(ishuman(user.mob) && user.mob.stat == CONSCIOUS)
-		var/mob/living/carbon/human/Emoter = user.mob
-		Emoter.apply_damage(0.25, "brute", BODY_ZONE_R_ARM)
-		Emoter.apply_damage(0.25, "brute", BODY_ZONE_L_ARM)
-		..()
+		var/mob/living/carbon/human/Player = user.mob
+		if(!Player.emote_cooling_down)
+			Player.emote_cooling_down = TRUE
+			..()
 
 /datum/keybinding/emote/flip
 	key = "Unbound"
@@ -56,13 +64,15 @@
 
 /datum/keybinding/emote/flip/down(client/user)
 	if(ishuman(user.mob) && user.mob.stat == CONSCIOUS)
-		var/mob/living/carbon/human/Emoter = user.mob
-		if(Emoter.IsStun())
+		var/mob/living/carbon/human/Player = user.mob
+		if(!Player.emote_cooling_down)
+			Player.emote_cooling_down = TRUE
+		if(Player.IsStun())
 			return
-		if(Emoter.dizziness >= 20)
-			Emoter.vomit()
+		if(Player.dizziness >= 20)
+			Player.vomit()
 			return
-		Emoter.dizziness++
+		Player.dizziness++
 		..()
 
 /datum/keybinding/emote/spin
@@ -74,11 +84,13 @@
 
 /datum/keybinding/emote/spin/down(client/user)
 	if(ishuman(user.mob) && user.mob.stat == CONSCIOUS)
-		var/mob/living/carbon/human/Emoter = user.mob
-		if(Emoter.IsStun())
+		var/mob/living/carbon/human/Player = user.mob
+		if(!Player.emote_cooling_down)
+			Player.emote_cooling_down = TRUE
+		if(Player.IsStun())
 			return
-		if(Emoter.dizziness >= 20)
-			Emoter.vomit()
+		if(Player.dizziness >= 20)
+			Player.vomit()
 			return
-		Emoter.dizziness++
+		Player.dizziness++
 		..()
