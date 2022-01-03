@@ -220,7 +220,8 @@
 		to_chat(user, "<span class='warning'>You don't have a butt!</span>")
 		return
 	var/obj/item/organ/butt/booty = user.getorgan(/obj/item/organ/butt)
-	booty.On_Fart(user)
+	if(!booty.cooling_down)
+		booty.On_Fart(user)
 //MonkeStation Edit End
 
 //Ayy lmao

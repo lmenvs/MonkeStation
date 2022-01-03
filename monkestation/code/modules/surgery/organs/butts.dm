@@ -158,6 +158,7 @@
 	//This goes above all else because it's an instagib.
 	for(var/obj/item/storage/book/bible/Holy in Location)
 		if(Holy)
+			cooling_down = TRUE
 			var/turf/T = get_step(get_step(Person, NORTH), NORTH)
 			T.Beam(Person, icon_state="lightning[rand(1,12)]", time = 15)
 			Person.Paralyze(15)
@@ -169,6 +170,7 @@
 				to_chat(Person,"<span class='ratvar'>What a grand and intoxicating innocence. Perish.</span>")
 				Person.gib()
 				dyn_explosion(Location, 1, 0)
+				cooling_down = FALSE
 			return
 
 	//EMOTE MESSAGE/MOB TARGETED FARTS

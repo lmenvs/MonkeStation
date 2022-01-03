@@ -76,5 +76,5 @@
 					if(Struck != user)
 						user.visible_message("<span class='danger'>[Struck] is violently struck in the face by [user]'s flying ass!</span>")
 						Struck.apply_damage(20, "brute", BODY_ZONE_HEAD)
-		spawn(10)
+		spawn(20)
 			booty.cooling_down = FALSE
