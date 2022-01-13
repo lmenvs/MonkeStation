@@ -50,7 +50,7 @@
 	ADD_TRAIT(floridan, TRAIT_IGNORESLOWDOWN, "Florida Man")
 
 	var/obj/effect/proc_holder/spell/targeted/doorbuster/DB = new
-	floridan.AddSpell(DB))
+	floridan.AddSpell(DB)
 
 	A.copy_to(floridan)
 	floridan.dna.update_dna_identity()
