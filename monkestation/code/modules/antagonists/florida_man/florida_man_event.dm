@@ -35,17 +35,21 @@
 
 	equip_floridan(floridan)
 
-	ADD_TRAIT(floridan, TRAIT_MONKEYLIKE, "Florida Man")
-	ADD_TRAIT(floridan, TRAIT_STUNIMMUNE, "Florida Man")
-	ADD_TRAIT(floridan, TRAIT_STABLELIVER, "Florida Man")
-	ADD_TRAIT(floridan, TRAIT_STABLEHEART, "Florida Man")
-	ADD_TRAIT(floridan, TRAIT_TOXIMMUNE, "Florida Man")
-	ADD_TRAIT(floridan, TRAIT_JAILBIRD, "Florida Man")
-	ADD_TRAIT(floridan, TRAIT_IGNORESLOWDOWN, "Florida Man")
+	ADD_TRAIT(floridan, TRAIT_MONKEYLIKE, SPECIES_TRAIT)
+	ADD_TRAIT(floridan, TRAIT_STUNIMMUNE, SPECIES_TRAIT)
+	ADD_TRAIT(floridan, TRAIT_STABLELIVER, SPECIES_TRAIT)
+	ADD_TRAIT(floridan, TRAIT_STABLEHEART, SPECIES_TRAIT)
+	ADD_TRAIT(floridan, TRAIT_TOXIMMUNE, SPECIES_TRAIT)
+	ADD_TRAIT(floridan, TRAIT_JAILBIRD, SPECIES_TRAIT)
+	ADD_TRAIT(floridan, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 
 	floridan.ventcrawler = 1
-	var/obj/effect/proc_holder/spell/targeted/doorbuster/DB = new
+	var/obj/effect/proc_holder/spell/targeted/florida_doorbuster/DB = new
+	var/obj/effect/proc_holder/spell/targeted/florida_cuff_break/CB = new
+	var/obj/effect/proc_holder/spell/targeted/florida_regeneration/RG = new
 	floridan.AddSpell(DB)
+	floridan.AddSpell(CB)
+	floridan.AddSpell(RG)
 
 	A.copy_to(floridan)
 	floridan.dna.update_dna_identity()
