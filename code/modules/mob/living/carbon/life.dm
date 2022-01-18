@@ -441,34 +441,22 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	//Dizziness
 	if(dizziness)
 		var/client/C = client
-		var/pixel_x_diff = 0
-		var/pixel_y_diff = 0
 		var/temp
 		var/saved_dizz = dizziness
 		if(C)
 			var/oldsrc = src
-			var/amplitude = dizziness*(sin(dizziness * world.time) + 1) // This shit is annoying at high strength
+			var/amplitude = dizziness*(sin(dizziness  * world.time * 0.5) + 1) / 5
 			src = null
 			spawn(0)
 				if(C)
-					temp = amplitude * sin(saved_dizz * world.time)
-					pixel_x_diff += temp
-					C.pixel_x += temp
-					temp = amplitude * cos(saved_dizz * world.time)
-					pixel_y_diff += temp
-					C.pixel_y += temp
+					temp = amplitude * sin(saved_dizz  * world.time * 0.5)
+					animate(C, ELASTIC_EASING, pixel_x = temp)
+					temp = amplitude * cos(saved_dizz  * world.time * 0.5)
+					animate(C, ELASTIC_EASING, pixel_y = temp)
 					sleep(3)
 					if(C)
-						temp = amplitude * sin(saved_dizz * world.time)
-						pixel_x_diff += temp
-						C.pixel_x += temp
-						temp = amplitude * cos(saved_dizz * world.time)
-						pixel_y_diff += temp
-						C.pixel_y += temp
-					sleep(3)
-					if(C)
-						C.pixel_x -= pixel_x_diff
-						C.pixel_y -= pixel_y_diff
+						C.pixel_x = 0
+						C.pixel_y = 0
 			src = oldsrc
 		dizziness = max(dizziness - restingpwr, 0)
 
