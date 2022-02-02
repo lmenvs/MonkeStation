@@ -88,6 +88,7 @@
 #define SPECIES_FELINID			"felinid"
 #define SPECIES_OOZELING		"oozeling"
 #define SPECIES_FLY 			"fly"
+#define SPECIES_SIMIAN 			"simian" //monkestation edit
 
 //Species bitflags, used for species_restricted. If this somehow ever gets above 23 Bee has larger problems.
 #define FLAG_HUMAN			(1<<0)
@@ -100,7 +101,8 @@
 #define FLAG_FELINID		(1<<7)
 #define FLAG_OOZELING		(1<<8)
 #define FLAG_FLY			(1<<9)
-#define FLAG_DEBUG_SPECIES	(1<<10)
+#define FLAG_SIMIAN			(1<<10)//monkestation edit
+#define FLAG_DEBUG_SPECIES	(1<<11)
 
 //Reagent Metabolization flags, defines the type of reagents that affect this mob
 #define PROCESS_ORGANIC 1		//Only processes reagents with "ORGANIC" or "ORGANIC | SYNTHETIC"
