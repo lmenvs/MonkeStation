@@ -19,6 +19,10 @@ GLOBAL_VAR(restart_counter)
 
 	config.Load(params[OVERRIDE_CONFIG_DIRECTORY_PARAMETER])
 
+	#ifdef REFERENCE_DOING_IT_LIVE
+	GLOB.harddel_log = GLOB.world_game_log
+	#endif
+
 	GLOB.revdata = new
 
 	InitTgs()
@@ -123,6 +127,10 @@ GLOBAL_VAR(restart_counter)
 #ifdef UNIT_TESTS
 	GLOB.test_log = file("[GLOB.log_directory]/tests.log")
 	start_log(GLOB.test_log)
+#endif
+#ifdef REFERENCE_DOING_IT_LIVE
+	GLOB.harddel_log = "[GLOB.log_directory]/harddels.log"
+	start_log(GLOB.harddel_log)
 #endif
 	start_log(GLOB.world_game_log)
 	start_log(GLOB.world_attack_log)
@@ -329,7 +337,7 @@ GLOBAL_VAR(restart_counter)
 
 	s += "<b>[station_name()]</b>";
 	var/discordurl = CONFIG_GET(string/discordurl)
-	s += "(<a href='[discordurl]'>Discord</a>|<a href='http://beestation13.com'>Website</a>))"
+	s += "(<a href='[discordurl]'>Discord</a>|<a href='http://monkestation.com'>Website</a>))"
 
 	var/players = GLOB.clients.len
 

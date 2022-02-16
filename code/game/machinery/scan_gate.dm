@@ -9,7 +9,6 @@
 
 #define SCANGATE_HUMAN			"human"
 #define SCANGATE_LIZARD			"lizard"
-#define SCANGATE_FELINID		"felinid"
 #define SCANGATE_FLY			"fly"
 #define SCANGATE_PLASMAMAN		"plasma"
 #define SCANGATE_MOTH			"moth"
@@ -39,7 +38,7 @@
 	var/reverse = FALSE //If true, signals if the scan returns false
 	var/detect_nutrition = NUTRITION_LEVEL_FAT
 
-/obj/machinery/scanner_gate/Initialize()
+/obj/machinery/scanner_gate/Initialize(mapload)
 	. = ..()
 	set_scanline("passive")
 	var/static/list/loc_connections = list(
@@ -139,8 +138,6 @@
 						scan_species = /datum/species/lizard
 					if(SCANGATE_FLY)
 						scan_species = /datum/species/fly
-					if(SCANGATE_FELINID)
-						scan_species = /datum/species/human/felinid
 					if(SCANGATE_PLASMAMAN)
 						scan_species = /datum/species/plasmaman
 					if(SCANGATE_MOTH)
@@ -265,7 +262,6 @@
 
 #undef SCANGATE_HUMAN
 #undef SCANGATE_LIZARD
-#undef SCANGATE_FELINID
 #undef SCANGATE_FLY
 #undef SCANGATE_PLASMAMAN
 #undef SCANGATE_MOTH

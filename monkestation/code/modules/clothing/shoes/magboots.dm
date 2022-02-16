@@ -2,11 +2,12 @@
 
 	desc = "The ultimate in clown shoe technology."
 	name = "boom boots"
+	icon = 'monkestation/icons/obj/clothing/shoes.dmi'
+	worn_icon = 'monkestation/icons/mob/feet.dmi'
 	icon_state = "boomboot0"
 	item_state = "boomboot0"
 	magboot_state = "boomboot"
 	slowdown = SHOES_SLOWDOWN+1
-	item_color = "boomboots"
 	actions_types = list(/datum/action/item_action/toggle)
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes/clown
 	var/datum/component/waddle

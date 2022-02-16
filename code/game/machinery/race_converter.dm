@@ -10,14 +10,14 @@
 	var/processing = FALSE
 	var/iterations = 0 // how long the user (victim) has been in the chamber for
 	var/changed =  FALSE
-	var/datum/species/desired_race = /datum/species/human/felinid
+	var/datum/species/desired_race = /datum/species/human
 	var/datum/looping_sound/microwave/soundloop
 
 /obj/machinery/species_converter/racewar
 	name = "species hypnosis chamber"
 	brainwash = TRUE
 
-/obj/machinery/species_converter/Initialize()
+/obj/machinery/species_converter/Initialize(mapload)
 	. = ..()
 	soundloop = new(list(src),  FALSE)
 	update_icon()

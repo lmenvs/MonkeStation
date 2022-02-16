@@ -21,7 +21,7 @@
 	var/message_cooldown
 	var/breakout_time = 600
 
-/obj/machinery/implantchair/Initialize()
+/obj/machinery/implantchair/Initialize(mapload)
 	. = ..()
 	open_machine()
 	update_icon()
@@ -168,7 +168,6 @@
 	if(!istype(H))
 		return 0
 	H.set_species(/datum/species/human, 1)//lizards go home
-	purrbation_remove(H)//remove cats
 	H.dna.remove_all_mutations()//hulks out
 	return 1
 
