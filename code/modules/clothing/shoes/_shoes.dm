@@ -16,6 +16,7 @@
 	var/offset = 0
 	var/equipped_before_drop = FALSE
 	var/can_be_bloody = TRUE
+	sprite_sheets = FLAG_SIMIAN//monkestation edit: add simians
 
 /obj/item/clothing/shoes/ComponentInitialize()
 	. = ..()

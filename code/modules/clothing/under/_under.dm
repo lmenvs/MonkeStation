@@ -18,6 +18,7 @@
 	var/obj/item/clothing/accessory/attached_accessory
 	var/mutable_appearance/accessory_overlay
 	var/freshly_laundered = FALSE
+	sprite_sheets = FLAG_SIMIAN//monkestation edit: add simians
 
 /obj/item/clothing/under/worn_overlays(mutable_appearance/standing, isinhands = FALSE)
 	. = list()

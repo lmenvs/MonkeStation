@@ -15,6 +15,7 @@
 	equip_delay_other = 40
 	// Path variable. If defined, will produced the type through interaction with wirecutters.
 	var/cut_type = null
+	sprite_sheets = FLAG_SIMIAN//monkestation edit: add simians
 
 /obj/item/clothing/gloves/ComponentInitialize()
 	. = ..()

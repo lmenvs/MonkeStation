@@ -7,8 +7,8 @@
 	default_color = "00FF00"
 	species_traits = list(MUTCOLORS,EYECOLOR, LIPS)
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID)
-	mutant_bodyparts = list("tail_simian")
-	mutanttail = /obj/item/organ/tail/simian
+	mutant_bodyparts = list("tail_monkey")
+	mutanttail = /obj/item/organ/tail/monkey
 	default_features = list("mcolor" = "0F0")
 	changesource_flags = MIRROR_BADMIN | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/monkey
@@ -16,7 +16,14 @@
 	disliked_food = GROSS
 	liked_food = FRUIT | MEAT
 	deathsound = 'sound/voice/lizard/deathsound.ogg' //todo change
-	species_language_holder = /datum/language_holder/simian //todo update
+	species_language_holder = /datum/language_holder/monkey//todo update
+
+	species_chest = /obj/item/bodypart/chest/simian
+	species_head = /obj/item/bodypart/head/simian
+	species_l_arm = /obj/item/bodypart/l_arm/simian
+	species_r_arm = /obj/item/bodypart/r_arm/simian
+	species_l_leg = /obj/item/bodypart/l_leg/simian
+	species_r_leg = /obj/item/bodypart/r_leg/simian
 
 /datum/species/simian/random_name(gender,unique,lastname)
 	if(unique)
@@ -28,15 +35,6 @@
 		randname += " [lastname]"
 
 	return randname
-
-/datum/species/ethereal/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	. = ..()
-	if(!ishuman(C))
-		return
-	var/mob/living/carbon/human/simian = C
-	default_color = "#[ethereal.dna.features["ethcolor"]]"
-	default_color = "#[ethereal.dna.features["ethcolor"]]"
-
 
 //for sprite sheets; hats, eyes, and masks are "good enough" so for now we're just using pixel offset on those.
 /datum/species/simian/get_custom_icons(var/part)

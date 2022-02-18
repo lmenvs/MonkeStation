@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(color_list_ethereal, list(
 
 //monkestation edit: add simian species
 //SIMIAN FUR
-GLOBAL_LIST_INIT(color_list_simian_fur, list(
+GLOBAL_LIST_INIT(color_list_simianfur, list(
 	"Chimp" = "914800",
 	"Gray" = "514954",
 	"Snow" - "b1abaf",
@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(color_list_simian_fur, list(
 
 //SIMIAN SKIN
 
-GLOBAL_LIST_INIT(color_list_simian_skin, list(
+GLOBAL_LIST_INIT(color_list_simianskin, list(
 	"Chimp" = "ffcc66",
 	"Gray" = "514954",
 	"Pale" = "eccdd8",
