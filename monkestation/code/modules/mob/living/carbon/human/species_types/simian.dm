@@ -16,7 +16,7 @@
 	disliked_food = GROSS
 	liked_food = FRUIT | MEAT
 	deathsound = 'sound/voice/lizard/deathsound.ogg' //todo change
-	species_language_holder = /datum/language_holder/monkey//todo update
+	species_language_holder = /datum/language_holder/monkey
 
 	species_chest = /obj/item/bodypart/chest/simian
 	species_head = /obj/item/bodypart/head/simian
@@ -40,20 +40,20 @@
 /datum/species/simian/get_custom_icons(var/part)
 	switch(part)
 		if("uniform")
-			return 'monkestation/icons/mob/species/simian/simian_uniforms.dmi' //done
+			return 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
 		if("gloves")
-			return 'monkestation/icons/mob/species/simian/simian_gloves.dmi' //done
+			return 'monkestation/icons/mob/species/simian/simian_gloves.dmi'
 		if("ears")
 			return 'monkestation/icons/mob/species/simian/simian_ears.dmi'
 		if("shoes")
-			return 'monkestation/icons/mob/species/simian/simian_shoes.dmi' //done
+			return 'monkestation/icons/mob/species/simian/simian_shoes.dmi'
 		if("belt")
-			return 'monkestation/icons/mob/species/simian/simian_belts.dmi' //done
+			return 'monkestation/icons/mob/species/simian/simian_belts.dmi'
 		if("suit")
-			return 'monkestation/icons/mob/species/simian/simian_suits.dmi' //done
+			return 'monkestation/icons/mob/species/simian/simian_suits.dmi'
 		if("back")
-			return 'monkestation/icons/mob/species/simian/simian_back.dmi' //done
+			return 'monkestation/icons/mob/species/simian/simian_back.dmi'
 		if("neck")
-			return 'monkestation/icons/mob/species/simian/simian_neck.dmi'
+			return 'monkestation/icons/mob/species/simian/simian_neck.dmi' //finish
 		else
 			return
