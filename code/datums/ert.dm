@@ -9,11 +9,7 @@
 	var/code
 	var/mission = "Assist the station."
 	var/teamsize = 5
-	var/polldesc
-
-/datum/ert/New()
-	if (!polldesc)
-		polldesc = "a Code [code] Nanotrasen Emergency Response Team"
+	var/polldesc = "a Nanotrasen Emergency Response Team"
 
 /datum/ert/blue
 	opendoors = FALSE
@@ -33,7 +29,6 @@
 	rename_team = "Deathsquad"
 	code = "Delta"
 	mission = "Leave no witnesses."
-	polldesc = "an elite Nanotrasen Strike Team"
 
 /datum/ert/centcom_official
 	code = "Green"
@@ -42,7 +37,6 @@
 	leader_role = /datum/antagonist/official
 	roles = list(/datum/antagonist/official)
 	rename_team = "CentCom Officials"
-	polldesc = "a CentCom Official"
 
 /datum/ert/centcom_official/New()
 	mission = "Conduct a routine performance review of [station_name()] and its Captain."
@@ -52,7 +46,6 @@
 	leader_role = /datum/antagonist/ert/commander/inquisitor
 	rename_team = "Inquisition"
 	mission = "Destroy any traces of paranormal activity aboard the station."
-	polldesc = "a Nanotrasen paranormal response team"
 
 /datum/ert/janitor
 	roles = list(/datum/antagonist/ert/janitor, /datum/antagonist/ert/janitor/heavy)
@@ -61,7 +54,6 @@
 	opendoors = FALSE
 	rename_team = "Janitor"
 	mission = "Clean up EVERYTHING."
-	polldesc = "a Nanotrasen Janitorial Response Team"
 
 /datum/ert/intern
 	roles = list(/datum/antagonist/ert/intern)
@@ -70,7 +62,6 @@
 	opendoors = FALSE
 	rename_team = "Horde of Interns"
 	mission = "Assist in conflict resolution."
-	polldesc = "an unpaid internship opportunity with Nanotrasen"
 
 /datum/ert/doomguy
 	roles = list(/datum/antagonist/ert/doomguy)
@@ -79,7 +70,6 @@
 	opendoors = TRUE
 	rename_team = "The Juggernaut"
 	mission = "Send them straight back to Hell."
-	polldesc = "an elite Nanotrasen enhanced supersoldier"
 
 /datum/ert/clown
 	roles = list(/datum/antagonist/ert/clown)
@@ -97,7 +87,6 @@
 	opendoors = TRUE
 	rename_team = "HONK Squad"
 	mission = "HONK them into submission"
-	polldesc = "an elite Nanotrasen tactical pranking squad"
 	code = "HOOOOOOOOOONK"
 
 /datum/ert/kudzu
@@ -107,5 +96,4 @@
 	opendoors = FALSE
 	rename_team = "Weed Whackers"
 	mission = "Eliminate the kudzu with extreme prejudice"
-	polldesc = "an elite gardening team"
 	code = "Vine Green"
