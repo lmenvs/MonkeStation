@@ -468,3 +468,12 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define ALIGNMENT_GOOD "good"
 #define ALIGNMENT_NEUT "neutral"
 #define ALIGNMENT_EVIL "evil"
+
+
+//monkestation edit: anonymize ghost roles
+//Ghost Role Injection
+
+#define GHOST_ROLE_NONANTAG "Would you like to be a candidate for a non-antagonistic ghost role?"
+#define GHOST_ROLE_ANTAG 	"Would you like to be a candidate for a mid-round antagonist?"
+#define GHOST_ROLE_ERT		"Would you like to be a candidate for an Emergency Response Team member?"
+#define GHOST_ROLE_GENERAL  "Would you like to be a candidate for a ghost role?"

@@ -161,7 +161,7 @@
 		G.name = new_name
 
 /obj/item/stand_arrow/proc/get_stand(mob/living/carbon/H, datum/guardian_stats/stats)
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_HOLOPARASITE, null, FALSE, 100, POLL_IGNORE_HOLOPARASITE)
+	var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_HOLOPARASITE, null, FALSE, 100, POLL_IGNORE_HOLOPARASITE)//monkestation edit: anonymize ghost roles
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		var/mob/living/simple_animal/hostile/guardian/G = new(H, GUARDIAN_MAGIC, rgb(rand(1, 255), rand(1, 255), rand(1, 255)))

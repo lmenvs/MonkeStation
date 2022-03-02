@@ -338,7 +338,7 @@
 			break
 
 	if(!chosen_ghost)	//Failing that, we grab a ghost
-		var/list/consenting_candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", null, ROLE_CULTIST, 50, POLL_IGNORE_SHADE)
+		var/list/consenting_candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, null, ROLE_CULTIST, 50, POLL_IGNORE_SHADE)//monkestation edit: anonymize ghost roles
 		if(consenting_candidates.len)
 			chosen_ghost = pick(consenting_candidates)
 	if(!T)

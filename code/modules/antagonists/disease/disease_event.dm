@@ -9,6 +9,7 @@
 
 /datum/round_event/ghost_role/sentient_disease
 	role_name = "sentient disease"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 
 /datum/round_event/ghost_role/sentient_disease/spawn_role()
 	var/list/candidates = get_candidates(ROLE_ALIEN, null, ROLE_ALIEN)

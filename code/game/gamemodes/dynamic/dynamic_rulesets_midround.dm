@@ -95,9 +95,9 @@
 		message_admins("Possible volunteers was 0. This shouldn't appear, because of ready(), unless you forced it!")
 		return
 	message_admins("Polling [possible_volunteers.len] players to apply for the [name] ruleset.")
-	log_game("DYNAMIC: Polling [possible_volunteers.len] players to apply for the [name] ruleset.")
+	log_game("DYNAMIC: Polling [possible_volunteers.len] players to apply for the [name] ruleset.")//monkestation edit: anonymize ghost roles
 
-	candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", antag_flag, SSticker.mode, antag_flag_override ? antag_flag_override : antag_flag, poll_time = 300)
+	candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, antag_flag, SSticker.mode, antag_flag_override ? antag_flag_override : antag_flag, poll_time = 300)
 
 	if(!candidates || candidates.len <= 0)
 		message_admins("The ruleset [name] received no applications.")

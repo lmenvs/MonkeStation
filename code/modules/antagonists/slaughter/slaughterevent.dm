@@ -12,6 +12,7 @@
 /datum/round_event/ghost_role/slaughter
 	minimum_required = 1
 	role_name = "slaughter demon"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 
 /datum/round_event/ghost_role/slaughter/spawn_role()
 	var/list/candidates = get_candidates(ROLE_ALIEN, null, ROLE_ALIEN)

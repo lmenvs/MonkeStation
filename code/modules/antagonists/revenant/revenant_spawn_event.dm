@@ -12,6 +12,7 @@
 /datum/round_event/ghost_role/revenant
 	var/ignore_mobcheck = FALSE
 	role_name = "revenant"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit: anonymize most ghost roles
 
 /datum/round_event/ghost_role/revenant/New(my_processing = TRUE, new_ignore_mobcheck = FALSE)
 	..()

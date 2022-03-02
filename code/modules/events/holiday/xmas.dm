@@ -85,7 +85,7 @@
 	priority_announce("Santa is coming to town!", "Unknown Transmission", SSstation.announcer.get_rand_alert_sound())
 
 /datum/round_event/santa/start()
-	var/list/candidates = pollGhostCandidates("Would you like to be a candidate for a non-antagonistic ghost role?", poll_time=150)
+	var/list/candidates = pollGhostCandidates(GHOST_ROLE_NONANTAG, poll_time=150)//monkestation edit: anonymize ghost roles
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		santa = new /mob/living/carbon/human(pick(GLOB.blobstart))

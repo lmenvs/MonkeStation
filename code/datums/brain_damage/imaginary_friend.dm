@@ -46,7 +46,7 @@
 	if(owner.stat == DEAD || !owner.mind)
 		qdel(src)
 		return
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Would you like to be a candidate for a non-antagonistic ghost role?", null, ROLE_PAI, null, null, 75, friend, POLL_IGNORE_IMAGINARYFRIEND)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob(GHOST_ROLE_NONANTAG, null, ROLE_PAI, null, null, 75, friend, POLL_IGNORE_IMAGINARYFRIEND)//monkestation edit: anonymize ghost roles
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		friend.key = C.key

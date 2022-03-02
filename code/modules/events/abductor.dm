@@ -12,6 +12,7 @@
 /datum/round_event/ghost_role/abductor
 	minimum_required = 2
 	role_name = "abductor team"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit: anonymize most ghost roles
 	fakeable = FALSE //Nothing to fake here
 
 /datum/round_event/ghost_role/abductor/spawn_role()

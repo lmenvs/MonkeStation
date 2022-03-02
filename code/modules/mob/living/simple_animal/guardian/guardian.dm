@@ -456,7 +456,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		var/mob/living/simple_animal/hostile/guardian/G = input(src, "Pick the guardian you wish to reset", "Guardian Reset") as null|anything in sortNames(guardians)
 		if(G)
 			to_chat(src, "<span class='holoparasite'>You attempt to reset <font color=\"[G.guardiancolor]\"><b>[G.real_name]</b></font>'s personality...</span>")
-			var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_PAI, null, FALSE, 100)
+			var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_PAI, null, FALSE, 100)//monkestation edit: anonymize ghost roles
 			if(LAZYLEN(candidates))
 				var/mob/dead/observer/C = pick(candidates)
 				to_chat(G, "<span class='holoparasite'>Your user reset you, and your body was taken over by a ghost. Looks like they weren't happy with your performance.</span>")
@@ -534,7 +534,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		return
 	used = TRUE
 	to_chat(user, "[use_message]")
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_PAI, null, FALSE, 100, POLL_IGNORE_HOLOPARASITE)
+	var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_PAI, null, FALSE, 100, POLL_IGNORE_HOLOPARASITE)//monkestation edit: anonymize ghost roles
 
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)

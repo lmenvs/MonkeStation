@@ -7,6 +7,7 @@
 /datum/round_event/ghost_role/florida_man
 	minimum_required = 1
 	role_name = "Florida Man"
+	role_type = GHOST_ROLE_ANTAG
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/florida_man/proc/equip_floridan(mob/living/carbon/human/H)

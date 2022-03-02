@@ -225,7 +225,7 @@
 		used = FALSE
 		return FALSE
 	// IMPORTANT - if we're debugging, the user gets thrown into the stand
-	var/list/mob/dead/observer/candidates = debug_mode ? list(user) : pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_HOLOPARASITE, null, FALSE, 100, POLL_IGNORE_HOLOPARASITE)
+	var/list/mob/dead/observer/candidates = debug_mode ? list(user) : pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_HOLOPARASITE, null, FALSE, 100, POLL_IGNORE_HOLOPARASITE)//monkestation edit: anonymize ghost roles
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		var/mob/living/simple_animal/hostile/guardian/G = new(user, theme, guardian_color)

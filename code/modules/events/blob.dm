@@ -14,6 +14,7 @@
 /datum/round_event/ghost_role/blob
 	announceChance	= 0
 	role_name = "blob overmind"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 	fakeable = TRUE
 
 /datum/round_event/ghost_role/blob/announce(fake)

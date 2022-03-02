@@ -11,6 +11,7 @@
 /datum/round_event/ghost_role/space_dragon
 	minimum_required = 1
 	role_name = "Space Dragon"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 	announceWhen = 10
 
 /datum/round_event/ghost_role/space_dragon/announce(fake)

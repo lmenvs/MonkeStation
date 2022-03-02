@@ -35,7 +35,7 @@
 	vote_active = FALSE
 	used = TRUE
 	if(!eminence)
-		var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_SERVANT_OF_RATVAR, null, null, 100, POLL_IGNORE_PYROSLIME)
+		var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_SERVANT_OF_RATVAR, null, null, 100, POLL_IGNORE_PYROSLIME)//monkestation edit: anonymize ghost roles
 		if(LAZYLEN(candidates))
 			eminence = pick(candidates)
 	else

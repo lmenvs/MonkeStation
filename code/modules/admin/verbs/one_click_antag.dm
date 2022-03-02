@@ -142,7 +142,7 @@
 
 /datum/admins/proc/makeWizard()
 
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_WIZARD, null)
+	var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_WIZARD, null)//monkestation edit: anonymize ghost roles
 
 	var/mob/dead/observer/selected = pick_n_take(candidates)
 
@@ -187,7 +187,7 @@
 
 /datum/admins/proc/makeNukeTeam(maxCount = 5)
 	var/datum/game_mode/nuclear/temp = new
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_OPERATIVE, temp)
+	var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_OPERATIVE, temp)//monkestation edit: anonymize ghost roles
 	var/list/mob/dead/observer/chosen = list()
 	var/mob/dead/observer/theghost = null
 
@@ -351,7 +351,7 @@
 		ertemplate.enforce_human = prefs["enforce_human"]["value"] == "Yes" ? TRUE : FALSE
 		ertemplate.opendoors = prefs["open_armory"]["value"] == "Yes" ? TRUE : FALSE
 
-		var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for an Emergency Response Team?", "deathsquad", null)
+		var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ERT, "deathsquad", null)//monkestation edit: anonymize ghost roles
 		var/teamSpawned = FALSE
 
 		if(candidates.len > 0)

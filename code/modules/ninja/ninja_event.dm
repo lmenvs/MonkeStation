@@ -20,6 +20,7 @@ Contents:
 /datum/round_event/ghost_role/ninja
 	var/success_spawn = 0
 	role_name = "space ninja"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 	minimum_required = 1
 
 	var/helping_station

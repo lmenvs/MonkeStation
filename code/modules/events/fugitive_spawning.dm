@@ -10,6 +10,7 @@
 /datum/round_event/ghost_role/fugitives
 	minimum_required = 1
 	role_name = "fugitive"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/fugitives/spawn_role()

@@ -56,7 +56,7 @@
 			if(used)
 				to_chat(H, "You already used this contract!")
 				return
-			var/list/candidates = pollCandidatesForMob("Would you like to be a candidate for a midround antagonist?", ROLE_WIZARD, null, ROLE_WIZARD, 150, src)
+			var/list/candidates = pollCandidatesForMob(GHOST_ROLE_ANTAG, ROLE_WIZARD, null, ROLE_WIZARD, 150, src)//monkestation edit: anonymize ghost roles
 			if(LAZYLEN(candidates))
 				if(QDELETED(src))
 					return
@@ -118,7 +118,7 @@
 		return
 
 	to_chat(user, "<span class='notice'>You activate [src] and wait for confirmation.</span>")
-	var/list/nuke_candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_OPERATIVE, null, ROLE_OPERATIVE, 150, POLL_IGNORE_SYNDICATE)
+	var/list/nuke_candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_OPERATIVE, null, ROLE_OPERATIVE, 150, POLL_IGNORE_SYNDICATE)//monkestation edit: anonymize ghost roles
 	if(LAZYLEN(nuke_candidates))
 		if(QDELETED(src) || !check_usability(user))
 			return
@@ -238,7 +238,7 @@
 		return
 	if(used)
 		return
-	var/list/candidates = pollCandidatesForMob("Would you like to be a candidate for a midround antagonist?", ROLE_ALIEN, null, ROLE_ALIEN, 50, src)
+	var/list/candidates = pollCandidatesForMob(GHOST_ROLE_ANTAG, ROLE_ALIEN, null, ROLE_ALIEN, 50, src)//monkestation edit: anonymize ghost roles
 	if(LAZYLEN(candidates))
 		if(used || QDELETED(src))
 			return
@@ -290,8 +290,8 @@
 		return
 
 	to_chat(user, "<span class='notice'>You activate [src] and wait for confirmation.</span>")
-	var/list/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_GANG, null, ROLE_GANG, 150)
-	if(LAZYLEN(candidates))
+	var/list/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_GANG, null, ROLE_GANG, 150)
+	if(LAZYLEN(candidates))//monkestation edit: anonymize ghost roles
 		if(QDELETED(src) || !check_usability(user))
 			return
 		used = TRUE

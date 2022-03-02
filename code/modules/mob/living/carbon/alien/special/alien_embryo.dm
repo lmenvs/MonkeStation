@@ -73,7 +73,7 @@
 
 	bursting = TRUE
 
-	var/list/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_ALIEN, null, ROLE_ALIEN, 100, POLL_IGNORE_ALIEN_LARVA)
+	var/list/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_ALIEN, null, ROLE_ALIEN, 100, POLL_IGNORE_ALIEN_LARVA)//monkestation edit: anonymize ghost roles
 
 	if(QDELETED(src) || QDELETED(owner))
 		return

@@ -165,7 +165,7 @@
 	if (.)
 		to_chat(user, "<span class='notice'>The uplink vibrates quietly, connecting to nearby agents...</span>")
 
-		var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_PAI, null, FALSE, 100, POLL_IGNORE_CONTRACTOR_SUPPORT)
+		var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_PAI, null, FALSE, 100, POLL_IGNORE_CONTRACTOR_SUPPORT)//monkestation edit: anonymize ghost roles
 
 		if(LAZYLEN(candidates))
 			var/mob/dead/observer/C = pick(candidates)

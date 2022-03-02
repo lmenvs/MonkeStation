@@ -9,6 +9,7 @@
 /datum/round_event/ghost_role/operative
 	minimum_required = 1
 	role_name = "lone operative"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/operative/spawn_role()

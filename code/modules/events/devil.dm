@@ -6,6 +6,7 @@
 /datum/round_event/ghost_role/devil
 	var/success_spawn = 0
 	role_name = "devil"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/devil/kill()

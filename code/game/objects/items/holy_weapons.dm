@@ -513,7 +513,7 @@
 
 	possessed = TRUE
 
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Would you like to be a candidate for a non-antagonistic ghost role?", ROLE_PAI, null, FALSE, 100, POLL_IGNORE_POSSESSED_BLADE)
+	var/list/mob/dead/observer/candidates = pollGhostCandidates(GHOST_ROLE_NONANTAG, ROLE_PAI, null, FALSE, 100, POLL_IGNORE_POSSESSED_BLADE)//monkestation edit: anonymize ghost roles
 
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)

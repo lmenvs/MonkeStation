@@ -23,6 +23,7 @@
 
 	minimum_required = 1
 	role_name = "alien larva"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 
 	// 50% chance of being incremented by one
 	var/spawncount = 1

@@ -66,8 +66,8 @@
 /datum/round_event/pirates/proc/spawn_shuttle()
 	shuttle_spawned = TRUE
 
-	var/list/candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", ROLE_TRAITOR)
-	shuffle_inplace(candidates)
+	var/list/candidates = pollGhostCandidates(GHOST_ROLE_ANTAG, ROLE_TRAITOR)
+	shuffle_inplace(candidates)//monkestation edit: anonymize ghost roles
 
 	var/datum/map_template/shuttle/pirate/default/ship = new
 	var/x = rand(TRANSITIONEDGE,world.maxx - TRANSITIONEDGE - ship.width)

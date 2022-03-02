@@ -344,6 +344,7 @@
 /datum/round_event/ghost_role/morph
 	minimum_required = 1
 	role_name = "morphling"
+	role_type = GHOST_ROLE_ANTAG //monkestation edit - anonymize most ghost roles
 
 /datum/round_event/ghost_role/morph/spawn_role()
 	var/list/candidates = get_candidates(ROLE_ALIEN, null, ROLE_ALIEN)

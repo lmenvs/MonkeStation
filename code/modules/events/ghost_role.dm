@@ -6,6 +6,7 @@
 	var/list/priority_candidates = list()
 	var/minimum_required = 1
 	var/role_name = "debug rat with cancer" // Q U A L I T Y  M E M E S
+	var/role_type = GHOST_ROLE_GENERAL //monkestation edit -- anonymize most ghost roles
 	var/list/spawned_mobs = list()
 	var/status
 	fakeable = FALSE
@@ -62,7 +63,7 @@
 	var/list/mob/dead/observer/regular_candidates
 	// don't get their hopes up
 	if(priority_candidates.len < minimum_required)
-		regular_candidates = pollGhostCandidates("Would you like to be a candidate for a midround antagonist?", jobban, gametypecheck, be_special)
+		regular_candidates = pollGhostCandidates(role_type, jobban, gametypecheck, be_special)
 	else
 		regular_candidates = list()
 
