@@ -16,6 +16,7 @@
 	var/footstep = 0
 	var/mob/listeningTo
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/exo
+	sprite_sheets = FLAG_SIMIAN
 
 
 /obj/item/clothing/suit/worn_overlays(mutable_appearance/standing, isinhands = FALSE)

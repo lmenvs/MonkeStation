@@ -4,12 +4,12 @@
 	id = SPECIES_SIMIAN
 	bodyflag = FLAG_SIMIAN
 	say_mod = "chimpers"
-	default_color = "00FF00"
-	species_traits = list(MUTCOLORS,EYECOLOR, LIPS)
+	species_traits = list(DYNCOLORS, EYECOLOR, LIPS, ALTEYESPRITES, NO_UNDERWEAR)
+	alt_eye = 'monkestation/icons/mob/species/simian/bodyparts.dmi'
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID)
 	mutant_bodyparts = list("tail_monkey")
 	mutanttail = /obj/item/organ/tail/monkey
-	default_features = list("mcolor" = "0F0")
+	default_features = list("tail_monkey" = "Chimp")
 	changesource_flags = MIRROR_BADMIN | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/monkey
 	skinned_type = /obj/item/stack/sheet/animalhide/monkey
@@ -36,6 +36,18 @@
 
 	return randname
 
+/datum/species/simian/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+	. = ..()
+	if(!ishuman(C))
+		return
+	var/mob/living/carbon/human/simian = C
+	default_color = "#[simian.dna.features["simiancolor"]]"
+	C.dna.features["mcolor"] = C.dna.features["simiancolor"]
+	for(var/obj/item/bodypart/BP as() in C.bodyparts)
+		if(BP.limb_id == SPECIES_SIMIAN)
+			BP.update_limb(is_creating = TRUE)
+
+
 //for sprite sheets; hats, eyes, and masks are "good enough" so for now we're just using pixel offset on those.
 /datum/species/simian/get_custom_icons(var/part)
 	switch(part)
@@ -43,10 +55,14 @@
 			return 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
 		if("gloves")
 			return 'monkestation/icons/mob/species/simian/simian_gloves.dmi'
+		if("glasses")
+			return null
 		if("ears")
-			return 'monkestation/icons/mob/species/simian/simian_ears.dmi'
+			return null
 		if("shoes")
 			return 'monkestation/icons/mob/species/simian/simian_shoes.dmi'
+		if("head")
+			return null
 		if("belt")
 			return 'monkestation/icons/mob/species/simian/simian_belts.dmi'
 		if("suit")
@@ -54,6 +70,9 @@
 		if("back")
 			return 'monkestation/icons/mob/species/simian/simian_back.dmi'
 		if("neck")
-			return 'monkestation/icons/mob/species/simian/simian_neck.dmi' //finish
+			return null
+		if("generic")
+			return null
+		//	return 'monkestation/icons/mob/species/simian/simian_neck.dmi' finish
 		else
 			return

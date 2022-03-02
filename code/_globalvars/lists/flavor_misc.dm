@@ -27,6 +27,7 @@ GLOBAL_LIST_EMPTY(frills_list)
 GLOBAL_LIST_EMPTY(spines_list)
 GLOBAL_LIST_EMPTY(legs_list)
 GLOBAL_LIST_EMPTY(animated_spines_list)
+GLOBAL_LIST_EMPTY(tails_list_monkey)//monkestation edit: add simian species
 
 	//Mutant Human bits
 GLOBAL_LIST_EMPTY(tails_list_human)
@@ -65,30 +66,15 @@ GLOBAL_LIST_INIT(color_list_ethereal, list(
 
 //monkestation edit: add simian species
 //SIMIAN FUR
-GLOBAL_LIST_INIT(color_list_simianfur, list(
-	"Chimp" = "914800",
-	"Gray" = "514954",
-	"Snow" - "b1abaf",
-	"Red" = "e7700a",
-	"Orange" = "e7700a",
-	"Purple" = "804eb3", //bonzi buddy
-	"Mankey" = "f4e2d5",
+GLOBAL_LIST_INIT(color_list_simian, list(
+	"Chimp" = COLOR_CHIMP,
+	"Grey" = COLOR_CHIMP_GREY,
+	"Snow" = COLOR_SNOW,
+	"Orange" = COLOR_CHIMP_ORANGE,
+	"Purple" = COLOR_CHIMP_PURPLE,
+	"Mankey" =COLOR_MANKE,
 	))
-
-//SIMIAN SKIN
-
-GLOBAL_LIST_INIT(color_list_simianskin, list(
-	"Chimp" = "ffcc66",
-	"Gray" = "514954",
-	"Pale" = "eccdd8",
-	"Light Gray" = "d9ced6",
-	"Pink" - "d7889b",
-	"Red" = "e7700a",
-	"Orange" = "e7700a",
-	"Purple" = "ebc8fe",
-	"Mankey" = "eccdd8",
-	))
-//monkestation edit end: add simian
+//monkestation edit end
 
 GLOBAL_LIST_INIT(ghost_forms_with_directions_list, list("ghost")) //stores the ghost forms that support directional sprites
 GLOBAL_LIST_INIT(ghost_forms_with_accessories_list, list("ghost")) //stores the ghost forms that support hair and other such things

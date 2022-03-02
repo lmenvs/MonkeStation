@@ -126,7 +126,7 @@ There are several things that need to be remembered:
 
 		//Change check_adjustable_clothing.dm if you change this
 		var/icon_file = 'icons/mob/clothing/uniform.dmi'
-		if(!uniform_overlay)
+		if(!uniform_overlay || dna.species.get_custom_icons("uniform") != null)
 			if(U.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("uniform")
 			//Currently doesn't work with GAGS
@@ -134,7 +134,7 @@ There are several things that need to be remembered:
 			//	icon_file = 'icons/mob/species/misc/digitigrade.dmi'
 			uniform_overlay = U.build_worn_icon(default_layer = UNIFORM_LAYER, default_icon_file = icon_file, isinhands = FALSE, override_state = target_overlay)
 
-			
+
 
 		if(OFFSET_UNIFORM in dna.species.offset_features)
 			uniform_overlay.pixel_x += dna.species.offset_features[OFFSET_UNIFORM][1]
@@ -426,15 +426,16 @@ There are several things that need to be remembered:
 		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[TOBITSHIFT(ITEM_SLOT_OCLOTHING) + 1]
 		inv.update_icon()
 
-	if(istype(wear_suit, /obj/item/clothing/suit))
+	if(wear_suit)
 		var/icon_file = 'icons/mob/clothing/suit.dmi'
-		var/obj/item/clothing/suit/S = wear_suit
-		if(S.sprite_sheets & (dna?.species.bodyflag))
-			icon_file = dna.species.get_custom_icons("suit")
+		if(istype(wear_suit, /obj/item/clothing/suit))
+			var/obj/item/clothing/suit/S = wear_suit
+			if(S.sprite_sheets & (dna?.species.bodyflag))
+				icon_file = dna.species.get_custom_icons("suit")
 
-		if(dna?.species.bodytype & BODYTYPE_DIGITIGRADE)
-			if(S.supports_variations & DIGITIGRADE_VARIATION)
-				icon_file = 'icons/mob/species/misc/digitigrade_suits.dmi'
+			if(dna?.species.bodytype & BODYTYPE_DIGITIGRADE)
+				if(S.supports_variations & DIGITIGRADE_VARIATION)
+					icon_file = 'icons/mob/species/misc/digitigrade_suits.dmi'
 
 		wear_suit.screen_loc = ui_oclothing
 		if(client && hud_used && hud_used.hud_shown)
@@ -783,9 +784,15 @@ generate/load female uniform sprites matching all previously decided variables
 			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
 			var/mutable_appearance/eye_overlay
 			if(!E)
-				eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eyes_missing", -BODY_LAYER)
+				if(ALTEYESPRITES in dna.species.species_traits)
+					eye_overlay = mutable_appearance(dna.species.alt_eye, "eyes_missing", -BODY_LAYER)
+				else
+					eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eyes_missing", -BODY_LAYER)
 			else
-				eye_overlay = mutable_appearance('icons/mob/human_face.dmi', E.eye_icon_state, -BODY_LAYER)
+				if(ALTEYESPRITES in dna.species.species_traits)
+					eye_overlay = mutable_appearance(dna.species.alt_eye, E.eye_icon_state, -BODY_LAYER)
+				else
+					eye_overlay = mutable_appearance('icons/mob/human_face.dmi', E.eye_icon_state, -BODY_LAYER)
 			if((EYECOLOR in dna.species.species_traits) && E)
 				eye_overlay.color = "#" + eye_color
 			if(OFFSET_FACE in dna.species.offset_features)
