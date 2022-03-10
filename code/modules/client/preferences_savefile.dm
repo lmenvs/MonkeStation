@@ -401,7 +401,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_ipc_chassis"], features["ipc_chassis"])
 	READ_FILE(S["feature_insect_type"], features["insect_type"])
 	READ_FILE(S["feature_simiancolor"], features["simiancolor"])//monkestation edit: add simian species
-	READ_FILE(S["feature_monkey_tail"], features["tail_monkey"])
+	READ_FILE(S["feature_monkey_tail"], features["tail_monkey"])//monkestation edit: add simian species
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -490,7 +490,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["ipc_antenna"]	 = sanitize_inlist(features["ipc_antenna"], GLOB.ipc_antennas_list)
 	features["ipc_chassis"]	 = sanitize_inlist(features["ipc_chassis"], GLOB.ipc_chassis_list)
 	features["insect_type"]	 = sanitize_inlist(features["insect_type"], GLOB.insect_type_list)
-	features["simiancolor"]	= copytext_char(features["simiancolor"], 1, 7) //monkestation edit: add simian species
+	features["simiancolor"]	= sanitize_hexcolor(features["simiancolor"], 3,0) //monkestation edit: add simian species
 	features["tail_monkey"]	= sanitize_inlist(features["tail_monkey"], GLOB.tails_list_monkey)
 	//Validate species forced mutant parts
 	for(var/forced_part in pref_species.forced_features)

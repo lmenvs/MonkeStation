@@ -10,6 +10,7 @@
 	mutant_bodyparts = list("tail_monkey")
 	mutanttail = /obj/item/organ/tail/monkey
 	default_features = list("tail_monkey" = "Chimp")
+	dyncolor = "simiancolor"
 	changesource_flags = MIRROR_BADMIN | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/monkey
 	skinned_type = /obj/item/stack/sheet/animalhide/monkey
@@ -36,15 +37,15 @@
 
 	return randname
 
+
 /datum/species/simian/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
 	. = ..()
 	if(!ishuman(C))
 		return
-	var/mob/living/carbon/human/simian = C
-	default_color = "#[simian.dna.features["simiancolor"]]"
-	C.dna.features["mcolor"] = C.dna.features["simiancolor"]
+	//The following code is literally only to make admin-spawned ethereals not be black.
+	C.dna.features["mcolor"] = C.dna.features["simiancolor"] //Ethcolor and Mut color are both dogshit and will be replaced
 	for(var/obj/item/bodypart/BP as() in C.bodyparts)
-		if(BP.limb_id == SPECIES_SIMIAN)
+		if(BP.limb_id == SPECIES_ETHEREAL)
 			BP.update_limb(is_creating = TRUE)
 
 

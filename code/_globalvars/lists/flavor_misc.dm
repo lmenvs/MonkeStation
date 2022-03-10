@@ -71,8 +71,9 @@ GLOBAL_LIST_INIT(color_list_simian, list(
 	"Grey" = COLOR_CHIMP_GREY,
 	"Snow" = COLOR_SNOW,
 	"Orange" = COLOR_CHIMP_ORANGE,
+	"De Luuk" = COLOR_CHIMP_GREEN,
 	"Purple" = COLOR_CHIMP_PURPLE,
-	"Mankey" =COLOR_MANKE,
+	"Mankey" = COLOR_MANKE,
 	))
 //monkestation edit end
 

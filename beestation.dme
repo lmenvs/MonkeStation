@@ -3503,6 +3503,7 @@
 #include "monkestation\code\datums\diseases\advance\symptoms\gateway.dm"
 #include "monkestation\code\datums\diseases\advance\symptoms\goat.dm"
 #include "monkestation\code\datums\diseases\advance\symptoms\rodman.dm"
+#include "monkestation\code\datums\greyscale\greyscale_configs.dm"
 #include "monkestation\code\datums\keybinding\carbon.dm"
 #include "monkestation\code\datums\keybinding\human.dm"
 #include "monkestation\code\datums\keybinding\living.dm"

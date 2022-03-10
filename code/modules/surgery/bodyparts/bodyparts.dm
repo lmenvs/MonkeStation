@@ -358,7 +358,10 @@
 			skin_tone = ""
 
 		if(((MUTCOLORS in S.species_traits) || (DYNCOLORS in S.species_traits)) && uses_mutcolor) //Ethereal code. Motherfuckers.
+			if(S.dyncolor)//monkestation edit: add simians; make dyncolor more useful
+				S.fixed_mut_color = H.dna.features[S.dyncolor]//monkestation edit: add simians; make dyncolor more useful
 			if(S.fixed_mut_color)
+
 				species_color = S.fixed_mut_color
 			else
 				species_color = H.dna.features["mcolor"]

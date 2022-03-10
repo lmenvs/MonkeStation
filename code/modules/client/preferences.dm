@@ -352,7 +352,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "<h3>Simian Color</h3>"
 
-				dat += "<span style='border: 1px solid #161616; background-color: #[features["simiancolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=color_simian;task=input'>Change</a><BR>"
+				dat += "<span style='border: 1px solid #161616; background-color: [features["simiancolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=color_simian;task=input'>Change</a><BR>"
 
 			//Mutant stuff
 			var/mutant_category = 0

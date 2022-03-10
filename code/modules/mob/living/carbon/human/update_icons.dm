@@ -129,6 +129,8 @@ There are several things that need to be remembered:
 		if(!uniform_overlay || dna.species.get_custom_icons("uniform") != null)
 			if(U.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("uniform")
+				if(U.greyscale_config_worn)
+					U.greyscale_config_worn = /datum/greyscale_config/jumpsuit_worn/simian // testing for GAGS
 			//Currently doesn't work with GAGS
 			//if((dna?.species.bodytype & BODYTYPE_DIGITIGRADE) && (U.supports_variations & DIGITIGRADE_VARIATION))
 			//	icon_file = 'icons/mob/species/misc/digitigrade.dmi'

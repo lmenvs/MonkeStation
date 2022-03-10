@@ -44,11 +44,12 @@
 #define COLOR_PURPLE_GRAY      "#AE8CA8"
 
 //monkestation: color defines for simian colors
-#define COLOR_CHIMP				"#914800"
-#define COLOR_CHIMP_GREY		 "#514954"
+#define COLOR_CHIMP				"#bea287"
+#define COLOR_CHIMP_GREY		 "#aeafb3"
 #define COLOR_SNOW				 "#b1abaf"
-#define COLOR_CHIMP_ORANGE		 "#e7700a"
-#define COLOR_CHIMP_PURPLE		 "#804eb3"
+#define COLOR_CHIMP_ORANGE		 "#ffb97c"
+#define COLOR_CHIMP_PURPLE		 "#d5aaff"
+#define COLOR_CHIMP_GREEN		"#c2ffaa"
 #define COLOR_MANKE				"#f4e2d5"
 
 //Color defines used by the assembly detailer.

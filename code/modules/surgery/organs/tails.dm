@@ -66,7 +66,6 @@
 /obj/item/organ/tail/monkey
 	name = "monkey tail"
 	desc = "A severed monkey tail. If found, please call 1-800-OOK-EEEK"
-	color = "#116611"
 	tail_type = "Chimp"
 
 /obj/item/organ/tail/monkey/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
