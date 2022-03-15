@@ -129,14 +129,19 @@ There are several things that need to be remembered:
 		if(!uniform_overlay || dna.species.get_custom_icons("uniform") != null)
 			if(U.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("uniform")
+				//monkestation edit: make GAGS work with sprite sheets
 				if(U.greyscale_config_worn)
-					U.greyscale_config_worn = /datum/greyscale_config/jumpsuit_worn/simian // testing for GAGS
-			//Currently doesn't work with GAGS
+					U.greyscale_config_worn = text2path("[U.greyscale_config_worn]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+					U.update_greyscale()
+				//monkestation edit end
 			//if((dna?.species.bodytype & BODYTYPE_DIGITIGRADE) && (U.supports_variations & DIGITIGRADE_VARIATION))
 			//	icon_file = 'icons/mob/species/misc/digitigrade.dmi'
 			uniform_overlay = U.build_worn_icon(default_layer = UNIFORM_LAYER, default_icon_file = icon_file, isinhands = FALSE, override_state = target_overlay)
-
-
+		//monkestation edit: make GAGS work with sprite sheets
+		if(U.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
+			U.greyscale_config_worn = initial(U.greyscale_config_worn)
+			U.update_greyscale()
+		//monkestation edit end
 
 		if(OFFSET_UNIFORM in dna.species.offset_features)
 			uniform_overlay.pixel_x += dna.species.offset_features[OFFSET_UNIFORM][1]
@@ -320,11 +325,18 @@ There are several things that need to be remembered:
 			var/obj/item/clothing/shoes/S = shoes
 			if(S.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("shoes")
-
+				//monkestation edit: make GAGS work with sprite sheets
+				if(S.greyscale_config_worn)
+					S.greyscale_config_worn = text2path("[S.greyscale_config_worn]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+					S.update_greyscale()
+			else if(S.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
+				S.greyscale_config_worn = initial(S.greyscale_config_worn)
+				S.update_greyscale()
 			if(dna?.species.bodytype & BODYTYPE_DIGITIGRADE)
 				if(S.supports_variations & DIGITIGRADE_VARIATION)
 					icon_file = 'icons/mob/species/misc/digitigrade_shoes.dmi'
 
+		//monkestation edit end
 		shoes.screen_loc = ui_shoes					//move the item to the appropriate screen loc
 		if(client && hud_used && hud_used.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open
