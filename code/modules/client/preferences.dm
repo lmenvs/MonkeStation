@@ -92,7 +92,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							"ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None",
 							"body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain",
 							"ipc_screen" = "Blue", "ipc_antenna" = "None", "ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)",
-							"insect_type" = "Common Fly", "simiancolor" = "914800", "tail_monkey" = "Chimp")
+							"insect_type" = "Common Fly", "tail_monkey" = "Chimp")
 	var/examine_text						//MONKESTATION EDIT - EXAMINE TEXT
 
 	var/list/custom_names = list()
@@ -276,7 +276,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "<h3>Skin Tone</h3>"
 
-				dat += "<a href='?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a><BR>"
+				dat += "<span style='border: 1px solid #161616; background-color: [skin_tone];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a><BR>"
 
 			var/mutant_colors
 			if((MUTCOLORS in pref_species.species_traits) || (MUTCOLORS_PARTSONLY in pref_species.species_traits))
@@ -344,15 +344,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<span style='border: 1px solid #161616; background-color: #[facial_hair_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=facial;task=input'>Change</a><BR>"
 
 				dat += "</td>"
-
-			if(istype(pref_species, /datum/species/simian))
-
-				if(!use_skintones)
-					dat += APPEARANCE_CATEGORY_COLUMN
-
-				dat += "<h3>Simian Color</h3>"
-
-				dat += "<span style='border: 1px solid #161616; background-color: [features["simiancolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=color_simian;task=input'>Change</a><BR>"
 
 			//Mutant stuff
 			var/mutant_category = 0
@@ -1352,7 +1343,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(BODY_ZONE_PRECISE_EYES)
 					eye_color = random_eye_color()
 				if("s_tone")
-					skin_tone = random_skin_tone()
+					skin_tone = random_skin_tone(pref_species.skin_tone_list)
 				if("bag")
 					backbag = pick(GLOB.backbaglist)
 				if("all")
@@ -1679,14 +1670,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						features["insect_type"] = new_insect_type
 
 				if("s_tone")
-					var/new_s_tone = input(user, "Choose your character's skin-tone:", "Character Preference")  as null|anything in GLOB.skin_tones
+					var/new_s_tone = input(user, "Choose your character's skin-tone:", "Character Preference")  as null|anything in GLOB.skin_tones[pref_species.skin_tone_list]
 					if(new_s_tone)
 						skin_tone = new_s_tone
-
-				if("color_simian")
-					var/new_simiancolor = input(user, "Choose your simian color", "Character Preference") as null|anything in GLOB.color_list_simian
-					if(new_simiancolor)
-						features["simiancolor"] = GLOB.color_list_simian[new_simiancolor]
 
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference",ooccolor) as color|null

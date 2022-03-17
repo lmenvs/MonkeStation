@@ -83,7 +83,7 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/monkey, GLOB.tails_list_monkey)
 	//monkestation edit end
 	//For now we will always return none for tail_human and ears.
-	return(list("mcolor" = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),"ethcolor" = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)],"tail_lizard" = pick(GLOB.tails_list_lizard),"tail_human" = "None","wings" = "None","snout" = pick(GLOB.snouts_list),"horns" = pick(GLOB.horns_list),"ears" = "None","frills" = pick(GLOB.frills_list),"spines" = pick(GLOB.spines_list),"body_markings" = pick(GLOB.body_markings_list),"legs" = "Normal Legs","caps" = pick(GLOB.caps_list),"moth_wings" = pick(GLOB.moth_wings_list),"ipc_screen" = pick(GLOB.ipc_screens_list),"ipc_antenna" = pick(GLOB.ipc_antennas_list),"ipc_chassis" = pick(GLOB.ipc_chassis_list),"insect_type" = pick(GLOB.insect_type_list),"simiancolor" = GLOB.color_list_simian[pick(GLOB.color_list_simian)],"tail_monkey" = pick(GLOB.tails_list_monkey)))//monkestation edit: add simians
+	return(list("mcolor" = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),"ethcolor" = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)],"tail_lizard" = pick(GLOB.tails_list_lizard),"tail_human" = "None","wings" = "None","snout" = pick(GLOB.snouts_list),"horns" = pick(GLOB.horns_list),"ears" = "None","frills" = pick(GLOB.frills_list),"spines" = pick(GLOB.spines_list),"body_markings" = pick(GLOB.body_markings_list),"legs" = "Normal Legs","caps" = pick(GLOB.caps_list),"moth_wings" = pick(GLOB.moth_wings_list),"ipc_screen" = pick(GLOB.ipc_screens_list),"ipc_antenna" = pick(GLOB.ipc_antennas_list),"ipc_chassis" = pick(GLOB.ipc_chassis_list),"insect_type" = pick(GLOB.insect_type_list),"tail_monkey" = pick(GLOB.tails_list_monkey)))//monkestation edit: add simians
 
 /proc/random_hair_style(gender)
 	switch(gender)
@@ -172,23 +172,34 @@
 			break
 
 
-/proc/random_skin_tone()
-	return pick(GLOB.skin_tones)
+/proc/random_skin_tone(skin_tone_list)
+	return pick(GLOB.skin_tones[skin_tone_list])
 
-GLOBAL_LIST_INIT(skin_tones, sortList(list(
-	"albino",
-	"caucasian1",
-	"caucasian2",
-	"caucasian3",
-	"latino",
-	"mediterranean",
-	"asian1",
-	"asian2",
-	"arab",
-	"indian",
-	"african1",
-	"african2"
-	)))
+GLOBAL_LIST_INIT(skin_tones, list(
+		"human" = sortList(list(
+			"albino" = "#fff4e6",
+			"caucasian1" = "#ffe0d1",
+			"caucasian2" = "#fcccb3",
+			"caucasian3" = "#e8b59b",
+			"latino" = "#d9ae96",
+			"mediterranean" = "#c79b8b",
+			"asian1" = "#ffdeb3",
+			"asian2" = "#e3ba84",
+			"arab" = "#e3ba84",
+			"indian"= "#b87840",
+			"african1" = "#754523",
+			"african2" = "#471c18"
+		)),
+		"simian" = sortList(list(
+			"Chimp" = "#bea287",
+			"Grey" = "#aeafb3",
+			"Snow" = "#b1abaf",
+			"Orange" = "#ffb97c",
+			"De Luuk" = "#c2ffaa",
+			"Purple" = "#d5aaff",
+			"Mankey" = "#f4e2d5"
+		))
+		))
 
 GLOBAL_LIST_EMPTY(species_list)
 

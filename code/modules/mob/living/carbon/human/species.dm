@@ -17,7 +17,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/examine_limb_id //This is used for children, felinids and ashwalkers namely
 
 	var/digitigrade_customization = DIGITIGRADE_NEVER //Never, Optional, or Forced digi legs?
-	var/use_skintones = FALSE	// does it use skintones or not? (spoiler alert this is only used by humans)
+	var/use_skintones = FALSE	// does it use skintones or not?
+	var/skin_tone_list = "human" //monkestation edit: add species specific skin tones - defaults to human
 	var/dyncolor = "" // if you use Dyncolor and are not ethereal, use this
 	var/exotic_blood = ""	// If your race wants to bleed something other than bog standard blood, change this to reagent id.
 	var/exotic_bloodtype = "" //If your race uses a non standard bloodtype (A+, O-, AB-, etc)

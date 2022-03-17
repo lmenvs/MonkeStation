@@ -360,9 +360,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!S["feature_ethcolor"] || S["feature_ethcolor"] == "#000")
 		WRITE_FILE(S["feature_ethcolor"]	, "9c3030")
 
-	if(!S["feature_simiancolor"] || S["feature_simiancolor"] == "#000")
-		WRITE_FILE(S["feature_simiancolor"]	, "9c3030")
-
 	//Character
 	READ_FILE(S["real_name"], real_name)
 	READ_FILE(S["examine_text"], examine_text) //MONKESTATION EDIT - EXAMINE TEXT
@@ -400,7 +397,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_ipc_antenna"], features["ipc_antenna"])
 	READ_FILE(S["feature_ipc_chassis"], features["ipc_chassis"])
 	READ_FILE(S["feature_insect_type"], features["insect_type"])
-	READ_FILE(S["feature_simiancolor"], features["simiancolor"])//monkestation edit: add simian species
 	READ_FILE(S["feature_monkey_tail"], features["tail_monkey"])//monkestation edit: add simian species
 
 	//Custom names
@@ -442,9 +438,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!features["ethcolor"] || features["ethcolor"] == "#000")
 		features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
 
-	if(!features["simiancolor"] || features["simiancolor"] == "#000")
-		features["simiancolor"] = GLOB.color_list_simian[pick(GLOB.color_list_simian)]
-
 	// Keep it updated
 	if(!helmet_style || !(helmet_style in list(HELMET_DEFAULT, HELMET_MK2, HELMET_PROTECTIVE)))
 		helmet_style = HELMET_DEFAULT
@@ -470,7 +463,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	gradient_color = sanitize_hexcolor(gradient_color, 3, 0)
 	underwear_color	= sanitize_hexcolor(underwear_color, 3, 0)
 	eye_color = sanitize_hexcolor(eye_color, 3, 0)
-	skin_tone = sanitize_inlist(skin_tone, GLOB.skin_tones)
+	skin_tone = sanitize_inlist(skin_tone, GLOB.skin_tones[pref_species.skin_tone_list])
 	backbag	= sanitize_inlist(backbag, GLOB.backbaglist, initial(backbag))
 	jumpsuit_style = sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list_save, initial(uplink_spawn_loc))
@@ -490,7 +483,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["ipc_antenna"]	 = sanitize_inlist(features["ipc_antenna"], GLOB.ipc_antennas_list)
 	features["ipc_chassis"]	 = sanitize_inlist(features["ipc_chassis"], GLOB.ipc_chassis_list)
 	features["insect_type"]	 = sanitize_inlist(features["insect_type"], GLOB.insect_type_list)
-	features["simiancolor"]	= sanitize_hexcolor(features["simiancolor"], 3,0) //monkestation edit: add simian species
 	features["tail_monkey"]	= sanitize_inlist(features["tail_monkey"], GLOB.tails_list_monkey)
 	//Validate species forced mutant parts
 	for(var/forced_part in pref_species.forced_features)
@@ -561,7 +553,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_ipc_antenna"]			, features["ipc_antenna"])
 	WRITE_FILE(S["feature_ipc_chassis"]			, features["ipc_chassis"])
 	WRITE_FILE(S["feature_insect_type"]			, features["insect_type"])
-	WRITE_FILE(S["feature_simiancolor"]			, features["simiancolor"])
 	WRITE_FILE(S["feature_monkey_tail"]			, features["tail_monkey"])//monkestation edit: add simian species
 
 	//Custom names

@@ -10,7 +10,8 @@
 	mutant_bodyparts = list("tail_monkey")
 	mutanttail = /obj/item/organ/tail/monkey
 	default_features = list("tail_monkey" = "Chimp")
-	dyncolor = "simiancolor"
+	use_skintones = TRUE
+	skin_tone_list = "simian"
 	changesource_flags = MIRROR_BADMIN | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/monkey
 	skinned_type = /obj/item/stack/sheet/animalhide/monkey
@@ -36,17 +37,6 @@
 		randname += " [lastname]"
 
 	return randname
-
-
-/datum/species/simian/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
-	. = ..()
-	if(!ishuman(C))
-		return
-	//The following code is literally only to make admin-spawned ethereals not be black.
-	C.dna.features["mcolor"] = C.dna.features["simiancolor"] //Ethcolor and Mut color are both dogshit and will be replaced
-	for(var/obj/item/bodypart/BP as() in C.bodyparts)
-		if(BP.limb_id == SPECIES_ETHEREAL)
-			BP.update_limb(is_creating = TRUE)
 
 
 //for sprite sheets; hats, eyes, and masks are "good enough" so for now we're just using pixel offset on those.

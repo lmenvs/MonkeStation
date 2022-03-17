@@ -64,18 +64,7 @@ GLOBAL_LIST_INIT(color_list_ethereal, list(
 	"Rose" = "ff92b6",
 	"Gray" = "979497"))
 
-//monkestation edit: add simian species
-//SIMIAN FUR
-GLOBAL_LIST_INIT(color_list_simian, list(
-	"Chimp" = COLOR_CHIMP,
-	"Grey" = COLOR_CHIMP_GREY,
-	"Snow" = COLOR_SNOW,
-	"Orange" = COLOR_CHIMP_ORANGE,
-	"De Luuk" = COLOR_CHIMP_GREEN,
-	"Purple" = COLOR_CHIMP_PURPLE,
-	"Mankey" = COLOR_MANKE,
-	))
-//monkestation edit end
+
 
 GLOBAL_LIST_INIT(ghost_forms_with_directions_list, list("ghost")) //stores the ghost forms that support directional sprites
 GLOBAL_LIST_INIT(ghost_forms_with_accessories_list, list("ghost")) //stores the ghost forms that support hair and other such things

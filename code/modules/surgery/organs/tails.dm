@@ -80,6 +80,6 @@
 	..()
 	if(istype(H))
 		H.dna.species.mutant_bodyparts -= "tail_monkey"
-		color = H.dna.features["simiancolor"]
+		color = H.dna.features["skin_tone"]
 		tail_type = H.dna.features["tail_monkey"]
 		H.update_body()
