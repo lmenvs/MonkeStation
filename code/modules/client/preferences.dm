@@ -276,7 +276,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "<h3>Skin Tone</h3>"
 
-				dat += "<span style='border: 1px solid #161616; background-color: [skin_tone];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a><BR>"
+				dat += "<span style='border: 1px solid #161616; background-color: [GLOB.skin_tones[pref_species.skin_tone_list][skin_tone]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a><BR>"
 
 			var/mutant_colors
 			if((MUTCOLORS in pref_species.species_traits) || (MUTCOLORS_PARTSONLY in pref_species.species_traits))
