@@ -20,7 +20,7 @@
 	departments = DEPARTMENT_SERVICE
 	rpg_title = "Peasant"
 
-	allow_bureaucratic_error = FALSE
+	//MonkeStation Edit: Gimmick Overflow
 	outfit = /datum/outfit/job/gimmick
 
 /datum/outfit/job/gimmick
@@ -87,7 +87,7 @@
 	outfit = /datum/outfit/job/gimmick/hobo
 	access = list(ACCESS_MAINT_TUNNELS)
 	minimal_access = list(ACCESS_MAINT_TUNNELS)
-	total_positions = 1 //MonkeStation Edit: Gimmick Latejoin
+	total_positions = 2 //MonkeStation Edit: Gimmick Latejoin
 	gimmick = TRUE
 	chat_color = "#929292"
 	departments = NONE		//being hobo is not a real job
