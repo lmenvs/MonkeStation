@@ -177,27 +177,27 @@
 
 GLOBAL_LIST_INIT(skin_tones, list(
 		"human" = sortList(list(
-			"albino" = "#fff4e6",
-			"caucasian1" = "#ffe0d1",
-			"caucasian2" = "#fcccb3",
-			"caucasian3" = "#e8b59b",
-			"latino" = "#d9ae96",
-			"mediterranean" = "#c79b8b",
-			"asian1" = "#ffdeb3",
-			"asian2" = "#e3ba84",
-			"arab" = "#e3ba84",
-			"indian"= "#b87840",
-			"african1" = "#754523",
-			"african2" = "#471c18"
+			"albino" = "fff4e6",
+			"caucasian1" = "ffe0d1",
+			"caucasian2" = "fcccb3",
+			"caucasian3" = "e8b59b",
+			"latino" = "d9ae96",
+			"mediterranean" = "c79b8b",
+			"asian1" = "ffdeb3",
+			"asian2" = "e3ba84",
+			"arab" = "e3ba84",
+			"indian"= "b87840",
+			"african1" = "754523",
+			"african2" = "471c18"
 		)),
 		"simian" = sortList(list(
-			"Chimp" = "#bea287",
-			"Grey" = "#aeafb3",
-			"Snow" = "#b1abaf",
-			"Orange" = "#ffb97c",
-			"De Luuk" = "#c2ffaa",
-			"Purple" = "#d5aaff",
-			"Mankey" = "#f4e2d5"
+			"Chimp" = "bea287",
+			"Grey" = "aeafb3",
+			"Snow" = "b1abaf",
+			"Orange" = "ffb97c",
+			"De Luuk" = "c2ffaa",
+			"Purple" = "d5aaff",
+			"Mankey" = "f4e2d5"
 		))
 		))
 

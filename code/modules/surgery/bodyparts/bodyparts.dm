@@ -337,7 +337,7 @@
 	if(mutation_color) //I hate mutations
 		draw_color = mutation_color
 	else if(should_draw_greyscale)
-		draw_color = (species_color) ||= (skin_tone)
+		draw_color = (species_color) || (skin_tone)
 	else
 		draw_color = null
 
@@ -353,7 +353,7 @@
 		var/datum/species/S = H.dna.species
 		species_flags_list = H.dna.species.species_traits //Literally only exists for a single use of NOBLOOD, but, no reason to remove it i guess...?
 		limb_gender = (H.gender == MALE) ? "m" : "f"
-		if(S.use_skintones)
+		if(SKINTONES in S.species_traits)
 			skin_tone = GLOB.skin_tones[H.dna.species.skin_tone_list][H.skin_tone]
 		else
 			skin_tone = ""
@@ -372,7 +372,7 @@
 
 		draw_color = mutation_color
 		if(should_draw_greyscale) //Should the limb be colored?
-			draw_color ||= (species_color) ||= (skin_tone)
+			draw_color ||= (species_color) || (skin_tone)
 
 		dmg_overlay_type = S.damage_overlay_type
 
@@ -456,7 +456,7 @@
 
 	draw_color = mutation_color
 	if(should_draw_greyscale) //Should the limb be colored?
-		draw_color ||= (species_color) ||= (skin_tone)
+		draw_color ||= (species_color) || (skin_tone)
 
 	if(draw_color)
 		limb.color = "#[draw_color]"

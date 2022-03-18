@@ -269,15 +269,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Jumpsuit:</b><BR><a href ='?_src_=prefs;preference=suit;task=input'>[jumpsuit_style]</a><BR>"
 			dat += "<b>Uplink Spawn Location:</b><BR><a href ='?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc == UPLINK_IMPLANT ? UPLINK_IMPLANT_WITH_PRICE : uplink_spawn_loc]</a><BR></td>"
 
-			var/use_skintones = pref_species.use_skintones
-			if(use_skintones)
+			var/use_skintones
+			if(SKINTONES in pref_species.species_traits)
 
 				dat += APPEARANCE_CATEGORY_COLUMN
 
 				dat += "<h3>Skin Tone</h3>"
 
-				dat += "<span style='border: 1px solid #161616; background-color: [GLOB.skin_tones[pref_species.skin_tone_list][skin_tone]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a><BR>"
-
+				dat += "<span style='border: 1px solid #161616; background-color: #[GLOB.skin_tones[pref_species.skin_tone_list][skin_tone]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a><BR>"
+				use_skintones = TRUE
 			var/mutant_colors
 			if((MUTCOLORS in pref_species.species_traits) || (MUTCOLORS_PARTSONLY in pref_species.species_traits))
 

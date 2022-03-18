@@ -17,7 +17,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/examine_limb_id //This is used for children, felinids and ashwalkers namely
 
 	var/digitigrade_customization = DIGITIGRADE_NEVER //Never, Optional, or Forced digi legs?
-	var/use_skintones = FALSE	// does it use skintones or not?
 	var/skin_tone_list = "human" //monkestation edit: add species specific skin tones - defaults to human
 	var/dyncolor = "" // if you use Dyncolor and are not ethereal, use this
 	var/exotic_blood = ""	// If your race wants to bleed something other than bog standard blood, change this to reagent id.
@@ -868,6 +867,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(!(HAS_TRAIT(H, TRAIT_HUSK)))
 				if(!forced_colour)
 					switch(S.color_src)
+						if(SKINTONES)
+							accessory_overlay.color = "#[GLOB.skin_tones[H.dna.species.skin_tone_list][H.skin_tone]]"
 						if(MUTCOLORS)
 							if(fixed_mut_color)
 								accessory_overlay.color = "#[fixed_mut_color]"
@@ -882,6 +883,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							accessory_overlay.color = "#[H.facial_hair_color]"
 						if(EYECOLOR)
 							accessory_overlay.color = "#[H.eye_color]"
+
 				else
 					accessory_overlay.color = forced_colour
 			standing += accessory_overlay

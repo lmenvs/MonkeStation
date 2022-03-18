@@ -4,13 +4,12 @@
 	id = SPECIES_SIMIAN
 	bodyflag = FLAG_SIMIAN
 	say_mod = "chimpers"
-	species_traits = list(DYNCOLORS, EYECOLOR, LIPS, ALTEYESPRITES, NO_UNDERWEAR)
+	species_traits = list(SKINTONES,EYECOLOR,LIPS,ALTEYESPRITES,NO_UNDERWEAR)
 	alt_eye = 'monkestation/icons/mob/species/simian/bodyparts.dmi'
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID)
 	mutant_bodyparts = list("tail_monkey")
 	mutanttail = /obj/item/organ/tail/monkey
 	default_features = list("tail_monkey" = "Chimp")
-	use_skintones = TRUE
 	skin_tone_list = "simian"
 	changesource_flags = MIRROR_BADMIN | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/monkey
