@@ -1555,6 +1555,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 						if (!CONFIG_GET(keyed_list/paywall_races)[new_species.id] || IS_PATRON(parent.ckey) || parent.holder)
 							pref_species = new_species
+							if(!(skin_tone in GLOB.skin_tones[pref_species.skin_tone_list])) //monkestation edit, for multiple species skin tone lists
+								skin_tone = pick(GLOB.skin_tones[pref_species.skin_tone_list])
 							//Now that we changed our species, we must verify that the mutant colour is still allowed.
 							var/temp_hsv = RGBtoHSV(features["mcolor"])
 							if(features["mcolor"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#7F7F7F")[3]))

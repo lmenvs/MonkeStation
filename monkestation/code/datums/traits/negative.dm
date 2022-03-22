@@ -48,3 +48,36 @@
 	desc = "For reasons unknown, your posterior is unstable and will fall off more often."
 	value = -1
 	//All effects are handled directly in butts.dm
+
+/datum/quirk/kleptomaniac
+	name = "Kleptomaniac"
+	desc = "The station's just full of free stuff!  Nobody would notice if you just... took it, right?"
+	process = TRUE
+	value = -1
+
+/datum/quirk/kleptomaniac/on_process()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(H.stat && !(H.incapacitated()) && prob(10)) //for testing
+		if(!H.get_active_held_item())
+			// if(prob(100))
+			// 	pickpocket(H)
+			// else
+			for(var/obj/item/I in view(1, H))
+				if(!isturf(I.loc) && !I.anchored) //anything that's not nailed down
+					I.attack_hand(H)
+				break
+
+// /datum/quirk/kleptomaniac/proc/pickpocket(var/mob/victim)
+// 	if(do_mob(src, M, MONKEY_ITEM_SNATCH_DELAY) && pickupTarget)
+// 		for(var/obj/item/I in M.held_items)
+// 			if(I == pickupTarget)
+// 				M.visible_message("<span class='danger'>[src] snatches [pickupTarget] from [M].</span>", "<span class='userdanger'>[src] snatched [pickupTarget]!</span>")
+// 				if(M.temporarilyRemoveItemFromInventory(pickupTarget))
+// 					if(!QDELETED(pickupTarget) && !equip_item(pickupTarget))
+// 						pickupTarget.forceMove(drop_location())
+// 				else
+// 					M.visible_message("<span class='danger'>[src] tried to snatch [pickupTarget] from [M], but failed!</span>", "<span class='userdanger'>[src] tried to grab [pickupTarget]!</span>")
+// 						break
+// 				else
+// 					victim.visible_message("<span class='danger'>[user] tried to snatch [target] from [victim], but failed!</span>", "<span class='userdanger'>[user] tried to grab [target]!</span>")
+

@@ -5,6 +5,7 @@
 	bodyflag = FLAG_SIMIAN
 	say_mod = "chimpers"
 	species_traits = list(SKINTONES,EYECOLOR,LIPS,ALTEYESPRITES,NO_UNDERWEAR)
+	inherent_traits = list(TRAIT_VAULTING, TRAIT_KLEPTOMANIAC)
 	alt_eye = 'monkestation/icons/mob/species/simian/bodyparts.dmi'
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID)
 	mutant_bodyparts = list("tail_monkey")

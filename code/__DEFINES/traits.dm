@@ -283,6 +283,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_UNSTABLE_ASS		"unstable_ass"
 #define TRAIT_STABLE_ASS		"stable_ass"
 #define TRAIT_DUMMY_THICK		"dummy_thick"
+#define TRAIT_KLEPTOMANIAC 		"kleptomaniac"
 //MonkeStation Edit End
 
 ///Trait applied to turfs when an atmos holosign is placed on them. It will stop firedoors from closing.
@@ -371,6 +372,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define STICKY_NODROP "sticky-nodrop" //sticky nodrop sounds like a bad soundcloud rapper's name
 // Monkestation Changes Start
 #define TRAIT_TRASH_EATER "trash_eater" //goat.dm symptom requirement
+#define TRAIT_VAULTING "vaulting" //simian trait
 // Monkestation Changes End
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client" //this mob should never close ui even if it doesn't have a client
 
