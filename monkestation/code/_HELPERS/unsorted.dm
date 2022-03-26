@@ -23,9 +23,9 @@
 /proc/vault_over_object(mob/user, object, range = 3, speed = 0.5)
 	var/dir = get_dir(user, object)
 	var/turf/target = get_ranged_target_turf(user, dir, range)
-	var/obj/machinery/disposal/bin/disposal_target = locate() in target
-	if(disposal_target)
-		user.throw_at(disposal_target, range, speed)
+	var/obj/machinery/machine_target = locate() in target
+	if(machine_target)
+		user.throw_at(machine_target, range, speed)
 	else
 		user.throw_at(target, range, speed)
 

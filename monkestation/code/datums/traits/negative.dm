@@ -53,4 +53,13 @@
 	name = "Kleptomaniac"
 	desc = "The station's just full of free stuff!  Nobody would notice if you just... took it, right?"
 	mob_trait = TRAIT_KLEPTOMANIAC
-	value = -1
+	value = -2
+
+/datum/quirk/kleptomaniac/add()
+	var/datum/brain_trauma/mild/kleptomania/T = new()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.gain_trauma(T, TRAUMA_RESILIENCE_ABSOLUTE)
+
+/datum/quirk/kleptomaniac/remove()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.cure_trauma_type(/datum/brain_trauma/mild/kleptomania, TRAUMA_RESILIENCE_ABSOLUTE)

@@ -1,5 +1,5 @@
 /mob/living/carbon/human/proc/get_pockets()
-	var/list/pockets
+	var/list/pockets = list()
 	if(l_store)
 		pockets += l_store
 	if(r_store)

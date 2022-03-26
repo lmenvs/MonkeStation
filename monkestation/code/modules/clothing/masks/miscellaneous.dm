@@ -19,3 +19,31 @@
 								'monkestation/sound/voice/laugh/misc/big_laugh2.ogg',
 								'monkestation/sound/voice/laugh/misc/big_laugh3.ogg',
 								'monkestation/sound/voice/laugh/misc/big_laugh4.ogg')
+
+/obj/item/clothing/mask/translator
+	name = "MonkeTech AutoTranslator"
+	desc = "This little gadget helps simians automatically translate speech to common."
+	icon = 'monkestation/icons/obj/clothing/masks.dmi'
+	worn_icon = 'monkestation/icons/mob/mask.dmi'
+	icon_state = "translator"
+	item_state = "translator"
+	slot_flags = ITEM_SLOT_MASK | ITEM_SLOT_NECK
+
+/obj/item/clothing/mask/translator/equipped(mob/M, slot)
+	. = ..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.grant_language(/datum/language/common, understood = TRUE, spoken = TRUE, source = LANGUAGE_HAT)
+
+/obj/item/clothing/mask/translator/dropped(mob/M)
+	. = ..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.remove_language(/datum/language/common, understood = FALSE, spoken = TRUE, source = LANGUAGE_HAT)
+
+
+
+
+
+
+
