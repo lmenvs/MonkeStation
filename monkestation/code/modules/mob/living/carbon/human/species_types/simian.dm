@@ -9,6 +9,7 @@
 	alt_eye = 'monkestation/icons/mob/species/simian/bodyparts.dmi'
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID)
 	mutant_bodyparts = list("tail_monkey")
+	mutanttongue = /obj/item/organ/tongue/monkey
 	mutanttail = /obj/item/organ/tail/monkey
 	default_features = list("tail_monkey" = "Chimp")
 	skin_tone_list = "simian"
@@ -37,6 +38,11 @@
 		randname += " [lastname]"
 
 	return randname
+
+/datum/species/simian/after_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
+	qdel(H.wear_mask)
+	var/obj/item/clothing/mask/translator/T = new /obj/item/clothing/mask/translator
+	H.equip_to_slot(T, ITEM_SLOT_MASK)
 
 
 //for sprite sheets; hats, eyes, and masks are "good enough" so for now we're just using pixel offset on those.

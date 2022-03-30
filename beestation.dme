@@ -3503,7 +3503,6 @@
 #include "monkestation\code\datums\diseases\advance\symptoms\goat.dm"
 #include "monkestation\code\datums\diseases\advance\symptoms\rodman.dm"
 #include "monkestation\code\datums\greyscale\greyscale_configs.dm"
-#include "monkestation\code\datums\keybinding\carbon.dm"
 #include "monkestation\code\datums\keybinding\human.dm"
 #include "monkestation\code\datums\keybinding\living.dm"
 #include "monkestation\code\datums\station_traits\neutral_traits.dm"
@@ -3578,5 +3577,6 @@
 #include "monkestation\code\modules\research\techweb\_techweb.dm"
 #include "monkestation\code\modules\surgery\bodyparts\species_parts\simian_bodyparts.dm"
 #include "monkestation\code\modules\surgery\organs\butts.dm"
+#include "monkestation\code\modules\surgery\organs\tongue.dm"
 #include "monkestation\code\modules\uplink\uplink_items.dm"
 // END_INCLUDE

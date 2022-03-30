@@ -24,9 +24,14 @@
 	var/dir = get_dir(user, object)
 	var/turf/target = get_ranged_target_turf(user, dir, range)
 	var/obj/machinery/machine_target = locate() in target
+	var/mob/living/carbon/human/H = user
 	if(machine_target)
 		user.throw_at(machine_target, range, speed)
+		if(prob(70))
+			H.Knockdown(10)
 	else
 		user.throw_at(target, range, speed)
+		if(prob(25))
+			H.Knockdown(10)
 
 
