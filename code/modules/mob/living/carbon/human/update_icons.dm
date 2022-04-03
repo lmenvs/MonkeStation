@@ -189,12 +189,22 @@ There are several things that need to be remembered:
 		inv.update_icon()
 
 	if(!gloves && bloody_hands)
-		var/mutable_appearance/bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands", -GLOVES_LAYER)
+		var/mutable_appearance/bloody_overlay
+		if(!dna.species.get_custom_icons("gloves"))//monkestation edit: add simians
+			bloody_overlay += mutable_appearance('icons/effects/blood.dmi', "bloodyhands", -GLOVES_LAYER)
+		else
+			bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.name)]_bloodyhands")
 		if(get_num_arms(FALSE) < 2)
 			if(has_left_hand(FALSE))
-				bloody_overlay.icon_state = "bloodyhands_left"
+				if(!dna.species.get_custom_icons("gloves"))
+					bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands_left", -GLOVES_LAYER)
+				else
+					bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.name)]_bloodyhands_left")
 			else if(has_right_hand(FALSE))
-				bloody_overlay.icon_state = "bloodyhands_right"
+				if(!dna.species.get_custom_icons("gloves"))
+					bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands_right", -GLOVES_LAYER)
+				else
+					bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.name)]_bloodyhands_right")
 
 		overlays_standing[GLOVES_LAYER] = bloody_overlay
 

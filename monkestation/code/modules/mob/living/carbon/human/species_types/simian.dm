@@ -20,6 +20,9 @@
 	liked_food = FRUIT | MEAT
 	deathsound = 'sound/voice/lizard/deathsound.ogg' //todo change
 	species_language_holder = /datum/language_holder/monkey
+	maxhealthmod = 0.7 //small = weak
+	staminamod = 0.7
+	speedmod = -0.1 //lil bit faster
 
 	species_chest = /obj/item/bodypart/chest/simian
 	species_head = /obj/item/bodypart/head/simian
@@ -40,9 +43,12 @@
 	return randname
 
 /datum/species/simian/after_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
-	qdel(H.wear_mask)
+	qdel(H.wear_neck)
 	var/obj/item/clothing/mask/translator/T = new /obj/item/clothing/mask/translator
-	H.equip_to_slot(T, ITEM_SLOT_MASK)
+	for(var/language in GLOB.all_languages) //check all languages
+		if(H.has_language(language, FALSE)) // if the simian understands the language at roundstart, their translator learns this language
+			T.available_languages.Add(language)
+	H.equip_to_slot(T, ITEM_SLOT_NECK)
 
 
 //for sprite sheets; hats, eyes, and masks are "good enough" so for now we're just using pixel offset on those.

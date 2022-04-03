@@ -27,7 +27,11 @@
 		if(damaged_clothes)
 			. += mutable_appearance('icons/effects/item_damage.dmi', "damageduniform")
 		if(HAS_BLOOD_DNA(src))
-			. += mutable_appearance('icons/effects/blood.dmi', "uniformblood")
+			var/mob/living/carbon/human/M = loc
+			if(!M.dna.species.get_custom_icons("uniform"))//monkestation edit: add simians
+				. += mutable_appearance('icons/effects/blood.dmi', "uniformblood")
+			else
+				. += mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(M.dna.species.name)]_uniformblood")
 		if(accessory_overlay)
 			. += accessory_overlay
 

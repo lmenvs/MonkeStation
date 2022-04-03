@@ -215,12 +215,12 @@ GLOBAL_LIST_INIT(skin_tones, list(
 			"african2" = "471c18"
 		)),
 		"simian" = sortList(list(
-			"Chimp" = "bea287",
+			"albino" = "ffffff",
+			"Chimp" = "ffb089",
 			"Grey" = "aeafb3",
-			"Snow" = "b1abaf",
-			"Orange" = "ffb97c",
-			"De Luuk" = "c2ffaa",
-			"Purple" = "d5aaff",
+			"Snow" = "bfd0ca",
+			"Orange" = "ffb089",
+			"Red" = "9e6c77ff",
 			"Mankey" = "f4e2d5"
 		))
 		))

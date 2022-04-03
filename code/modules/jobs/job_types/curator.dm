@@ -22,7 +22,8 @@
 	rpg_title = "Veteran Adventurer"
 
 	species_outfits = list(
-		SPECIES_PLASMAMAN = /datum/outfit/plasmaman/curator
+		SPECIES_PLASMAMAN = /datum/outfit/plasmaman/curator,
+		SPECIES_SIMIAN = /datum/outfit/simian/curator //monkestation edit: add simians
 	)
 	biohazard = 5 //he doesnt get out much
 
@@ -50,5 +51,7 @@
 
 	if(visualsOnly)
 		return
-
-	H.grant_all_languages(TRUE, TRUE, TRUE, LANGUAGE_CURATOR)
+	var/multilingual_tongue = TRUE//monkestation edit: add simians
+	if(issimian(H))
+		multilingual_tongue = FALSE
+	H.grant_all_languages(TRUE, multilingual_tongue, TRUE, LANGUAGE_CURATOR)

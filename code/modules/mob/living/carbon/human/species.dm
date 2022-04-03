@@ -46,6 +46,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/clonemod = 1
 	var/toxmod = 1
 	var/staminamod = 1		// multiplier for stun duration
+	var/maxhealthmod = 1 //multiplier for overriding max health
 	var/attack_type = BRUTE //Type of damage attack does
 	var/punchdamage = 7      //highest possible punch damage
 	var/siemens_coeff = 1 //base electrocution coefficient
@@ -412,6 +413,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(inherent_factions)
 		for(var/i in inherent_factions)
 			C.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
+
+	C.maxHealth = C.maxHealth * maxhealthmod
 
 	C.add_movespeed_modifier(MOVESPEED_ID_SPECIES, TRUE, 100, override=TRUE, multiplicative_slowdown=speedmod, movetypes=(~FLYING))
 
