@@ -131,7 +131,7 @@ There are several things that need to be remembered:
 				icon_file = dna.species.get_custom_icons("uniform")
 				//monkestation edit: make GAGS work with sprite sheets
 				if(U.greyscale_config_worn)
-					U.greyscale_config_worn = text2path("[U.greyscale_config_worn]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+					U.greyscale_config_worn = text2path("[initial(U.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
 					U.update_greyscale()
 				//monkestation edit end
 			//if((dna?.species.bodytype & BODYTYPE_DIGITIGRADE) && (U.supports_variations & DIGITIGRADE_VARIATION))
@@ -336,10 +336,10 @@ There are several things that need to be remembered:
 			if(S.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("shoes")
 				//monkestation edit: make GAGS work with sprite sheets
-				if(S.greyscale_config_worn)
-					S.greyscale_config_worn = text2path("[S.greyscale_config_worn]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+				if(S.greyscale_config)
+					S.greyscale_config_worn = text2path("[initial(S.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
 					S.update_greyscale()
-			else if(S.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
+			else if(S.greyscale_config_worn != initial(S.greyscale_config_worn)) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 				S.greyscale_config_worn = initial(S.greyscale_config_worn)
 				S.update_greyscale()
 			if(dna?.species.bodytype & BODYTYPE_DIGITIGRADE)

@@ -55,9 +55,9 @@
 		if(bloody)
 			var/mob/living/carbon/human/M = loc
 			if(!M.dna.species.get_custom_icons("shoes"))//monkestation edit: add simians
-				. += mutable_appearance('icons/effects/blood.dmi', "bloodyshoes")
+				. += mutable_appearance('icons/effects/blood.dmi', "shoeblood")
 			else
-				. += mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(M.dna.species.name)]_bloodyshoes")//considering sprite_sheets is leaving at some point, and upstream does not use them, pathing should be fine.
+				. += mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(M.dna.species.name)]_shoeblood")//considering sprite_sheets is leaving at some point, and upstream does not use them, pathing should be fine.
 
 
 /obj/item/clothing/shoes/equipped(mob/user, slot)
