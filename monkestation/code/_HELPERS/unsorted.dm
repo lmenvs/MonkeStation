@@ -34,4 +34,12 @@
 		if(prob(25))
 			H.Knockdown(10)
 
+/proc/monkeyfriend_check(mob/living/user)
+	var/obj/item/clothing/suit/monkeysuit/S
+	var/obj/item/clothing/mask/gas/monkeymask/M
+	var/list/equipped = user.get_equipped_items(FALSE)
+	if(issimian(user))
+		ADD_TRAIT(user, TRAIT_MONKEYFRIEND, SPECIES_TRAIT)
+	if(((M in equipped) && (S in equipped)))
+		ADD_TRAIT(user, TRAIT_MONKEYFRIEND, CLOTHING_TRAIT)
 

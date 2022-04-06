@@ -3559,6 +3559,7 @@
 #include "monkestation\code\modules\language\sippins.dm"
 #include "monkestation\code\modules\language\zoomercant.dm"
 #include "monkestation\code\modules\mob\inventory.dm"
+#include "monkestation\code\modules\mob\dead\new_player\sprite_accessories.dm"
 #include "monkestation\code\modules\mob\living\inventory.dm"
 #include "monkestation\code\modules\mob\living\carbon\death.dm"
 #include "monkestation\code\modules\mob\living\carbon\human\emote.dm"
