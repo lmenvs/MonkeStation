@@ -31,6 +31,10 @@
 	species_l_leg = /obj/item/bodypart/l_leg/simian
 	species_r_leg = /obj/item/bodypart/r_leg/simian
 
+/datum/species/simian/on_species_gain(mob/living/carbon/C, datum/species/old_species, pref_load)
+	. = ..()
+	C.gain_trauma(/datum/brain_trauma/mild/kleptomania, TRAUMA_RESILIENCE_ABSOLUTE)
+
 /datum/species/simian/random_name(gender,unique,lastname)
 	if(unique)
 		return random_unique_simian_name(gender)

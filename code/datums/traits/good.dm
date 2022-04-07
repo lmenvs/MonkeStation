@@ -108,8 +108,27 @@
 	var/mob/living/carbon/human/H = quirk_holder
 	if(H.job == "Curator")
 		return
-	var/obj/item/organ/tongue/T = H.getorganslot(ORGAN_SLOT_TONGUE)
-	var/list/languages_possible = T.languages_possible_base //monkestation edit: make multilingual possible for simpletongue species
+	var/list/languages_possible = typecacheof(list(
+		/datum/language/aphasia,
+		/datum/language/apidite,
+		/datum/language/beachbum,
+		/datum/language/buzzwords,
+		/datum/language/calcic,
+		/datum/language/codespeak,
+		/datum/language/common,
+		/datum/language/draconic,
+		/datum/language/moffic,
+		/datum/language/monkey,
+		/datum/language/narsie,
+		/datum/language/piratespeak,
+		/datum/language/ratvar,
+		/datum/language/shadowtongue,
+		/datum/language/slime,
+		/datum/language/sylvan,
+		/datum/language/terrum,
+		/datum/language/uncommon,
+		/datum/language/zoomercant,
+		/datum/language/sippins)) //monkestation edit: make multilingual possible for simpletongue species
 	languages_possible = languages_possible - typecacheof(/datum/language/codespeak) - typecacheof(/datum/language/narsie) - typecacheof(/datum/language/ratvar)
 	languages_possible = languages_possible - H.language_holder.understood_languages
 	languages_possible = languages_possible - H.language_holder.spoken_languages
