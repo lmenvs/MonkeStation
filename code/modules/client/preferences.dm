@@ -1269,6 +1269,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if((quirk in L) && (Q in L) && !(Q == quirk)) //two quirks have lined up in the list of the list of quirks that conflict with each other, so return (see quirks.dm for more details)
 							to_chat(user, "<span class='danger'>[quirk] is incompatible with [Q].</span>")
 							return
+				if(pref_species.name in SSquirks.quirk_species_blacklist)
+					var/list/blacklist = SSquirks.quirk_species_blacklist[pref_species.name]
+					if(quirk in blacklist)
+						to_chat(user, "<span class='danger'>[quirk] is incompatible with [pref_species.name].</span>")
+						return
 				var/value = SSquirks.quirk_points[quirk]
 				var/balance = GetQuirkBalance()
 				if(quirk in all_quirks)

@@ -23,6 +23,7 @@
 	maxhealthmod = 0.7 //small = weak
 	staminamod = 0.7
 	speedmod = -0.1 //lil bit faster
+	offset_features = list(OFFSET_ID = list(0,3), OFFSET_RIGHT_HAND = list(0,3), OFFSET_LEFT_HAND = list(0,3))
 
 	species_chest = /obj/item/bodypart/chest/simian
 	species_head = /obj/item/bodypart/head/simian
@@ -49,9 +50,6 @@
 /datum/species/simian/after_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
 	qdel(H.wear_neck)
 	var/obj/item/clothing/mask/translator/T = new /obj/item/clothing/mask/translator
-	for(var/language in GLOB.all_languages) //check all languages
-		if(H.has_language(language, FALSE)) // if the simian understands the language at roundstart, their translator learns this language
-			T.available_languages.Add(language)
 	H.equip_to_slot(T, ITEM_SLOT_NECK)
 
 

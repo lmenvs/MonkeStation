@@ -219,9 +219,9 @@ GLOBAL_LIST_INIT(skin_tones, list(
 			"Chimp" = "ffb089",
 			"Grey" = "aeafb3",
 			"Snow" = "bfd0ca",
-			"Orange" = "ffb089",
-			"Red" = "9e6c77ff",
-			"Mankey" = "f4e2d5"
+			"Orange" = "ce7d54",
+			"Red" = "c47373",
+			"Cream" = "f4e2d5"
 		))
 		))
 

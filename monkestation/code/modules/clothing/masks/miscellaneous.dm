@@ -32,13 +32,26 @@
 	var/currentlanguage = /datum/language/common
 	var/list/available_languages = list(/datum/language/common) //basic translator has only common
 
+
+/obj/item/clothing/mask/translator/proc/update_languages(mob/living/carbon/human/user)
+	for(var/language in GLOB.all_languages) //check all languages
+		if(user.has_language(language, FALSE)) //if the user understands a language, their translator learns this language
+			src.available_languages.Add(language)
+
+
 /obj/item/clothing/mask/translator/attack_self(mob/user)
 	. = ..()
-	currentlanguage = input("Select a new language:", "Selected language", currentlanguage) in available_languages
+	if(ishuman(user))
+		update_languages(user)
+	if(length(available_languages) > 1)
+		currentlanguage = input("Select a new language:", "Selected language", currentlanguage) in available_languages
+	else
+		to_chat(user, "<span class='notice'>There are no other languages to choose from!</span>")
 
-/obj/item/clothing/mask/equipped(mob/M, slot)
+
+/obj/item/clothing/mask/translator/equipped(mob/M, slot)
 	. = ..()
-	if (slot == ITEM_SLOT_MASK || slot == ITEM_SLOT_NECK && modifies_speech)
+	if ((slot == ITEM_SLOT_MASK || slot == ITEM_SLOT_NECK) && modifies_speech)
 		RegisterSignal(M, COMSIG_MOB_SAY, .proc/handle_speech)
 	else
 		UnregisterSignal(M, COMSIG_MOB_SAY)
@@ -61,13 +74,6 @@
 	obj_flags |= EMAGGED
 	icon_state = "translator_emag"
 	playsound(src, "sparks", 100, 1)
-
-/obj/item/clothing/mask/translator/unlocked
-
-/obj/item/clothing/mask/translator/unlocked/New(loc, ...)
-	. = ..()
-	for(var/language in GLOB.all_languages)
-		available_languages.Add(language)
 
 
 
