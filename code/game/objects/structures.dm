@@ -87,7 +87,7 @@
 	structureclimber = user
 	if(do_mob(user, user, adjusted_climb_time))
 		if(src.loc) //Checking if structure has been destroyed
-			if(HAS_TRAIT(user, TRAIT_VAULTING))//monkestation edit: simians can fling themselves off climbable structures
+			if(HAS_TRAIT(user, TRAIT_VAULTING) && user.m_intent == MOVE_INTENT_RUN)//monkestation edit: simians can fling themselves off climbable structures
 				vault_over_object(user, src)
 				if(climb_stun)
 					user.Stun(climb_stun)

@@ -61,23 +61,15 @@
 		if("gloves")
 			return 'monkestation/icons/mob/species/simian/simian_gloves.dmi'
 		if("glasses")
-			return null
-		if("ears")
-			return null
+			return 'monkestation/icons/mob/species/simian/simian_glasses.dmi'
 		if("shoes")
 			return 'monkestation/icons/mob/species/simian/simian_shoes.dmi'
-		if("head")
-			return null
 		if("belt")
 			return 'monkestation/icons/mob/species/simian/simian_belts.dmi'
 		if("suit")
 			return 'monkestation/icons/mob/species/simian/simian_suits.dmi'
 		if("back")
 			return 'monkestation/icons/mob/species/simian/simian_back.dmi'
-		if("neck")
-			return null
-		if("generic")
-			return null
 		//	return 'monkestation/icons/mob/species/simian/simian_neck.dmi' finish
 		else
 			return
