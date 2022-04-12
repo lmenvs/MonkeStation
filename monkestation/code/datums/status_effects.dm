@@ -5,8 +5,8 @@
 	alert_type = null
 
 /datum/status_effect/kleptomania/tick()
-	if(prob(5) && !owner.get_active_held_item() && !(owner.incapacitated()))
-		if(prob(25)) //we pick pockets
+	if(prob(100) && !owner.get_active_held_item() && !(owner.incapacitated()))
+		if(prob(0)) //we pick pockets
 			for(var/mob/living/carbon/human/victim in view(1, owner))
 				var/pockets = victim.get_pockets()
 				if(victim != owner && length(pockets))
@@ -22,7 +22,7 @@
 						owner.visible_message("<span class='warning'>[owner] fails to pickpocket [victim].</span>","<span class='warning'>You fail to pick [victim]'s pocket.</span>", FALSE, 1)
 		else //we pick stuff off the ground
 			var/mob/living/carbon/C = owner
-			for(var/obj/item/I in view(1, C))
-				if(!I.anchored && !(I in C.get_all_gear())) //anything that's not nailed down or worn
+			for(var/obj/item/I in oview(1, C))
+				if(!I.anchored && !(I in C.get_all_gear()) && I.Adjacent(C)) //anything that's not nailed down or worn
 					I.attack_hand(C)
 					break

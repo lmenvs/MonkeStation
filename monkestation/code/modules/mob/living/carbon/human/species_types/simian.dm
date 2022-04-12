@@ -70,6 +70,7 @@
 			return 'monkestation/icons/mob/species/simian/simian_suits.dmi'
 		if("back")
 			return 'monkestation/icons/mob/species/simian/simian_back.dmi'
-		//	return 'monkestation/icons/mob/species/simian/simian_neck.dmi' finish
+		if("neck")
+			return 'monkestation/icons/mob/species/simian/simian_neck.dmi'
 		else
 			return
