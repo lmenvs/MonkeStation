@@ -5,8 +5,9 @@
 	alert_type = null
 
 /datum/status_effect/kleptomania/tick()
-	if(prob(100) && !owner.get_active_held_item() && !(owner.incapacitated()))
-		if(prob(0)) //we pick pockets
+
+	if(prob(5) && !owner.get_active_held_item() && !(owner.incapacitated()) && owner.has_active_hand())
+		if(prob(25)) //we pick pockets
 			for(var/mob/living/carbon/human/victim in view(1, owner))
 				var/pockets = victim.get_pockets()
 				if(victim != owner && length(pockets))
@@ -15,7 +16,7 @@
 					if(do_after(owner, I.strip_delay, null, owner) && victim.temporarilyRemoveItemFromInventory(I))
 						owner.visible_message("<span class='warning'>[owner] removes [I] from [victim]'s pocket!</span>","<span class='warning'>You remove [I] from [victim]'s pocket.</span>", FALSE, 1)
 						log_admin("[key_name(usr)] picked [victim.name]'s pockets with Kleptomania trait.")
-						if(!QDELETED(I) && !owner.put_in_active_hand(I, TRUE, TRUE))
+						if(!QDELETED(I) && !owner.putItemFromInventoryInHandIfPossible(I, owner.active_hand_index, TRUE, TRUE))
 							I.forceMove(owner.drop_location())
 						break
 					else
