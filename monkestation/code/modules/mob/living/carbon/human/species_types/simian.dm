@@ -49,11 +49,16 @@
 
 /datum/species/simian/after_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
 	qdel(H.wear_neck)
-	var/obj/item/clothing/mask/translator/T = new /obj/item/clothing/mask/translator
+	var/obj/item/clothing/mask/translator/T
+	if(H.has_quirk(/datum/quirk/foreigner))
+		T = new /obj/item/clothing/mask/translator/foreigner
+	else
+		T = new /obj/item/clothing/mask/translator
 	H.equip_to_slot(T, ITEM_SLOT_NECK)
 
 
-//for sprite sheets; hats, eyes, and masks are "good enough" so for now we're just using pixel offset on those.
+
+
 /datum/species/simian/get_custom_icons(var/part)
 	switch(part)
 		if("uniform")

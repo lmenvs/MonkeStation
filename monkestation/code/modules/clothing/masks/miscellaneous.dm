@@ -37,6 +37,8 @@
 	for(var/language in GLOB.all_languages) //check all languages
 		if(user.has_language(language, FALSE)) //if the user understands a language, their translator learns this language
 			src.available_languages.Add(language)
+		if(!(user.has_language(language, FALSE)) && (language in available_languages))
+			src.available_languages.Remove(language)//if we don't understand a language, we remove!
 
 
 /obj/item/clothing/mask/translator/attack_self(mob/user)
@@ -75,5 +77,8 @@
 	icon_state = "translator_emag"
 	playsound(src, "sparks", 100, 1)
 
+/obj/item/clothing/mask/translator/foreigner
+	currentlanguage = /datum/language/uncommon
+	available_languages = list(/datum/language/uncommon)
 
 
