@@ -87,11 +87,11 @@
 	structureclimber = user
 	if(do_mob(user, user, adjusted_climb_time))
 		if(src.loc) //Checking if structure has been destroyed
-			if(HAS_TRAIT(user, TRAIT_VAULTING) && user.m_intent == MOVE_INTENT_RUN)//monkestation edit: simians can fling themselves off climbable structures
+			if(istype(src, /obj/structure/table) && HAS_TRAIT(user, TRAIT_VAULTING) && user.m_intent == MOVE_INTENT_RUN)//monkestation edit: simians can fling themselves off climbable structures
 				vault_over_object(user, src)
 				if(climb_stun)
 					user.Stun(climb_stun)
-					user.visible_message("<span class='warning'>[user] flips over  [src]!</span>", \
+					user.visible_message("<span class='warning'>[user] flips over [src]!</span>", \
 									"<span class='notice'>You flip over [src]!</span>")
 				. = 1
 			else if(do_climb(user))

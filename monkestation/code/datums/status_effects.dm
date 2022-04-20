@@ -1,11 +1,13 @@
 
+
 /datum/status_effect/kleptomania
 	id = "kleptomania"
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = null
+	var/kleptomania_chance = 2.5
 
 /datum/status_effect/kleptomania/tick()
-	if(prob(5) && !owner.get_active_held_item() && !(owner.incapacitated()) && owner.has_active_hand())
+	if(prob(kleptomania_chance) && !owner.get_active_held_item() && !(owner.incapacitated()) && owner.has_active_hand())
 		if(prob(25)) //we pick pockets
 			for(var/mob/living/carbon/human/victim in view(1, owner))
 				var/pockets = victim.get_pockets()
