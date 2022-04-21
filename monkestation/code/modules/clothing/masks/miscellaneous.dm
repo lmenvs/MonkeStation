@@ -77,8 +77,5 @@
 	icon_state = "translator_emag"
 	playsound(src, "sparks", 100, 1)
 
-/obj/item/clothing/mask/translator/foreigner
-	currentlanguage = /datum/language/uncommon
-	available_languages = list(/datum/language/uncommon)
 
 

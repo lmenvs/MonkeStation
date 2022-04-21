@@ -18,7 +18,7 @@
 	skinned_type = /obj/item/stack/sheet/animalhide/monkey
 	disliked_food = GROSS
 	liked_food = FRUIT | MEAT
-	deathsound = 'sound/voice/lizard/deathsound.ogg' //todo change
+	deathsound = 'monkestation/sound/voice/simian/deathsound.ogg'
 	species_language_holder = /datum/language_holder/monkey
 	maxhealthmod = 0.85 //small = weak
 	staminamod = 0.7
@@ -49,11 +49,7 @@
 
 /datum/species/simian/after_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
 	qdel(H.wear_neck)
-	var/obj/item/clothing/mask/translator/T
-	if(H.has_quirk(/datum/quirk/foreigner))
-		T = new /obj/item/clothing/mask/translator/foreigner
-	else
-		T = new /obj/item/clothing/mask/translator
+	var/obj/item/clothing/mask/translator/T = new /obj/item/clothing/mask/translator
 	H.equip_to_slot(T, ITEM_SLOT_NECK)
 
 
