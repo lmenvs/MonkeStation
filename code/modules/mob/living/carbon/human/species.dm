@@ -803,6 +803,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					S = GLOB.tails_list_human[H.dna.features["tail_human"]]
 				if("waggingtail_human")
 					S = GLOB.animated_tails_list_human[H.dna.features["tail_human"]]
+				if("tail_fox")
+					S = GLOB.tails_list_human[H.dna.features["tail_fox"]]
+				if("waggingtail_fox")
+					S = GLOB.animated_tails_list_human[H.dna.features["tail_fox"]]
 				if("spines")
 					S = GLOB.spines_list[H.dna.features["spines"]]
 				if("waggingspines")
