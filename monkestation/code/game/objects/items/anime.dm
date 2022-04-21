@@ -55,6 +55,13 @@
 	weeb_screams = list('monkestation/sound/voice/screams/felinid/hiss.ogg','monkestation/sound/voice/screams/felinid/merowr.ogg','monkestation/sound/voice/screams/felinid/scream_cat.ogg')
 	weeb_laughs = list('monkestation/sound/voice/laugh/felinid/cat_laugh0.ogg','monkestation/sound/voice/laugh/felinid/cat_laugh1.ogg','monkestation/sound/voice/laugh/felinid/cat_laugh2.ogg','monkestation/sound/voice/laugh/felinid/cat_laugh3.ogg')
 
+/obj/item/anime/fox
+	name = "anime fox dermal implant"
+	desc = "You're ready to become the next hokage!"
+	icon_state = "fox"
+	ears = new /obj/item/organ/ears/fox
+	tail = new /obj/item/organ/tail/fox
+
 
 //ANIME TRAIT SPAWNER//
 /obj/item/choice_beacon/anime
@@ -77,7 +84,8 @@
 	var/static/list/anime
 	if(!anime)
 		anime = list()
-		var/list/templist = list(/obj/item/anime/cat //Add to this list if you want your implant to be included in the trait
+		var/list/templist = list(/obj/item/anime/cat, //Add to this list if you want your implant to be included in the trait
+								/obj/item/anime/fox
 							)
 		for(var/V in templist)
 			var/atom/A = V
