@@ -30,25 +30,21 @@
 	slot_flags = ITEM_SLOT_MASK | ITEM_SLOT_NECK
 	modifies_speech = TRUE
 	var/currentlanguage = /datum/language/common
-	var/list/available_languages = list(/datum/language/common) //basic translator has only common
-
+	var/list/available_languages = list(null)
 
 /obj/item/clothing/mask/translator/proc/update_languages(mob/living/carbon/human/user)
-	for(var/language in GLOB.all_languages) //check all languages
-		if(user.has_language(language, FALSE)) //if the user understands a language, their translator learns this language
-			src.available_languages.Add(language)
-		if(!(user.has_language(language, FALSE)) && (language in available_languages))
-			src.available_languages.Remove(language)//if we don't understand a language, we remove!
+	for(var/language in available_languages)
+		available_languages.Remove(language)
+	for(var/language in user.mind.language_holder.understood_languages)//translator learns all languages that the user knows
+		src.available_languages.Add(language)
+
 
 
 /obj/item/clothing/mask/translator/attack_self(mob/user)
 	. = ..()
 	if(ishuman(user))
 		update_languages(user)
-	if(length(available_languages) > 1)
-		currentlanguage = input("Select a new language:", "Selected language", currentlanguage) in available_languages
-	else
-		to_chat(user, "<span class='notice'>There are no other languages to choose from!</span>")
+	currentlanguage = input("Select a new language:", "Selected language", currentlanguage) in available_languages
 
 
 /obj/item/clothing/mask/translator/equipped(mob/M, slot)
@@ -76,6 +72,3 @@
 	obj_flags |= EMAGGED
 	icon_state = "translator_emag"
 	playsound(src, "sparks", 100, 1)
-
-
-
