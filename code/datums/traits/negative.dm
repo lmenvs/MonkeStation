@@ -258,7 +258,7 @@
 		qdel(H.wear_neck)
 		var/obj/item/clothing/mask/translator/T = new /obj/item/clothing/mask/translator
 		H.equip_to_slot(T, ITEM_SLOT_NECK)
-		T.currentlanguage = /datum/language/uncommon
+		T.current_language = /datum/language/uncommon
 
 /datum/quirk/foreigner/remove()
 	var/mob/living/carbon/human/H = quirk_holder

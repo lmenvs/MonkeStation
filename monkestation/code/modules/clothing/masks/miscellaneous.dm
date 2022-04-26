@@ -29,22 +29,30 @@
 	item_state = "translator"
 	slot_flags = ITEM_SLOT_MASK | ITEM_SLOT_NECK
 	modifies_speech = TRUE
-	var/currentlanguage = /datum/language/common
-	var/list/available_languages = list(null)
+	var/current_language = /datum/language/common
 
-/obj/item/clothing/mask/translator/proc/update_languages(mob/living/carbon/human/user)
-	for(var/language in available_languages)
-		available_languages.Remove(language)
-	for(var/language in user.mind.language_holder.understood_languages)//translator learns all languages that the user knows
-		src.available_languages.Add(language)
-
-
+/obj/item/clothing/mask/translator/proc/generate_language_names(mob/user)
+	var/static/list/language_name_list
+	if(!language_name_list)
+		language_name_list = list()
+		for(var/language in user.mind.language_holder.understood_languages)
+			if(language in user.mind.language_holder.blocked_languages)
+				continue
+			var/atom/A = language
+			language_name_list[initial(A.name)] = A
+	return language_name_list
 
 /obj/item/clothing/mask/translator/attack_self(mob/user)
 	. = ..()
 	if(ishuman(user))
-		update_languages(user)
-	currentlanguage = input("Select a new language:", "Selected language", currentlanguage) in available_languages
+		var/list/display_names = generate_language_names(user)
+		if(!display_names.len > 1)
+			return
+		var/choice = input(user,"Please select a language","Select a language:") as null|anything in sortList(display_names)
+		if(!choice || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+			return
+		current_language = display_names[choice]
+
 
 
 /obj/item/clothing/mask/translator/equipped(mob/M, slot)
@@ -60,7 +68,7 @@
 		if(obj_flags & EMAGGED)
 			speech_args[SPEECH_LANGUAGE] = pick(GLOB.all_languages)
 		else
-			speech_args[SPEECH_LANGUAGE] = currentlanguage
+			speech_args[SPEECH_LANGUAGE] = current_language
 
 /obj/item/clothing/mask/translator/examine(mob/user)
 	. = ..()
