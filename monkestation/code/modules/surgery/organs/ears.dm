@@ -8,7 +8,7 @@
 	..()
 	if(istype(H))
 		H.dna.species.mutant_bodyparts |= "ears"
-		H.dna.features["ears"] = "fox"
+		H.dna.features["ears"] = "Fox"
 		H.update_body()
 
 /obj/item/organ/ears/fox/Remove(mob/living/carbon/human/H,  special = 0)
@@ -17,4 +17,5 @@
 		H.dna.features["ears"] = "None"
 		H.dna.species.mutant_bodyparts -= "ears"
 		H.update_body()
+
 

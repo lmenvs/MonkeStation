@@ -1722,24 +1722,12 @@
 /datum/sprite_accessory/tails/human/cat
 	name = "Cat"
 	icon_state = "cat"
-	color_src = HAIR
+	color_src = CUSTOM
 
 /datum/sprite_accessory/tails_animated/human/cat
 	name = "Cat"
 	icon_state = "cat"
-	color_src = HAIR
-
-/datum/sprite_accessory/tails/human/fox
-	name = "Fox"
-	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
-	icon_state = "fox"
-	color_src = HAIR
-
-/datum/sprite_accessory/tails_animated/human/fox
-	name = "Fox"
-	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
-	icon_state = "fox"
-	color_src = HAIR
+	color_src = CUSTOM
 
 /datum/sprite_accessory/tails/human/clock
 	name = "Clockwork"
@@ -1810,14 +1798,7 @@
 	name = "Cat"
 	icon_state = "cat"
 	hasinner = 1
-	color_src = HAIR
-
-/datum/sprite_accessory/ears/fox
-	name = "Fox"
-	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
-	icon_state = "fox"
-	hasinner = 1
-	color_src = HAIR
+	color_src = CUSTOM
 
 /datum/sprite_accessory/wings/none
 	name = "None"

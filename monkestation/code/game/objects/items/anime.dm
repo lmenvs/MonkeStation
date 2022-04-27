@@ -15,10 +15,11 @@
 /obj/item/anime/attack_self(mob/living/carbon/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/weeb = user
-		var/new_color = input(user, "Choose a new hair color:", "Anime Color","#"+ears.color) as color|null
+		var/new_color = input(user, "Choose a new hair color:", "Anime Color", weeb.hair_color) as color|null
 		if(new_color) //If they DON'T pick a color, then it just defaults to their original hair color.
-			src.color = new_color
-			weeb.hair_color = sanitize_hexcolor(src.color) //I guess I have to do this fuck living code
+			weeb.custom_color = sanitize_hexcolor(new_color)
+		else
+			weeb.custom_color = weeb.hair_color
 
 		if(ears)
 			ears.Insert(weeb)
@@ -50,7 +51,7 @@
 	icon_state = "cat"
 	ears = new /obj/item/organ/ears/cat
 	tail = new /obj/item/organ/tail/cat
-	food_likes = DAIRY | MEAT
+	food_likes = DAIRY | MEAT | JUNKFOOD
 	food_dislikes = FRUIT | VEGETABLES | SUGAR
 	weeb_screams = list('monkestation/sound/voice/screams/felinid/hiss.ogg','monkestation/sound/voice/screams/felinid/merowr.ogg','monkestation/sound/voice/screams/felinid/scream_cat.ogg')
 	weeb_laughs = list('monkestation/sound/voice/laugh/felinid/cat_laugh0.ogg','monkestation/sound/voice/laugh/felinid/cat_laugh1.ogg','monkestation/sound/voice/laugh/felinid/cat_laugh2.ogg','monkestation/sound/voice/laugh/felinid/cat_laugh3.ogg')
@@ -61,7 +62,27 @@
 	icon_state = "fox"
 	ears = new /obj/item/organ/ears/fox
 	tail = new /obj/item/organ/tail/fox
+	food_likes = MEAT | JUNKFOOD
+	food_dislikes = FRUIT | VEGETABLES | SUGAR | DAIRY
 
+/obj/item/anime/wolf
+	name = "anime wolf dermal implant"
+	desc = "Sit, boy!"
+	icon_state = "wolf"
+	ears = new /obj/item/organ/ears/fox
+	tail = new /obj/item/organ/tail/wolf
+	food_likes = MEAT | JUNKFOOD
+	food_dislikes = FRUIT | VEGETABLES | SUGAR | DAIRY
+
+/obj/item/anime/shark
+	name = "anime shark dermal implant"
+	desc = "A."
+	icon_state = "shark"
+	tail = new /obj/item/organ/tail/shark
+	food_likes = MEAT | JUNKFOOD
+	food_dislikes = FRUIT | VEGETABLES | SUGAR | DAIRY
+	weeb_screams = list('monkestation/sound/voice/screams/misc/shark_scream0.ogg')
+	weeb_laughs = list('monkestation/sound/voice/screams/misc/shark_scream0.ogg')
 
 //ANIME TRAIT SPAWNER//
 /obj/item/choice_beacon/anime
@@ -69,10 +90,11 @@
 	desc = "Summon your spirit animal."
 	icon = 'monkestation/icons/obj/device.dmi'
 	icon_state = "anime"
+	pickup_sound =  'monkestation/sound/misc/anime.ogg'
 
 /obj/item/choice_beacon/anime/spawn_option(obj/choice, mob/living/carbon/human/M)//overwrite choice proc so it doesn't drop pod.
 	var/obj/new_item = new choice()
-	var/msg = "<span class=danger>Your dermal implant box produces your chosen persona.</span>"
+	var/msg = "<span class=danger>The box spits out a [new_item]. </span>"
 	to_chat(M, msg)
 	var/list/slots = list (
 		"backpack" = ITEM_SLOT_BACKPACK,
@@ -85,8 +107,10 @@
 	if(!anime)
 		anime = list()
 		var/list/templist = list(/obj/item/anime/cat, //Add to this list if you want your implant to be included in the trait
-								/obj/item/anime/fox
-							)
+								 /obj/item/anime/fox,
+								 /obj/item/anime/wolf,
+								 /obj/item/anime/shark
+								)
 		for(var/V in templist)
 			var/atom/A = V
 			anime[initial(A.name)] = A
