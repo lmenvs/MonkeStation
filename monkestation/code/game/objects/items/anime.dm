@@ -15,12 +15,11 @@
 /obj/item/anime/attack_self(mob/living/carbon/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/weeb = user
-		var/new_color = input(user, "Choose a new hair color:", "Anime Color", weeb.hair_color) as color|null
+		var/new_color = input(user, "Choose an Anime color:", "Anime Color (clicking 'cancel' will set Anime color to Hair color):", weeb.hair_color) as color|null
 		if(new_color) //If they DON'T pick a color, then it just defaults to their original hair color.
 			weeb.custom_color = sanitize_hexcolor(new_color)
 		else
 			weeb.custom_color = weeb.hair_color
-
 		if(ears)
 			ears.Insert(weeb)
 		if(tail)
@@ -37,7 +36,7 @@
 
 		var/turf/location = get_turf(weeb)
 		weeb.add_splatter_floor(location)
-		var/msg = "<span class=danger>You feel the power of God and Anime flow through you! </span>"
+		var/msg = "<span class=danger>You feel the power of God and Anime flow through you!</span>"
 		to_chat(weeb, msg)
 		playsound(location, 'sound/weapons/circsawhit.ogg', 50, 1)
 		weeb.update_body()
