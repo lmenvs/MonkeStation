@@ -27,9 +27,9 @@
 
 	//MONKESTATION EDIT START - EXAMINE TEXT
 	if(examine_text && !obscure_name && (real_name == name))
-		. += "[examine_text]\n*---------*"
+		. += "[examine_text]\n<span class='notice'>*---------*"
 	else
-		. += "<span class='notice'>*---------*</span>"
+		. += "<span class='notice'>*---------*"
 	//MONKESTATION EDIT END
 
 	//uniform
