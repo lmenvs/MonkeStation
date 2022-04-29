@@ -13,7 +13,7 @@
 	squeak_override = list('sound/items/bikehorn.ogg'=1)
 	var/last_lubed = 0  //so you can't spam the floor with their lube
 
-/obj/item/toy/plush/livinglube/dropped(mob/user, silent)
+/obj/item/toy/plush/lubeplush/dropped(mob/user, silent)
 	. = ..()
 	if((last_lubed + 30 SECONDS) < world.time)
 		var/turf/open/OT = get_turf(src)
