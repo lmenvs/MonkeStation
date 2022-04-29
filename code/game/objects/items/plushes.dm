@@ -546,12 +546,12 @@
 	attack_verb = list("fluttered", "flapped")
 	squeak_override = list('sound/voice/moth/scream_moth.ogg'=1)
 	var/suicide_count = 0 //Used to track how many people killed themselves with item/toy/plush/moth
-	var/suicide_text = " stares deeply into the eyes of " //for modularizing creepy toys
+	var/suicide_text = "stares deeply into the eyes of" //for modularizing creepy toys
 	var/creepy_plush_type = "mothperson" //for modularizing creepy toys
 	var/has_creepy_icons = FALSE //for updating icons
 
 /obj/item/toy/plush/moth/suicide_act(mob/living/user)
-	user.visible_message("<span class='suicide'>[user][suicide_text][src]! The plush begins to consume [user.p_their()] soul!  It looks like [user.p_theyre()] trying to commit suicide!</span>")
+	user.visible_message("<span class='suicide'>[user] [suicide_text] [src]! The plush begins to consume [user.p_their()] soul!  It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	suicide_count++
 	if(suicide_count < 3)
 		desc = "An unsettling [creepy_plush_type] plushy. After killing [suicide_count] [suicide_count == 1 ? "person" : "people"] it's not looking so huggable now..."
