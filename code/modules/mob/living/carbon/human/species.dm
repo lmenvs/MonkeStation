@@ -887,8 +887,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							accessory_overlay.color = "#[H.facial_hair_color]"
 						if(EYECOLOR)
 							accessory_overlay.color = "#[H.eye_color]"
+						//monkestation edit - add custom color for sprite accessories
 						if(CUSTOM)
+							if(!H.custom_color) //if they don't have one, we just return random.  TODO: make sprite accessories and bodyparts inherit their owners colors.
+								H.custom_color = random_short_color()
 							accessory_overlay.color = "#[H.custom_color]"
+						//monkestation edit end
 				else
 					accessory_overlay.color = forced_colour
 			standing += accessory_overlay
