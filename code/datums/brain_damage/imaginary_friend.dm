@@ -80,6 +80,7 @@
 	greet()
 	Show()
 
+
 /mob/camera/imaginary_friend/proc/greet()
 	to_chat(src, "<span class='notice'><b>You are the imaginary friend of [owner]!</b></span>")
 	to_chat(src, "<span class='notice'>You are absolutely loyal to your friend, no matter what.</span>")
@@ -264,3 +265,37 @@
 	real_name = "[owner.real_name]?"
 	name = real_name
 	human_image = icon('icons/mob/lavaland/lavaland_monsters.dmi', icon_state = "curseblob")
+
+
+//monkestation edit begin for mentors to become imaginary friends to help new players
+/datum/brain_trauma/special/imaginary_friend/mentor
+
+
+/mob/camera/imaginary_friend/mentor/proc/unmentor()
+	icon = human_image
+	log_admin("[key_name(src)] stopped being imaginary friend of [key_name(owner)].")
+	message_admins("[key_name(src)] stopped being imaginary friend of [key_name(owner)].")
+	ghostize()
+	qdel(src)
+
+/mob/camera/imaginary_friend/mentor/recall()
+	if(QDELETED(owner))
+		unmentor()
+		return FALSE
+	if(loc == owner)
+		return FALSE
+	forceMove(owner)
+
+/mob/camera/imaginary_friend/mentor/Logout() //monkestation edit: add imaginary friend mentor
+	. = ..()
+	unmentor()
+
+/datum/action/innate/imaginary_hide/mentor/Deactivate()
+	active = FALSE
+	var/mob/camera/imaginary_friend/I = owner
+	I.hidden = TRUE
+	I.Show()
+	name = "Show"
+	desc = "Become visible to your owner."
+	button_icon_state = "unhide"
+	UpdateButtonIcon()
