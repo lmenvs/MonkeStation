@@ -88,7 +88,8 @@
 
 /mob/camera/imaginary_friend/Initialize(mapload, _trauma)
 	. = ..()
-
+	if(!trauma)//monkestation edit: add imaginary friends for mentors
+		return
 	trauma = _trauma
 	owner = trauma.owner
 	copy_languages(owner, LANGUAGE_FRIEND)
@@ -270,6 +271,22 @@
 //monkestation edit begin for mentors to become imaginary friends to help new players
 /datum/brain_trauma/special/imaginary_friend/mentor
 
+
+/mob/camera/imaginary_friend/mentor/Initialize(mapload, mob/owner)
+	copy_languages(owner, LANGUAGE_FRIEND)
+	setup_friend()
+
+	join = new
+	join.Grant(src)
+	hide = new
+	hide.Grant(src)
+	. = ..()
+
+/mob/camera/imaginary_friend/mentor/setup_friend()
+	name = usr.client.prefs.real_name
+	real_name = name
+	gender = usr.client.prefs.gender
+	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant), client.prefs)
 
 /mob/camera/imaginary_friend/mentor/proc/unmentor()
 	icon = human_image

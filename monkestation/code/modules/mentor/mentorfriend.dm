@@ -1,13 +1,13 @@
-/datum/admins/proc/imaginary_friend()
+/mob/verb/imaginary_friend()
 	set category = "Mentor"
 	set name = "Become Imaginary Friend"
 
-	if(!usr.client.is_mentor())
-		return
+	// if(!usr.client.is_mentor())
+	// 	return
 
 	if(istype(usr, /mob/camera/imaginary_friend/mentor))
-		var/mob/camera/imaginary_friend/mentor/mentor = usr
-		mentor.unmentor()
+		var/mob/camera/imaginary_friend/mentor/mentorfriend = usr
+		mentorfriend.unmentor()
 		return
 
 	if(usr.client.is_mentor() && !isobserver(usr))
@@ -37,8 +37,8 @@
 		to_chat("<span class='warning'>Selected mob is not alive.</span>")
 		return
 
-	var/mob/camera/imaginary_friend/mentor/mentor = new(get_turf(mentee), mentee)
-	usr.mind.transfer_to(mentor)
+	var/mob/camera/imaginary_friend/mentor/mentorfriend = new(get_turf(mentee), mentee)
+	src.mind.transfer_to(mentorfriend)
 
-	log_admin("[key_name(mentor)] started being imaginary friend of [key_name(mentee)].")
-	message_admins("[key_name(mentor)] started being imaginary friend of [key_name(mentee)].")
+	log_admin("[key_name(mentorfriend)] started being imaginary friend of [key_name(mentee)].")
+	message_admins("[key_name(mentorfriend)] started being imaginary friend of [key_name(mentee)].")
