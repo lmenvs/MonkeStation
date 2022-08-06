@@ -158,9 +158,10 @@
 
 	var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[say_quote(message)]</span></span>"
 	var/dead_rendered = "<span class='game say'><span class='name'>[name] (Imaginary friend of [owner])</span> <span class='message'>[say_quote(message)]</span></span>"
-
+	//monkestation edit, add balloon alerts to IF speech
 	balloon_alert(owner, message)
 	balloon_alert(src, message)
+	//monkestation edit end
 	to_chat(owner, "[rendered]")
 	to_chat(src, "[rendered]")
 
