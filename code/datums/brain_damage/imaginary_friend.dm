@@ -88,8 +88,6 @@
 
 /mob/camera/imaginary_friend/Initialize(mapload, _trauma)
 	. = ..()
-	if(!trauma)//monkestation edit: add imaginary friends for mentors
-		return
 	trauma = _trauma
 	owner = trauma.owner
 	copy_languages(owner, LANGUAGE_FRIEND)
@@ -161,6 +159,8 @@
 	var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[say_quote(message)]</span></span>"
 	var/dead_rendered = "<span class='game say'><span class='name'>[name] (Imaginary friend of [owner])</span> <span class='message'>[say_quote(message)]</span></span>"
 
+	balloon_alert(owner, message)
+	balloon_alert(src, message)
 	to_chat(owner, "[rendered]")
 	to_chat(src, "[rendered]")
 
@@ -266,53 +266,3 @@
 	real_name = "[owner.real_name]?"
 	name = real_name
 	human_image = icon('icons/mob/lavaland/lavaland_monsters.dmi', icon_state = "curseblob")
-
-
-//monkestation edit begin for mentors to become imaginary friends to help new players
-/datum/brain_trauma/special/imaginary_friend/mentor
-
-
-/mob/camera/imaginary_friend/mentor/Initialize(mapload, mob/owner)
-	copy_languages(owner, LANGUAGE_FRIEND)
-	setup_friend()
-
-	join = new
-	join.Grant(src)
-	hide = new
-	hide.Grant(src)
-	. = ..()
-
-/mob/camera/imaginary_friend/mentor/setup_friend()
-	name = usr.client.prefs.real_name
-	real_name = name
-	gender = usr.client.prefs.gender
-	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant), client.prefs)
-
-/mob/camera/imaginary_friend/mentor/proc/unmentor()
-	icon = human_image
-	log_admin("[key_name(src)] stopped being imaginary friend of [key_name(owner)].")
-	message_admins("[key_name(src)] stopped being imaginary friend of [key_name(owner)].")
-	ghostize()
-	qdel(src)
-
-/mob/camera/imaginary_friend/mentor/recall()
-	if(QDELETED(owner))
-		unmentor()
-		return FALSE
-	if(loc == owner)
-		return FALSE
-	forceMove(owner)
-
-/mob/camera/imaginary_friend/mentor/Logout() //monkestation edit: add imaginary friend mentor
-	. = ..()
-	unmentor()
-
-/datum/action/innate/imaginary_hide/mentor/Deactivate()
-	active = FALSE
-	var/mob/camera/imaginary_friend/I = owner
-	I.hidden = TRUE
-	I.Show()
-	name = "Show"
-	desc = "Become visible to your owner."
-	button_icon_state = "unhide"
-	UpdateButtonIcon()
