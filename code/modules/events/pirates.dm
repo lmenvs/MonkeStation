@@ -17,8 +17,6 @@
 	send_pirate_threat()
 
 /proc/send_pirate_threat()
-	var/pirate_type = pick(PIRATES_ROGUES)
-	var/ship_template = null
 	var/ship_name = "Space Privateers Association"
 	var/payoff_min = 20000
 	var/payoff = 0
@@ -30,18 +28,15 @@
 
 	if(D)
 		payoff = max(payoff_min, FLOOR(D.account_balance * 0.80, 1000))
-	switch(pirate_type)
-		if(PIRATES_ROGUES)
-			ship_name = pick(strings(PIRATE_NAMES_FILE, "rogue_names"))
-			ship_template = /datum/map_template/shuttle/pirate/default
-			threat.title = "Sector protection offer"
-			threat.content = "Hey, pal, do you have a moment? This is the \"[ship_name]\". Can't help but notice you're rocking a wild and crazy station there with NO INSURANCE! Crazy. What if something happened to it, huh?! We've done a quick evaluation on your rates in this sector and we're offering a payoff of [payoff] to cover for your safety in case of any disaster."
-			threat.possible_answers = list("Purchase Insurance.","Reject Offer.")
-	threat.answer_callback = CALLBACK(GLOBAL_PROC, .proc/pirates_answered, threat, payoff, ship_name, initial_send_time, response_max_time, ship_template)
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/spawn_pirates, threat, ship_template, FALSE), response_max_time)
+	ship_name = pick(strings(PIRATE_NAMES_FILE, "ship_names"))
+	threat.title = "Business proposition"
+	threat.content = "This is [ship_name]. Pay up [payoff] credits or you'll walk the plank."
+	threat.possible_answers = list("We'll pay.","No way.")
+	threat.answer_callback = CALLBACK(GLOBAL_PROC, .proc/pirates_answered, threat, payoff, ship_name, initial_send_time, response_max_time)
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/spawn_pirates, threat, FALSE), response_max_time)
 	SScommunications.send_message(threat,unique = TRUE)
 
-/proc/pirates_answered(datum/comm_message/threat, payoff, ship_name, initial_send_time, response_max_time, ship_template)
+/proc/pirates_answered(datum/comm_message/threat, payoff, ship_name, initial_send_time, response_max_time)
 	if(world.time > initial_send_time + response_max_time)
 		priority_announce("Too late to beg for mercy!",sender_override = ship_name)
 		return
@@ -49,19 +44,19 @@
 		var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
 		if(D)
 			if(D.adjust_money(-payoff))
-				priority_announce("Thanks for the credits, landlubbers.",sender_override = ship_name)
+				priority_announce("Thanks for the credits, landlubbers.", sound = SSstation.announcer.get_rand_alert_sound(), sender_override = ship_name)
 				return
 			else
-				priority_announce("Trying to cheat us? You'll regret this!",sender_override = ship_name)
-				spawn_pirates(threat, ship_template, TRUE)
+				priority_announce("Trying to cheat us? You'll regret this!", sound = SSstation.announcer.get_rand_alert_sound(), sender_override = ship_name)
+	spawn_pirates(threat, TRUE)
 
-/proc/spawn_pirates(datum/comm_message/threat, ship_template, skip_answer_check)
-	if(!skip_answer_check && threat?.answered == 1)
+/proc/spawn_pirates(datum/comm_message/threat, skip_answer_check)
+	if(!skip_answer_check && threat?.answered == TRUE)
 		return
 
 	var/list/candidates = pollGhostCandidates("Do you wish to be considered for pirate crew?", ROLE_TRAITOR)
 	shuffle_inplace(candidates)
-	var/datum/map_template/shuttle/pirate/ship = new ship_template
+	var/datum/map_template/shuttle/pirate/ship = new
 	var/x = rand(TRANSITIONEDGE,world.maxx - TRANSITIONEDGE - ship.width)
 	var/y = rand(TRANSITIONEDGE,world.maxy - TRANSITIONEDGE - ship.height)
 	var/z = SSmapping.empty_space.z_value
@@ -78,12 +73,14 @@
 	for(var/turf/A in ship.get_affected_turfs(T))
 		for(var/obj/effect/mob_spawn/human/pirate/spawner in A)
 			if(candidates.len > 0)
-				var/mob/our_candidate = candidates[1]
-				spawner.create(our_candidate.ckey)
-				candidates -= our_candidate
-				notify_ghosts("The pirate ship has an object of interest: [our_candidate]!", source=our_candidate, action=NOTIFY_ORBIT, header="Something's Interesting!")
+				var/mob/M = candidates[1]
+				spawner.create(M.ckey)
+				candidates -= M
+				notify_ghosts("The pirate ship has an object of interest: [M]!", source=M, action=NOTIFY_ORBIT, header="Something's Interesting!")
 			else
 				notify_ghosts("The pirate ship has an object of interest: [spawner]!", source=spawner, action=NOTIFY_ORBIT, header="Something's Interesting!")
+
+	priority_announce("Unidentified armed ship detected near the station.", sound = SSstation.announcer.get_rand_alert_sound())
 
 //Shuttle equipment
 

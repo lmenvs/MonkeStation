@@ -9,7 +9,6 @@
 
 /datum/dynamic_ruleset/roundstart/traitor
 	name = "Traitors"
-	persistent = TRUE
 	antag_flag = ROLE_TRAITOR
 	antag_datum = /datum/antagonist/traitor
 	minimum_required_age = 0
@@ -17,16 +16,15 @@
 	restricted_roles = list("Cyborg")
 	required_candidates = 1
 	weight = 5
-	cost = 8	// Avoid raising traitor threat above 10, as it is the default low cost ruleset.
-	scaling_cost = 12
+	cost = 8	// Avoid raising traitor threat above this, as it is the default low cost ruleset.
+	scaling_cost = 9
 	minimum_players = 8
-	requirements = list(101,10,10,10,10,10,10,10,10,10)
-	antag_cap = 1
-	COOLDOWN_DECLARE(autotraitor_cooldown_check)
+	requirements = list(8,8,8,8,8,8,8,8,8,8)
+	antag_cap = list("denominator" = 38)
+	var/autotraitor_cooldown = (15 MINUTES)
 
 /datum/dynamic_ruleset/roundstart/traitor/pre_execute(population)
 	. = ..()
-	COOLDOWN_START(src, autotraitor_cooldown_check, TRAITOR_COOLDOWN)
 	var/num_traitors = get_antag_cap(population) * (scaled_times + 1)
 	for (var/i = 1 to num_traitors)
 		if(candidates.len <= 0)
@@ -37,11 +35,6 @@
 		M.mind.restricted_roles = restricted_roles
 	return TRUE
 
-/datum/dynamic_ruleset/roundstart/traitor/rule_process()
-	if (COOLDOWN_FINISHED(src, autotraitor_cooldown_check))
-		COOLDOWN_START(src, autotraitor_cooldown_check, TRAITOR_COOLDOWN)
-		log_game("DYNAMIC: Checking if we can turn someone into a traitor.")
-		mode.picking_specific_rule(/datum/dynamic_ruleset/midround/autotraitor)
 
 #undef TRAITOR_COOLDOWN
 
@@ -59,9 +52,8 @@
 	restricted_roles = list("Cyborg", "AI")
 	required_candidates = 2
 	weight = 2
-	cost = 13
-	scaling_cost = 13
-	minimum_players = 20
+	cost = 12
+	scaling_cost = 15
 	requirements = list(40,30,30,20,20,15,15,15,10,10)
 	antag_cap = 2
 	var/list/datum/team/brother_team/pre_brother_teams = list()
@@ -145,11 +137,11 @@
 	restricted_roles = list("AI", "Cyborg")
 	required_candidates = 1
 	weight = 3
-	cost = 25
-	scaling_cost = 15 //15(15), 30(45), 45(80)
+	cost = 15
+	scaling_cost = 9
 	minimum_players = 25
-	requirements = list(101,101,101,101,40,30,30,30,20,20)
-	antag_cap = 1
+	requirements = list(101,101,101,40,35,20,20,15,10,10)
+	antag_cap = list("denominator" = 24)
 
 
 /datum/dynamic_ruleset/roundstart/heretics/pre_execute(population)
@@ -191,9 +183,9 @@
 	restricted_roles = list("Head of Security", "Captain") // Just to be sure that a wizard getting picked won't ever imply a Captain or HoS not getting drafted
 	required_candidates = 1
 	minimum_players = 30
-	weight = 5
-	cost = 30
-	requirements = list(101,101,101,101,101,50,40,30,30,30)
+	weight = 2
+	cost = 20
+	requirements = list(90,90,90,80,60,40,30,20,10,10)
 	var/list/roundstart_wizards = list()
 
 /datum/dynamic_ruleset/roundstart/wizard/acceptable(population=0, threat=0)
@@ -244,7 +236,7 @@
 
 /datum/dynamic_ruleset/roundstart/bloodcult/ready(population, forced = FALSE)
 	required_candidates = get_antag_cap(population)
-	. = ..()
+	return ..()
 
 /datum/dynamic_ruleset/roundstart/bloodcult/pre_execute(population)
 	. = ..()
@@ -301,7 +293,7 @@
 
 /datum/dynamic_ruleset/roundstart/nuclear/ready(population, forced = FALSE)
 	required_candidates = get_antag_cap(population)
-	. = ..()
+	return ..()
 
 /datum/dynamic_ruleset/roundstart/nuclear/pre_execute(population)
 	. = ..()
@@ -521,7 +513,7 @@
 	var/num_devils = get_antag_cap(population) * (scaled_times + 1)
 
 	for(var/j = 0, j < num_devils, j++)
-		if (!candidates.len)
+		if (candidates.len <= 0)
 			break
 		var/mob/devil = pick_n_take(candidates)
 		assigned += devil.mind

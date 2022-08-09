@@ -28,18 +28,23 @@
 			continue
 
 /datum/dynamic_ruleset/latejoin/ready(forced = 0)
-	if (!forced)
-		var/job_check = 0
-		if (enemy_roles.len > 0)
-			for (var/mob/M in mode.current_players[CURRENT_LIVING_PLAYERS])
-				if (M.stat == DEAD)
-					continue // Dead players cannot count as opponents
-				if (M.mind && M.mind.assigned_role && (M.mind.assigned_role in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role in restricted_roles)))
-					job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that rule, or have a job that restricts them from it
+	if (forced)
+		return ..()
 
-		var/threat = round(mode.threat_level/10)
-		if (job_check < required_enemies[threat])
-			return FALSE
+	var/job_check = 0
+	if (enemy_roles.len > 0)
+		for (var/mob/M in mode.current_players[CURRENT_LIVING_PLAYERS])
+			if (M.stat == DEAD)
+				continue // Dead players cannot count as opponents
+			if (M.mind && (M.mind.assigned_role in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role in restricted_roles)))
+				job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that rule, or have a job that restricts them from it
+
+	var/threat = round(mode.threat_level/10)
+
+	if (job_check < required_enemies[threat])
+		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies[threat]] needed, [job_check] found")
+		return FALSE
+
 	return ..()
 
 /datum/dynamic_ruleset/latejoin/execute()
@@ -63,10 +68,10 @@
 	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel")
 	restricted_roles = list("AI","Cyborg")
 	required_candidates = 1
-	weight = 4
-	cost = 8
+	weight = 7
+	cost = 5
 	minimum_players = 8
-	requirements = list(101,30,20,20,20,20,20,10,10,10)
+	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	repeatable = TRUE
 
 //////////////////////////////////////////////
@@ -86,10 +91,10 @@
 	required_enemies = list(5,5,5,5,5,5,5,5,5,5)
 	required_candidates = 1
 	weight = 2
-	delay = 1 MINUTES	// Prevents rule start while head is offstation.
-	cost = 20
+	delay = 1 MINUTES // Prevents rule start while head is offstation.
+	cost = 10
 	minimum_players = 30
-	requirements = list(101,101,101,101,101,20,20,20,20,20)
+	requirements = list(101,101,70,40,30,20,20,20,20,20)
 	flags = HIGH_IMPACT_RULESET
 	blocking_rules = list(/datum/dynamic_ruleset/roundstart/revs)
 	var/required_heads_of_staff = 3
@@ -160,8 +165,8 @@
 	protected_roles = list("Security Officer", "Warden", "Head of Personnel", "Detective", "Head of Security", "Captain")
 	restricted_roles = list("AI","Cyborg")
 	required_candidates = 1
-	weight = 2
-	cost = 25
+	weight = 4
+	cost = 7
 	minimum_players = 25
-	requirements = list(101,101,101,101,40,30,30,30,20,20)
+	requirements = list(101,101,101,10,10,10,10,10,10,10)
 	repeatable = TRUE

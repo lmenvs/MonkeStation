@@ -6,6 +6,7 @@
 
 /datum/dynamic_ruleset/midround // Can be drafted once in a while during a round
 	ruletype = "Midround"
+	var/midround_ruleset_style
 	/// If the ruleset should be restricted from ghost roles.
 	var/restrict_ghost_roles = TRUE
 	/// What mob type the ruleset is restricted to.
@@ -15,6 +16,9 @@
 	var/list/dead_players = list()
 	var/list/list_observers = list()
 
+	/// The minimum round time before this ruleset will show up
+	var/minimum_round_time = 0
+
 /datum/dynamic_ruleset/midround/from_ghosts
 	weight = 0
 	required_type = /mob/dead/observer
@@ -22,6 +26,15 @@
 	var/makeBody = TRUE
 	/// The rule needs this many applicants to be properly executed.
 	var/required_applicants = 1
+
+/datum/dynamic_ruleset/midround/from_ghosts/check_candidates()
+	var/dead_count = dead_players.len + list_observers.len
+	if (required_candidates <= dead_count)
+		return TRUE
+
+	log_game("DYNAMIC: FAIL: [src], a from_ghosts ruleset, did not have enough dead candidates: [required_candidates] needed, [dead_count] found")
+
+	return FALSE
 
 /datum/dynamic_ruleset/midround/trim_candidates()
 	living_players = trim_list(mode.current_players[CURRENT_LIVING_PLAYERS])
@@ -67,18 +80,23 @@
 // IMPORTANT, since /datum/dynamic_ruleset/midround may accept candidates from both living, dead, and even antag players, you need to manually check whether there are enough candidates
 // (see /datum/dynamic_ruleset/midround/autotraitor/ready(var/forced = FALSE) for example)
 /datum/dynamic_ruleset/midround/ready(forced = FALSE)
-	if (!forced)
-		var/job_check = 0
-		if (enemy_roles.len > 0)
-			for (var/mob/M in mode.current_players[CURRENT_LIVING_PLAYERS])
-				if (M.stat == DEAD || !M.client)
-					continue // Dead/disconnected players cannot count as opponents
-				if (M.mind && M.mind.assigned_role && (M.mind.assigned_role in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role in restricted_roles)))
-					job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that rule, or have a job that restricts them from it
+	if (forced)
+		return TRUE
 
-		var/threat = round(mode.threat_level/10)
-		if (job_check < required_enemies[threat])
-			return FALSE
+	var/job_check = 0
+	if (enemy_roles.len > 0)
+		for (var/mob/M in mode.current_players[CURRENT_LIVING_PLAYERS])
+			if (M.stat == DEAD || !M.client)
+				continue // Dead/disconnected players cannot count as opponents
+			if (M.mind && (M.mind.assigned_role in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role in restricted_roles)))
+				job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that rule, or have a job that restricts them from it
+
+	var/threat = round(mode.threat_level/10)
+
+	if (job_check < required_enemies[threat])
+		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies[threat]] needed, [job_check] found")
+		return FALSE
+
 	return TRUE
 
 /datum/dynamic_ruleset/midround/from_ghosts/execute()
@@ -120,9 +138,6 @@
 		return
 	for (var/i = 1, i <= required_candidates, i++)
 		if(candidates.len <= 0)
-			if(i == 1)
-				// We have found no candidates so far and we are out of applicants.
-				mode.executed_rules -= src
 			break
 		var/mob/applicant = pick(candidates)
 		candidates -= applicant
@@ -144,7 +159,7 @@
 
 		finish_setup(new_character, i)
 		assigned += applicant
-		notify_ghosts("[new_character] has been picked for the ruleset [name]!", source = new_character, action = NOTIFY_ORBIT, header="Something Interesting!")
+		notify_ghosts("[applicant.name] has been picked for the ruleset [name]!", source = new_character, action = NOTIFY_ORBIT, header="Something Interesting!")
 
 /datum/dynamic_ruleset/midround/from_ghosts/proc/generate_ruleset_body(mob/applicant)
 	var/mob/living/carbon/human/new_character = makeBody(applicant)
@@ -168,33 +183,16 @@
 
 /datum/dynamic_ruleset/midround/autotraitor
 	name = "Syndicate Sleeper Agent"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_TRAITOR
 	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	restricted_roles = list("Cyborg", "AI", "Positronic Brain")
 	required_candidates = 1
-	minimum_players = 8
-	weight = 5
-	cost = 10
-	requirements = list(20,20,20,20,20,20,20,20,20,20)
+	weight = 35
+	cost = 3
+	requirements = list(3,3,3,3,3,3,3,3,3,3)
 	repeatable = TRUE
-
-/datum/dynamic_ruleset/midround/autotraitor/acceptable(population = 0, threat = 0)
-	var/player_count = mode.current_players[CURRENT_LIVING_PLAYERS].len
-	var/antag_count = mode.current_players[CURRENT_LIVING_ANTAGS].len
-	var/max_traitors = round(player_count / 10) + 1
-
-	// adding traitors if the antag population is getting low
-	var/too_little_antags = antag_count < max_traitors
-	if (!too_little_antags)
-		log_game("DYNAMIC: Too many living antags compared to living players ([antag_count] living antags, [player_count] living players, [max_traitors] max traitors)")
-		return FALSE
-
-	if (!prob(mode.threat_level))
-		log_game("DYNAMIC: Random chance to roll autotraitor failed, it was a [mode.threat_level]% chance.")
-		return FALSE
-
-	return ..()
 
 /datum/dynamic_ruleset/midround/autotraitor/trim_candidates()
 	..()
@@ -210,6 +208,7 @@
 
 /datum/dynamic_ruleset/midround/autotraitor/ready(forced = FALSE)
 	if (required_candidates > living_players.len)
+		log_game("DYNAMIC: FAIL: [src] does not have enough candidates, using living_players ([required_candidates] needed, [living_players.len] found)")
 		return FALSE
 	return ..()
 
@@ -220,7 +219,6 @@
 	var/datum/antagonist/traitor/newTraitor = new
 	M.mind.add_antag_datum(newTraitor)
 	return TRUE
-
 
 //////////////////////////////////////////////
 //                                          //
@@ -233,16 +231,17 @@
 
 /datum/dynamic_ruleset/midround/malf
 	name = "Malfunctioning AI"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_MALF
 	enemy_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Scientist", "Chemist", "Research Director", "Chief Engineer")
 	exclusive_roles = list("AI")
 	required_enemies = list(4,4,4,4,4,4,2,2,2,0)
 	required_candidates = 1
-	weight = 3
-	cost = 30
 	minimum_players = 25
-	requirements = list(101,101,101,101,50,40,30,30,30,30)
+	weight = 2
+	cost = 10
+
 	required_type = /mob/living/silicon/ai
 
 /datum/dynamic_ruleset/midround/malf/trim_candidates()
@@ -285,19 +284,20 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/wizard
 	name = "Wizard"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	antag_datum = /datum/antagonist/wizard
 	antag_flag = ROLE_WIZARD
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain", "Research Director") //RD doesn't believe in magic
 	required_enemies = list(2,2,1,1,1,1,1,1,1,1)
 	required_candidates = 1
-	weight = 3
-	cost = 20
+	weight = 1
+	cost = 10
 	minimum_players = 30
-	requirements = list(101,101,101,101,40,30,10,10,10,10)
+	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
 	flags = HIGH_IMPACT_RULESET
 
 /datum/dynamic_ruleset/midround/from_ghosts/wizard/ready(forced = FALSE)
-	if (required_candidates > (dead_players.len + list_observers.len))
+	if (!check_candidates())
 		return FALSE
 	if(GLOB.wizardstart.len == 0)
 		log_admin("Cannot accept Wizard ruleset. Couldn't find any wizard spawn points.")
@@ -317,15 +317,17 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/nuclear
 	name = "Nuclear Assault"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	antag_flag = ROLE_OPERATIVE
 	antag_datum = /datum/antagonist/nukeop
 	enemy_roles = list("AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	required_enemies = list(3,3,3,3,3,2,1,1,0,0)
-	required_candidates = 3
-	weight = 4
-	cost = 20
+	required_candidates = 5
+	weight = 5
+	cost = 7
 	minimum_players = 30
-	requirements = list(101,101,101,101,101,40,30,20,10,10)
+	minimum_round_time = 45 MINUTES
+	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
 	var/list/operative_cap = list(2,2,3,3,4,5,5,5,5,5)
 	var/datum/team/nuclear/nuke_team
 	flags = HIGH_IMPACT_RULESET
@@ -338,7 +340,7 @@
 	return ..()
 
 /datum/dynamic_ruleset/midround/from_ghosts/nuclear/ready(forced = FALSE)
-	if (required_candidates > (dead_players.len + list_observers.len))
+	if (!check_candidates())
 		return FALSE
 	return ..()
 
@@ -360,15 +362,16 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/blob
 	name = "Blob"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	antag_datum = /datum/antagonist/blob
 	antag_flag = ROLE_BLOB
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
 	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
+	minimum_round_time = 35 MINUTES
 	weight = 3
-	cost = 25
+	cost = 8
 	minimum_players = 30
-	requirements = list(101,101,101,80,60,50,30,20,10,10)
 	repeatable = TRUE
 
 /datum/dynamic_ruleset/midround/from_ghosts/blob/generate_ruleset_body(mob/applicant)
@@ -383,15 +386,16 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	antag_datum = /datum/antagonist/xeno
 	antag_flag = ROLE_ALIEN
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
 	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
-	weight = 3
-	cost = 25
+	minimum_round_time = 40 MINUTES
+	weight = 5
+	cost = 10
 	minimum_players = 30
-	requirements = list(101,101,101,70,50,40,20,15,10,10)
 	repeatable = TRUE
 	var/list/vents = list()
 
@@ -429,6 +433,7 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/nightmare
 	name = "Nightmare"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
 	antag_datum = /datum/antagonist/nightmare
 	antag_flag = "Nightmare"
 	antag_flag_override = ROLE_ALIEN
@@ -436,9 +441,8 @@
 	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
 	weight = 3
-	cost = 15
+	cost = 5
 	minimum_players = 30
-	requirements = list(101,101,101,70,50,40,20,15,10,10)
 	repeatable = TRUE
 	var/list/spawn_locs = list()
 
@@ -477,6 +481,7 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/abductors
 	name = "Abductors"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
 	antag_flag = "Abductor"
 	antag_flag_override = ROLE_ABDUCTOR
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
@@ -484,9 +489,8 @@
 	required_candidates = 2
 	required_applicants = 2
 	weight = 4
-	cost = 15
+	cost = 7
 	minimum_players = 20
-	requirements = list(101,101,101,40,30,30,30,20,10,10)
 	repeatable = TRUE
 	var/datum/team/abductor_team/new_team
 
@@ -510,46 +514,21 @@
 
 //////////////////////////////////////////////
 //                                          //
-//           PIRATES      (GHOST)           //
+//           REVENANT    (GHOST)            //
 //                                          //
 //////////////////////////////////////////////
-
-/datum/dynamic_ruleset/midround/pirates
-	name = "Space Pirates"
-	antag_flag = ROLE_TRAITOR
-	required_type = /mob/dead/observer
-	enemy_roles = list("Security Officer", "Detective", "Head of Security", "Captain")
-	required_enemies = list(2,2,2,2,2,2,2,2,2,2)
-	weight = 5
-	cost = 10
-	minimum_players = 25
-	requirements = list(101,101,101,80,60,50,30,20,10,10)
-
-/datum/dynamic_ruleset/midround/pirates/acceptable(population=0, threat=0)
-	if (!SSmapping.empty_space)
-		return FALSE
-	return ..()
-
-/datum/dynamic_ruleset/midround/pirates/execute()
-	send_pirate_threat()
-
-//////////////////////////////////////////////
-//                                          //
-//           REVENANT      (GHOST)          //
-//                                          //
-//////////////////////////////////////////////
-
 /datum/dynamic_ruleset/midround/from_ghosts/revenant
 	name = "Revenant"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
 	antag_datum = /datum/antagonist/revenant
 	antag_flag = "Revenant"
 	antag_flag_override = ROLE_REVENANT
-	enemy_roles = list("Security Officer", "Detective", "Head of Security", "Captain")
+	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
 	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
 	weight = 4
-	cost = 10
-	requirements = list(101,101,101,70,50,40,20,15,10,10)
+	cost = 5
+	minimum_players = 15
 	repeatable = TRUE
 	var/dead_mobs_required = 20
 	var/need_extra_spawns_value = 15
@@ -602,6 +581,46 @@
 	weight = 3
 	cost = 5
 	requirements = list(101,101,101,80,60,50,30,20,10,10)
+
+//////////////////////////////////////////////
+//                                          //
+//           PIRATES    (GHOST)             //
+//                                          //
+//////////////////////////////////////////////
+/datum/dynamic_ruleset/midround/pirates
+	name = "Space Pirates"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	antag_flag = "Space Pirates"
+	required_type = /mob/dead/observer
+	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
+	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_candidates = 0
+	weight = 4
+	cost = 8
+	minimum_players = 27
+	repeatable = TRUE
+
+/datum/dynamic_ruleset/midround/pirates/acceptable(population=0, threat=0)
+	if (!SSmapping.empty_space)
+		return FALSE
+	return ..()
+
+/datum/dynamic_ruleset/midround/pirates/execute()
+	send_pirate_threat()
+	return ..()
+
+/// Obsessed ruleset
+/datum/dynamic_ruleset/midround/obsessed
+	name = "Obsessed"
+	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	antag_datum = /datum/antagonist/obsessed
+	antag_flag = ROLE_OBSESSED
+	restricted_roles = list("AI", "Cyborg", "Positronic Brain")
+	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
+	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_candidates = 1
+	weight = 4
+	cost = 3 // Doesn't have the same impact on rounds as revenants, dragons, sentient disease (10) or syndicate infiltrators (5).
 	repeatable = TRUE
 
 /datum/dynamic_ruleset/midround/obsessed/trim_candidates()
