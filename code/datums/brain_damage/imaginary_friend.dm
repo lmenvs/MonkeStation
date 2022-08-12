@@ -159,17 +159,11 @@
 	var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[say_quote(message)]</span></span>"
 	var/dead_rendered = "<span class='game say'><span class='name'>[name] (Imaginary friend of [owner])</span> <span class='message'>[say_quote(message)]</span></span>"
 
-	//monkestation edit, add balloon alerts to IF speech
-	create_chat_message(src, owner.get_selected_language(), list(owner, src), message)
-	//monkestation edit end
+
+	create_chat_message(src, owner.get_selected_language(), list(owner, src), message)//monkestation edit: add runechat to imaginary friends
+
 	to_chat(owner, "[rendered]")
 	to_chat(src, "[rendered]")
-
-	//speech bubble
-	if(owner.client)
-		var/mutable_appearance/MA = mutable_appearance('icons/mob/talk.dmi', src, "default[say_test(message)]", FLY_LAYER)
-		MA.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-		INVOKE_ASYNC(GLOBAL_PROC, /proc/flick_overlay, MA, list(owner.client), 30)
 
 	for(var/mob/M in GLOB.dead_mob_list)
 		var/link = FOLLOW_LINK(M, owner)
