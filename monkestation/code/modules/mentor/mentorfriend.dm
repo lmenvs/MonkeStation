@@ -8,29 +8,32 @@
 		return
 
 	if(istype(usr, /mob/camera/imaginary_friend/mentor))
-		var/mob/camera/imaginary_friend/mentor/mentorfriend = usr
-		mentorfriend.unmentor()
-		return
-
-	if(usr.client.is_mentor() && !isobserver(usr))
-		to_chat(usr, span_warning("You can only be an imaginary friend when you are observing."))
+		to_chat(usr, span_warning("You are already someone's imaginary friend!"))
 		return
 
 	if(!isobserver(usr))
-		usr.client.admin_ghost()
+		to_chat(usr, span_warning("You can only be an imaginary friend when you are observing."))
+		return
 
 	var/mob/living/mentee
+
 	switch(input("Select by:", "Imaginary Friend") as null|anything in list("Key", "Mob"))
 		if("Key")
-			var/client/C = input("Please, select a key.", "Imaginary Friend") as null|anything in sortKey(GLOB.clients)
-			if(!C)
+			var/list/friendlist = list()
+			for(var/mob/living/friend in GLOB.player_list)
+				friendlist |= friend.client
+			var/client/friendclient = input("Please, select a key.", "Imaginary Friend") as null|anything in sortKey(friendlist)
+			if(!friendclient)
 				return
-			mentee = C.mob
+			mentee = friendclient.mob
 		if("Mob")
-			var/mob/M = input("Please, select a mob.", "Imaginary Friend") as null|anything in sortNames(GLOB.mob_living_list)
-			if(!M)
+			var/list/friendlist = list()
+			for(var/mob/living/friend in GLOB.player_list)
+				friendlist |= friend
+			var/mob/friendmob = input("Please, select a mob.", "Imaginary Friend") as null|anything in sortNames(friendlist)
+			if(!friendmob)
 				return
-			mentee = M
+			mentee = friendmob
 
 	if(!isobserver(usr))
 		return
@@ -45,6 +48,19 @@
 	log_admin("[key_name(mentorfriend)] started being the imaginary friend of [key_name(mentee)].")
 	message_admins("[key_name(mentorfriend)] started being the imaginary friend of [key_name(mentee)].")
 
+/mob/verb/end_imaginary_friendship()
+	set category = "Mentor"
+	set name = "End Imaginary Friendship"
+
+	if(!usr.client.is_mentor())
+		return
+
+	if(!istype(usr, /mob/camera/imaginary_friend/mentor))
+		to_chat(usr, span_warning("You aren't anybody's imaginary friend!"))
+		return
+
+	var/mob/camera/imaginary_friend/mentor/mentorfriend = usr
+	mentorfriend.unmentor()
 
 //Section for the Mentor Friend mob.
 /mob/camera/imaginary_friend/mentor
@@ -82,7 +98,7 @@
 	name = client.prefs.real_name
 	real_name = name
 	gender = client.prefs.gender
-	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant/mentor), client.prefs)
+	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant), client.prefs,,,/datum/outfit/mentor)
 
 /mob/camera/imaginary_friend/mentor/proc/unmentor()
 	icon = human_image
@@ -157,3 +173,30 @@
 	if(href_list["mentor_friend"])
 		var/mob/M = locate(href_list["mentor_friend"])
 		create_ifriend(M, TRUE)
+
+//for Mentor Chat Messages
+
+/atom/proc/mentor_message(mob/viewer, text)
+	if(!viewer?.client)
+		return
+	switch(viewer.client.prefs.see_balloon_alerts)
+		if(BALLOON_ALERT_ALWAYS)
+			new /datum/chatmessage/mentor_message(text, src, viewer)
+		if(BALLOON_ALERT_WITH_CHAT)
+			new /datum/chatmessage/mentor_message(text, src, viewer)
+			to_chat(viewer, "<span class='notice'>[text].</span>")
+		if(BALLOON_ALERT_NEVER)
+			to_chat(viewer, "<span class='notice'>[text].</span>")
+
+/datum/chatmessage/mentor_message
+	tgt_color = "#e044ff"
+
+/datum/chatmessage/mentor_message/New(text, atom/target, mob/owner)
+	if (!istype(target))
+		CRASH("Invalid target given for chatmessage")
+	if(QDELETED(owner) || !istype(owner) || !owner.client)
+		stack_trace("/datum/chatmessage created with [isnull(owner) ? "null" : "invalid"] mob owner")
+		qdel(src)
+		return
+	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner)
+
