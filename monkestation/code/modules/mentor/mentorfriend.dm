@@ -176,27 +176,3 @@
 
 //for Mentor Chat Messages
 
-/atom/proc/mentor_message(mob/viewer, text)
-	if(!viewer?.client)
-		return
-	switch(viewer.client.prefs.see_balloon_alerts)
-		if(BALLOON_ALERT_ALWAYS)
-			new /datum/chatmessage/mentor_message(text, src, viewer)
-		if(BALLOON_ALERT_WITH_CHAT)
-			new /datum/chatmessage/mentor_message(text, src, viewer)
-			to_chat(viewer, "<span class='notice'>[text].</span>")
-		if(BALLOON_ALERT_NEVER)
-			to_chat(viewer, "<span class='notice'>[text].</span>")
-
-/datum/chatmessage/mentor_message
-	tgt_color = "#e044ff"
-
-/datum/chatmessage/mentor_message/New(text, atom/target, mob/owner)
-	if (!istype(target))
-		CRASH("Invalid target given for chatmessage")
-	if(QDELETED(owner) || !istype(owner) || !owner.client)
-		stack_trace("/datum/chatmessage created with [isnull(owner) ? "null" : "invalid"] mob owner")
-		qdel(src)
-		return
-	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner)
-
