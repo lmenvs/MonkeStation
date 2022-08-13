@@ -98,7 +98,7 @@
 	name = client.prefs.real_name
 	real_name = name
 	gender = client.prefs.gender
-	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant), client.prefs,,,/datum/outfit/job/mentor)
+	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant), client.prefs,,list(SOUTH),/datum/outfit/job/mentor)
 
 /mob/camera/imaginary_friend/mentor/proc/unmentor()
 	icon = human_image

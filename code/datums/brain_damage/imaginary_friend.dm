@@ -88,8 +88,9 @@
 
 /mob/camera/imaginary_friend/Initialize(mapload, _trauma)
 	. = ..()
-	trauma = _trauma
-	owner = trauma.owner
+	if(trauma) //monkestation edit: add imaginary friends for mentors
+		trauma = _trauma
+		owner = trauma.owner
 	copy_languages(owner, LANGUAGE_FRIEND)
 
 	setup_friend()
