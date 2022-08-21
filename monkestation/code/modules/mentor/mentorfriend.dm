@@ -82,14 +82,8 @@
 	unmentor()
 
 /mob/camera/imaginary_friend/mentor/Initialize(mapload, mob/owner)
-	. = ..()
 	src.owner = owner
-	copy_languages(owner, LANGUAGE_FRIEND)
-
-	join = new
-	join.Grant(src)
-	hide = new
-	hide.Grant(src)
+	. = ..()
 	leave = new
 	leave.Grant(src)
 
