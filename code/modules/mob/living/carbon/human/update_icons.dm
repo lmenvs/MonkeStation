@@ -163,10 +163,14 @@ There are several things that need to be remembered:
 		if(!uniform_overlay || dna.species.get_custom_icons("uniform") != null)
 			if(U.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("uniform")
-				//monkestation edit: make GAGS work with sprite sheets
-				if(U.greyscale_config_worn)
-					U.greyscale_config_worn = text2path("[initial(U.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
-					U.update_greyscale()
+				if(findtextEx("[U.worn_icon]", "monkestation")) //checks if the item is modular
+					U.worn_icon = icon_file
+				//monkestation edit: add more functionality to sprite sheets for modular and GAGS usage
+			else if(U.worn_icon != initial(U.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				U.worn_icon = initial(U.worn_icon)
+			if(U.greyscale_config_worn)
+				U.greyscale_config_worn = text2path("[initial(U.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+				U.update_greyscale()
 				//monkestation edit end
 			//if((dna?.species.bodytype & BODYTYPE_DIGITIGRADE) && (U.supports_variations & DIGITIGRADE_VARIATION))
 			//	icon_file = 'icons/mob/species/misc/digitigrade.dmi'
@@ -369,10 +373,14 @@ There are several things that need to be remembered:
 			var/obj/item/clothing/shoes/S = shoes
 			if(S.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("shoes")
-				//monkestation edit: make GAGS work with sprite sheets
+				//monkestation edit: make GAGS work with sprite sheets, and modular items
+				if(findtextEx("[S.worn_icon]", "monkestation")) //for modular items
+					S.worn_icon = icon_file
 				if(S.greyscale_config)
 					S.greyscale_config_worn = text2path("[initial(S.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
 					S.update_greyscale()
+			else if(S.worn_icon != initial(S.worn_icon)) //for species change on modular items
+				S.worn_icon = initial(S.worn_icon)
 			else if(S.greyscale_config_worn != initial(S.greyscale_config_worn)) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 				S.greyscale_config_worn = initial(S.greyscale_config_worn)
 				S.update_greyscale()
@@ -490,10 +498,16 @@ There are several things that need to be remembered:
 			var/obj/item/clothing/suit/S = wear_suit
 			if(S.sprite_sheets & (dna?.species.bodyflag))
 				icon_file = dna.species.get_custom_icons("suit")
-
+			//monkestation edit: add modular capabilities to sprite sheets
+				if(findtextEx("[S.worn_icon]", "monkestation")) //for modular items
+					S.worn_icon = icon_file
+			else if(S.worn_icon != initial(S.worn_icon)) //for species change
+				S.worn_icon = initial(S.worn_icon)
+			//monkestation edit end
 			if(dna?.species.bodytype & BODYTYPE_DIGITIGRADE)
 				if(S.supports_variations & DIGITIGRADE_VARIATION)
 					icon_file = 'icons/mob/species/misc/digitigrade_suits.dmi'
+
 
 		wear_suit.screen_loc = ui_oclothing
 		if(client && hud_used && hud_used.hud_shown)
