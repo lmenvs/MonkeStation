@@ -82,16 +82,21 @@
 	unmentor()
 
 /mob/camera/imaginary_friend/mentor/Initialize(mapload, mob/owner)
-	src.owner = owner
 	. = ..()
+	src.owner = owner
+	copy_languages(owner, LANGUAGE_FRIEND)
+	join = new
+	join.Grant(src)
+	hide = new
+	hide.Grant(src)
 	leave = new
 	leave.Grant(src)
 
 
 /mob/camera/imaginary_friend/mentor/setup_friend()
 	name = client.prefs.real_name
-	real_name = name
 	gender = client.prefs.gender
+	real_name = name
 	human_image = get_flat_human_icon(null, SSjob.GetJobType(/datum/job/assistant), client.prefs,,list(SOUTH),/datum/outfit/job/mentor)
 
 /mob/camera/imaginary_friend/mentor/proc/unmentor()
