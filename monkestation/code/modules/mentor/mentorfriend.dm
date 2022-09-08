@@ -28,7 +28,7 @@
 			mentee = friendclient.mob
 		if("Mob")
 			var/list/friendlist = list()
-			for(var/mob/living/friend in GLOB.mob_list)
+			for(var/mob/living/friend in GLOB.player_list)
 				friendlist |= friend
 			var/mob/friendmob = input("Please, select a mob.", "Imaginary Friend") as null|anything in sortNames(friendlist)
 			if(!friendmob)
