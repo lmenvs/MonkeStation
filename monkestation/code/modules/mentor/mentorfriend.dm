@@ -28,7 +28,7 @@
 			mentee = friendclient.mob
 		if("Mob")
 			var/list/friendlist = list()
-			for(var/mob/living/friend in GLOB.player_list)
+			for(var/mob/living/friend in GLOB.mob_list)
 				friendlist |= friend
 			var/mob/friendmob = input("Please, select a mob.", "Imaginary Friend") as null|anything in sortNames(friendlist)
 			if(!friendmob)
@@ -64,6 +64,7 @@
 
 //Section for the Mentor Friend mob.
 /mob/camera/imaginary_friend/mentor
+
 	var/datum/action/innate/imaginary_leave/leave
 
 
@@ -79,6 +80,8 @@
 
 /mob/camera/imaginary_friend/mentor/Logout()
 	. = ..()
+	if(!src.key)
+		return
 	unmentor()
 
 /mob/camera/imaginary_friend/mentor/Initialize(mapload, mob/owner)

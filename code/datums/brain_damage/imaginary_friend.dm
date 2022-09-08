@@ -88,7 +88,7 @@
 
 /mob/camera/imaginary_friend/Initialize(mapload, _trauma)
 	. = ..()
-	if(!_trauma)
+	if(istype(src, /mob/camera/imaginary_friend/mentor))
 		return
 	trauma = _trauma
 	owner = trauma.owner
@@ -149,6 +149,9 @@
 			return
 
 	friend_talk(message)
+
+/mob/camera/imaginary_friend/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode) //monke edit: so imaginary friends can hear, ya silly
+	to_chat(src, compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mode))
 
 /mob/camera/imaginary_friend/proc/friend_talk(message)
 	message = capitalize(trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN)))
