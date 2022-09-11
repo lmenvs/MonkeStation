@@ -209,12 +209,11 @@
 			candidates -= player // We don't autotator people in CentCom
 			continue
 		if(player.mind && (player.mind.special_role || length(player.mind.antag_datums)))
-			candidates -= player // We don't autotator people with roles already
+			living_players -= player // We don't autotator people with roles already
 
 /datum/dynamic_ruleset/midround/autotraitor/ready(forced = FALSE)
-	var/candidates_amt = length(candidates)
-	if (required_candidates > candidates_amt)
-		log_game("DYNAMIC: FAIL: [src] does not have enough candidates ([required_candidates] needed, [candidates_amt] found)")
+	if (required_candidates > length(living_players))
+		log_game("DYNAMIC: FAIL: [src] does not have enough candidates, using living_players ([required_candidates] needed, [living_players.len] found)")
 		return FALSE
 	return ..()
 
