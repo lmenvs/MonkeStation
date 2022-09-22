@@ -8,7 +8,7 @@
 	icon_state = "jumpsuit"
 	item_state = "jumpsuit"
 	worn_icon_state = "jumpsuit"
-	supports_variations = DIGITIGRADE_VARIATION
+	worn_icon = 'icons/mob/clothing/uniform.dmi'
 	dying_key = DYE_REGISTRY_UNDER
 
 /obj/item/clothing/under/color/jumpskirt
