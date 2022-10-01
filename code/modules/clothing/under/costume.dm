@@ -6,6 +6,7 @@
 	can_adjust = FALSE
 	strip_delay = 100
 	resistance_flags = NONE
+	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/costume/jabroni
 	name = "jabroni outfit"
@@ -40,6 +41,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
+	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/costume/schoolgirl/red
 	name = "red schoolgirl uniform"

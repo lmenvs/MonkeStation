@@ -23,6 +23,7 @@
 	icon_state = "purplebartender"
 	item_state = "purplebartender"
 	can_adjust = FALSE
+	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/rank/civilian/chaplain
 	desc = "It's a black jumpsuit, often worn by religious folk."
