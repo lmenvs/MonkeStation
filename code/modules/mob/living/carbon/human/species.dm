@@ -1140,7 +1140,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			// 	if(!disable_warning)
 			// 		to_chat(H, "<span class='warning'>The footwear around here isn't compatible with your feet!</span>")
 				// return FALSE
-			return equip_delay_self_check(I, H, bypass_equip_delay_self)
+			return equip_delay_self_check(I, human_host, bypass_equip_delay_self)
 		if(ITEM_SLOT_BELT)
 			if(human_host.belt)
 				return FALSE
