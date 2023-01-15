@@ -21,6 +21,7 @@
 	paycheck_department = ACCOUNT_MED
 
 	display_order = JOB_DISPLAY_ORDER_BRIG_PHYS
+	bounty_types = CIV_JOB_MED
 	departments = DEPARTMENT_MEDICAL | DEPARTMENT_SECURITY
 	rpg_title = "Battle Cleric"
 
@@ -34,7 +35,7 @@
 	jobtype = /datum/job/brig_phys
 
 	id = /obj/item/card/id/job/brigphys
-	belt = /obj/item/pda/security
+	belt = /obj/item/pda/brigphys
 	ears = /obj/item/radio/headset/headset_medsec
 	uniform = /obj/item/clothing/under/rank/brig_phys
 	shoes = /obj/item/clothing/shoes/sneakers/white

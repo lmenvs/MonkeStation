@@ -261,6 +261,11 @@
 /obj/item/restraints/legcuffs/bola/cult/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(iscultist(hit_atom))
 		return
+	if(ismob(hit_atom))
+		var/mob/M = hit_atom
+		if(M.anti_magic_check(holy = TRUE))
+			M.visible_message("[src] passes right through [M]!")
+			return
 	. = ..()
 
 
@@ -483,7 +488,7 @@
 	if(curselimit > 1)
 		to_chat(user, "<span class='notice'>We have exhausted our ability to curse the shuttle.</span>")
 		return
-	if(locate(/obj/singularity/narsie) in GLOB.poi_list)
+	if(locate(/obj/eldritch/narsie) in GLOB.poi_list)
 		to_chat(user, "<span class='warning'>Nar'Sie is already on this plane, there is no delaying the end of all things.</span>")
 		return
 
@@ -615,7 +620,7 @@
 			to_chat(user, "<span class='cult italic'>[cultist_to_receive] is not a follower of the Geometer!</span>")
 			log_game("Void torch failed - target was deconverted")
 			return
-		if(A in user.GetAllContents())
+		if(A in user.get_all_contents_type())
 			to_chat(user, "<span class='cult italic'>[A] must be on a surface in order to teleport it!</span>")
 			return
 		to_chat(user, "<span class='cult italic'>You ignite [A] with \the [src], turning it to ash, but through the torch's flames you see that [A] has reached [cultist_to_receive]!")
@@ -675,7 +680,7 @@
 			else
 				L.visible_message("<span class='warning'>[src] bounces off of [L], as if repelled by an unseen force!</span>")
 		else if(!..())
-			if(!L.anti_magic_check(holy = TRUE))
+			if(!L.anti_magic_check(magic=FALSE,holy=TRUE))
 				L.Knockdown(50)
 			break_spear(T)
 	else
@@ -803,7 +808,7 @@
 		return
 	var/C = user.client
 	if(ishuman(user) && C)
-		angle = Get_Angle(get_turf(src), get_turf(A))
+		angle = get_angle(get_turf(src), get_turf(A))
 	else
 		qdel(src)
 		return
@@ -856,7 +861,7 @@
 		playsound(src, 'sound/magic/exit_blood.ogg', 75, 1)
 		new /obj/effect/temp_visual/dir_setting/cult/phase(user.loc, user.dir)
 		var/turf/temp_target = get_turf_in_angle(set_angle, targets_from, 40)
-		for(var/turf/T in getline(targets_from,temp_target))
+		for(var/turf/T in get_line(targets_from,temp_target))
 			if (locate(/obj/effect/blessing, T))
 				temp_target = T
 				playsound(T, 'sound/machines/clockcult/ark_damage.ogg', 50, 1)
@@ -946,7 +951,7 @@
 			else
 				L.visible_message("<span class='warning'>[src] bounces off of [L], as if repelled by an unseen force!</span>")
 		else if(!..())
-			if(!L.anti_magic_check(holy = TRUE))
+			if(!L.anti_magic_check(magic=FALSE,holy=TRUE))
 				L.Knockdown(30)
 				if(D?.thrower)
 					for(var/mob/living/Next in orange(2, T))

@@ -31,8 +31,8 @@
 
 	radio_key = /obj/item/encryptionkey/headset_eng
 	radio_channel = RADIO_CHANNEL_ENGINEERING
-	bot_type = FLOOR_BOT
-	model = "Floorbot"
+	bot_type = ATMOS_BOT
+	model = "Atmosbot"
 	bot_core = /obj/machinery/bot_core/floorbot
 	window_id = "autofloor"
 	window_name = "Automatic Station Atmospherics Restabilizer v1.1"
@@ -64,7 +64,28 @@
 		GAS_STIMULUM = 0,
 		GAS_TRITIUM = 1,
 		GAS_H2O = 0,
+		GAS_NUCLEIUM = 1,
 	)
+
+	//For getting the proper name of things
+	var/static/list/gas_map = list(
+		GAS_O2 = /datum/gas/oxygen,
+		GAS_N2 = /datum/gas/nitrogen,
+		GAS_BZ = /datum/gas/bz,
+		GAS_CO2 = /datum/gas/carbon_dioxide,
+		GAS_HYPERNOB = /datum/gas/hypernoblium,
+		GAS_MIASMA = /datum/gas/miasma,
+		GAS_NITROUS = /datum/gas/nitrous_oxide,
+		GAS_NITRYL = /datum/gas/nitryl,
+		GAS_PLASMA = /datum/gas/plasma,
+		GAS_PLUOXIUM = /datum/gas/pluoxium,
+		GAS_STIMULUM = /datum/gas/stimulum,
+		GAS_TRITIUM = /datum/gas/tritium,
+		GAS_H2O = /datum/gas/water_vapor,
+		//NUCLEIUM added. Waste Gas from RBMK Nuclear Reactor	//Monkestation Edit
+		GAS_NUCLEIUM = /datum/gas/nucleium,
+	)
+
 	//Tank type
 	var/tank_type = /obj/item/tank/internals/oxygen/empty
 

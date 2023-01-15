@@ -72,6 +72,7 @@
 	. = ..()
 
 /obj/machinery/clonepod/RefreshParts()
+	. = ..()
 	speed_coeff = 0
 	efficiency = 0
 	reagents.maximum_volume = 0
@@ -158,7 +159,7 @@
 	var/mob/living/mob_occupant = occupant
 	if(mess)
 		. += "It's filled with blood and viscera. You swear you can see it moving..."
-	if(is_operational() && istype(mob_occupant))
+	if(is_operational && istype(mob_occupant))
 		if(mob_occupant.stat != DEAD)
 			. += "Current clone cycle is [round(get_completion())]% complete."
 
@@ -310,7 +311,7 @@
 /obj/machinery/clonepod/process()
 	var/mob/living/mob_occupant = occupant
 
-	if(!is_operational()) //Autoeject if power is lost (or the pod is dysfunctional due to whatever reason)
+	if(!is_operational) //Autoeject if power is lost (or the pod is dysfunctional due to whatever reason)
 		if(mob_occupant)
 			go_out()
 			log_cloning("[key_name(mob_occupant)] ejected from [src] at [AREACOORD(src)] due to power loss.")
@@ -341,7 +342,7 @@
 				var/datum/bank_account/D = SSeconomy.get_dep_account(payment_department)
 				if(D)
 					D.adjust_money(fair_market_price)
-		if(mob_occupant && (mob_occupant.stat == DEAD) || (mob_occupant.suiciding) || mob_occupant.hellbound)  //Autoeject corpses and suiciding dudes.
+		if(mob_occupant && (mob_occupant.stat == DEAD) || (mob_occupant.suiciding) || mob_occupant.ishellbound())  //Autoeject corpses and suiciding dudes.
 			connected_message("Clone Rejected: Deceased.")
 			if(internal_radio)
 				SPEAK("The cloning of [mob_occupant.real_name] has been \
@@ -546,7 +547,7 @@
 		log_cloning("[key_name(mob_occupant)] destroyed within [src] at [AREACOORD(src)] due to malfunction.")
 		QDEL_IN(mob_occupant, 40)
 
-/obj/machinery/clonepod/relaymove(mob/user)
+/obj/machinery/clonepod/relaymove(mob/living/user, direction)
 	container_resist(user)
 
 /obj/machinery/clonepod/container_resist(mob/living/user)

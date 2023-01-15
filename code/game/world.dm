@@ -1,5 +1,10 @@
 #define RESTART_COUNTER_PATH "data/round_counter.txt"
 
+/// Force the log directory to be something specific in the data/logs folder
+#define OVERRIDE_LOG_DIRECTORY_PARAMETER "log-directory"
+/// Prevent the master controller from starting automatically
+#define NO_INIT_PARAMETER "no-init"
+
 GLOBAL_VAR(restart_counter)
 
 //This happens after the Master subsystem new(s) (it's a global datum)
@@ -7,8 +12,6 @@ GLOBAL_VAR(restart_counter)
 /world/New()
 	//Keep the auxtools stuff at the top
 	AUXTOOLS_CHECK(AUXMOS)
-
-	enable_debugger()
 
 	log_world("World loaded at [time_stamp()]!")
 	SSmetrics.world_init_time = REALTIMEOFDAY // Important
@@ -377,3 +380,6 @@ GLOBAL_VAR(restart_counter)
 	world.refresh_atmos_grid()
 
 /world/proc/refresh_atmos_grid()
+
+#undef OVERRIDE_LOG_DIRECTORY_PARAMETER
+#undef NO_INIT_PARAMETER

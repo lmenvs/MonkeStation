@@ -17,11 +17,11 @@
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
-	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/lizard
+	meat = /obj/item/food/meat/slab/human/mutant/lizard
 	skinned_type = /obj/item/stack/sheet/animalhide/lizard
 	exotic_bloodtype = "L"
 	disliked_food = GRAIN | DAIRY
-	liked_food = GROSS | MEAT
+	liked_food = GROSS | MEAT | NUTS
 	inert_mutation = FIREBREATH
 	deathsound = 'sound/voice/lizard/deathsound.ogg'
 	species_language_holder = /datum/language_holder/lizard
@@ -35,16 +35,15 @@
 	species_r_leg = /obj/item/bodypart/r_leg/lizard
 
 
-/datum/species/lizard/random_name(gender,unique,lastname)
-	if(unique)
-		return random_unique_lizard_name(gender)
+/datum/species/lizard/random_name(gender, unique, lastname, attempts)
+	if(gender == MALE)
+		. = "[pick(GLOB.lizard_names_male)]-[pick(GLOB.lizard_names_male)]"
+	else
+		. = "[pick(GLOB.lizard_names_female)]-[pick(GLOB.lizard_names_female)]"
 
-	var/randname = lizard_name(gender)
-
-	if(lastname)
-		randname += " [lastname]"
-
-	return randname
+	if(unique && attempts < 10)
+		if(findname(.))
+			. = .(gender, TRUE, null, ++attempts)
 
 /*
  Lizard subspecies: ASHWALKERS

@@ -23,6 +23,7 @@
 		Refresh(H)
 
 /obj/item/organ/wings/proc/Refresh(mob/living/carbon/human/H)
+	H.dna.species.mutant_bodyparts -= "[basewings]open"
 	if(!(basewings in H.dna.species.mutant_bodyparts))
 		H.dna.species.mutant_bodyparts |= basewings
 		H.dna.features[basewings] = wing_type
@@ -40,6 +41,7 @@
 	..()
 	if(istype(H))
 		H.dna.species.mutant_bodyparts -= basewings
+		H.dna.species.mutant_bodyparts -= "[basewings]open"
 		wing_type = H.dna.features[basewings]
 		H.update_body()
 	if(flight_level >= WINGS_FLYING)
@@ -53,13 +55,19 @@
 		return FALSE
 	if(wingsound)
 		playsound(H, wingsound, 100, 7)
-	if(basewings == "wings")
+	if(basewings == "wings" || basewings == "moth_wings")
 		if("wings" in H.dna.species.mutant_bodyparts)
 			H.dna.species.mutant_bodyparts -= "wings"
 			H.dna.species.mutant_bodyparts |= "wingsopen"
 		else if("wingsopen" in H.dna.species.mutant_bodyparts)
 			H.dna.species.mutant_bodyparts -= "wingsopen"
 			H.dna.species.mutant_bodyparts |= "wings"
+		else if("moth_wings" in H.dna.species.mutant_bodyparts)
+			H.dna.species.mutant_bodyparts |= "moth_wingsopen"
+			H.dna.species.mutant_bodyparts -= "moth_wings"
+		else if("moth_wingsopen" in H.dna.species.mutant_bodyparts)
+			H.dna.species.mutant_bodyparts -= "moth_wingsopen"
+			H.dna.species.mutant_bodyparts |= "moth_wings"
 		else //it appears we don't actually have wing icons. apply them!!
 			Refresh(H)
 		H.update_body()
@@ -112,8 +120,8 @@
 	icon_state = "mothwings"
 	flight_level = WINGS_FLIGHTLESS
 	basewings = "moth_wings"
-	wing_type = "Plain" //MonkeStation Edit: Moth Wing Bugfix
-	canopen = FALSE
+	wing_type = "plain"
+	canopen = TRUE
 
 /obj/item/organ/wings/moth/Remove(mob/living/carbon/human/H, special)
 	flight_level = initial(flight_level)
@@ -174,7 +182,7 @@
 	var/obj/item/organ/wings/bee/wings = locate(/obj/item/organ/wings/bee) in L.internal_organs
 	var/jumpdistance = wings.jumpdist
 
-	if(L.stat != CONSCIOUS || L.buckling || L.restrained()) // Has to be concious and unbuckled
+	if(L.stat != CONSCIOUS || L.buckling || HAS_TRAIT(L, TRAIT_HANDS_BLOCKED)) // Has to be concious and unbuckled
 		return
 	if(recharging_time > world.time)
 		to_chat(L, "<span class='warning'>The wings aren't ready to dash yet!</span>")
@@ -222,7 +230,7 @@
 
 /datum/action/innate/flight
 	name = "Toggle Flight"
-	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_STUN
+	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_IMMOBILE
 	icon_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "flight"
 

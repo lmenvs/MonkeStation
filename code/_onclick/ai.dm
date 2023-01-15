@@ -1,9 +1,6 @@
 /*
 	AI ClickOn()
 
-	Note currently ai restrained() returns 0 in all cases,
-	therefore restrained code has been removed
-
 	The AI can double click to move the camera (this was already true but is cleaner),
 	or double click a mob to track them.
 
@@ -14,9 +11,9 @@
 		return
 
 	if(ismob(A))
-		ai_actual_track(A)
+		ai_start_tracking(A)
 	else if(!ismachinery(A))	//Getting the camera moved just because you double click on something to interact with it is annoying as hell
-		A.move_camera_by_click()
+		eyeobj.move_camera_by_click(A)
 
 /mob/living/silicon/ai/ClickOn(var/atom/A, params)
 	if(world.time <= next_click)

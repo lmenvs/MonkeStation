@@ -64,6 +64,7 @@
 	update_icon()
 	myarea = get_area(src)
 	LAZYADD(myarea.firealarms, src)
+	AddComponent(/datum/component/shell, list(new /obj/item/circuit_component/firealarm()), SHELL_CAPACITY_MEDIUM)
 
 /obj/machinery/firealarm/Destroy()
 	myarea.firereset(src)
@@ -82,13 +83,13 @@
 		icon_state = "fire_b[buildstage]"
 		return
 
-	if(stat & BROKEN)
+	if(machine_stat & BROKEN)
 		icon_state = "firex"
 		return
 
 	icon_state = "fire0"
 
-	if(stat & NOPOWER)
+	if(machine_stat & NOPOWER)
 		return
 
 	add_overlay("fire_overlay")
@@ -143,12 +144,12 @@
 		attack_hand(eminence)
 
 /obj/machinery/firealarm/temperature_expose(datum/gas_mixture/air, temperature, volume)
-	if((temperature > T0C + 200 || temperature < BODYTEMP_COLD_DAMAGE_LIMIT) && (last_alarm+FIREALARM_COOLDOWN < world.time) && !(obj_flags & EMAGGED) && detecting && !stat)
+	if((temperature > T0C + 200 || temperature < BODYTEMP_COLD_DAMAGE_LIMIT) && (last_alarm+FIREALARM_COOLDOWN < world.time) && !(obj_flags & EMAGGED) && detecting && !machine_stat)
 		alarm()
 	..()
 
 /obj/machinery/firealarm/proc/alarm(mob/user)
-	if(!is_operational() || (last_alarm+FIREALARM_COOLDOWN > world.time))
+	if(!is_operational || (last_alarm+FIREALARM_COOLDOWN > world.time))
 		return
 	last_alarm = world.time
 	var/area/A = get_area(src)
@@ -156,14 +157,16 @@
 	playsound(loc, 'goon/sound/machinery/FireAlarm.ogg', 75)
 	if(user)
 		log_game("[user] triggered a fire alarm at [COORD(src)]")
+	SEND_SIGNAL(src,COMSIG_FIREALARM_SET)
 
 /obj/machinery/firealarm/proc/reset(mob/user)
-	if(!is_operational())
+	if(!is_operational)
 		return
 	var/area/A = get_area(src)
 	A.firereset(src)
 	if(user)
 		log_game("[user] reset a fire alarm at [COORD(src)]")
+	SEND_SIGNAL(src,COMSIG_FIREALARM_RESET)
 
 /obj/machinery/firealarm/attack_hand(mob/user)
 	if(buildstage != 2)
@@ -248,9 +251,9 @@
 										"<span class='notice'>You start prying out the circuit...</span>")
 					if(W.use_tool(src, user, 20, volume=50))
 						if(buildstage == 1)
-							if(stat & BROKEN)
+							if(machine_stat & BROKEN)
 								to_chat(user, "<span class='notice'>You remove the destroyed circuit.</span>")
-								stat &= ~BROKEN
+								set_machine_stat(machine_stat & ~BROKEN)
 							else
 								to_chat(user, "<span class='notice'>You pry out the circuit.</span>")
 								new /obj/item/electronics/firealarm(user.loc)
@@ -304,7 +307,7 @@
 /obj/machinery/firealarm/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
 	if(.) //damage received
-		if(obj_integrity > 0 && !(stat & BROKEN) && buildstage != 0)
+		if(obj_integrity > 0 && !(machine_stat & BROKEN) && buildstage != 0)
 			if(prob(33))
 				alarm()
 
@@ -314,15 +317,15 @@
 	..()
 
 /obj/machinery/firealarm/obj_break(damage_flag)
-	if(!(stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1) && buildstage != 0) //can't break the electronics if there isn't any inside.
+	if(!(machine_stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1) && buildstage != 0) //can't break the electronics if there isn't any inside.
 		LAZYREMOVE(myarea.firealarms, src)
-		stat |= BROKEN
+		set_machine_stat(machine_stat | BROKEN)
 		update_icon()
 
 /obj/machinery/firealarm/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
 		new /obj/item/stack/sheet/iron(loc, 1)
-		if(!(stat & BROKEN))
+		if(!(machine_stat & BROKEN))
 			var/obj/item/I = new /obj/item/electronics/firealarm(loc)
 			if(!disassembled)
 				I.obj_integrity = I.max_integrity * 0.5
@@ -338,33 +341,68 @@
 		set_light(l_power = 0)
 
 /*
- * Return of Party button
- */
+Monkestation: Added circuit component
+Ported from /tg/station: PR #64985
+*/
 
-/area
-	var/party = FALSE
+/obj/item/circuit_component/firealarm
+	display_name = "Fire Alarm"
+	display_desc = "Lets you interface with the fire alarm."
 
-/obj/machinery/firealarm/partyalarm
-	name = "\improper PARTY BUTTON"
-	desc = "Cuban Pete is in the house!"
-	var/static/party_overlay
+	var/datum/port/input/input_set
+	var/datum/port/input/input_reset
 
-/obj/machinery/firealarm/partyalarm/reset()
-	if (stat & (NOPOWER|BROKEN))
-		return
-	var/area/A = get_area(src)
-	if (!A || !A.party)
-		return
-	A.party = FALSE
-	A.cut_overlay(party_overlay)
+	var/datum/port/output/is_on
+	var/datum/port/output/output_set
+	var/datum/port/output/output_reset
 
-/obj/machinery/firealarm/partyalarm/alarm()
-	if (stat & (NOPOWER|BROKEN))
+
+/obj/item/circuit_component/firealarm/Initialize(mapload)
+	. = ..()
+	input_set = add_input_port("Set", PORT_TYPE_SIGNAL)
+	input_reset = add_input_port("Reset", PORT_TYPE_SIGNAL)
+
+	is_on = add_output_port("Is On", PORT_TYPE_NUMBER)
+	output_set = add_output_port("Set", PORT_TYPE_SIGNAL)
+	output_reset = add_output_port("Reset", PORT_TYPE_SIGNAL)
+
+/obj/item/circuit_component/firealarm/Destroy()
+	input_set = null
+	input_reset = null
+
+	is_on = null
+	output_set = null
+	output_reset = null
+	return ..()
+
+/obj/item/circuit_component/firealarm/register_shell(atom/movable/shell)
+	RegisterSignal(shell, COMSIG_FIREALARM_SET, .proc/on_firealarm_triggered)
+	RegisterSignal(shell, COMSIG_FIREALARM_RESET, .proc/on_firealarm_reset)
+
+/obj/item/circuit_component/firealarm/unregister_shell(atom/movable/shell)
+	UnregisterSignal(shell, COMSIG_FIREALARM_SET)
+	UnregisterSignal(shell, COMSIG_FIREALARM_RESET)
+
+/obj/item/circuit_component/firealarm/proc/on_firealarm_triggered(atom/source)
+	SIGNAL_HANDLER
+	is_on.set_output(1)
+	output_set.set_output(COMPONENT_SIGNAL)
+
+/obj/item/circuit_component/firealarm/proc/on_firealarm_reset(atom/source)
+	SIGNAL_HANDLER
+	is_on.set_output(0)
+	output_reset.set_output(COMPONENT_SIGNAL)
+
+/obj/item/circuit_component/firealarm/input_received(datum/port/input/port)
+	. = ..()
+	if(.)
 		return
-	var/area/A = get_area(src)
-	if (!A || A.party || A.name == "Space")
+
+	var/obj/machinery/firealarm/shell = parent.shell
+	if(!istype(shell))
 		return
-	A.party = TRUE
-	if (!party_overlay)
-		party_overlay = iconstate2appearance('icons/turf/areas.dmi', "party")
-	A.add_overlay(party_overlay)
+	if(COMPONENT_TRIGGERED_BY(input_set, port))
+		shell.alarm()
+
+	if(COMPONENT_TRIGGERED_BY(input_reset, port))
+		shell.reset()

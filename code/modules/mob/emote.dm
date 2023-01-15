@@ -32,33 +32,9 @@
 /datum/emote/flip
 	key = "flip"
 	key_third_person = "flips"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 	mob_type_allowed_typecache = list(/mob/living, /mob/dead/observer)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer)
-
-//MonkeStation Edit: /tg/ emote hotkeys
-/datum/emote/flip/check_cooldown(mob/user, intentional)
-	. = ..()
-	if(.)
-		return
-	if(!can_run_emote(user, intentional=intentional))
-		return
-	if(isliving(user))
-		var/mob/living/flippy_mcgee = user
-		if(prob(20))
-			flippy_mcgee.Knockdown(1 SECONDS)
-			flippy_mcgee.visible_message(
-				"<span class='notice'>[flippy_mcgee] attempts to do a flip and falls over, what a doofus!</span>",
-				"<span class='notice'>You attempt to do a flip while still off balance from the last flip and fall down!</span>"
-			)
-			if(prob(50))
-				flippy_mcgee.adjustBruteLoss(1)
-		else
-			flippy_mcgee.visible_message(
-				"<span class='notice'>[flippy_mcgee] stumbles a bit after their flip.</span>",
-				"<span class='notice'>You stumble a bit from still being off balance from your last flip.</span>"
-			)
-//MonkeStation Edit End
 
 /datum/emote/flip/run_emote(mob/user, params , type_override, intentional)
 	. = ..()
@@ -74,12 +50,11 @@
 					if(worn_headwear.contents.len)
 						worn_headwear.throw_hats(rand(2,3), get_turf(hat_loser), hat_loser)
 			//MonkeStation Edit End
-			L.confused += 2
 
 /datum/emote/spin
 	key = "spin"
 	key_third_person = "spins"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 	mob_type_allowed_typecache = list(/mob/living, /mob/dead/observer)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer)
 
@@ -97,7 +72,6 @@
 					if(worn_headwear.contents.len)
 						worn_headwear.throw_hats(rand(1,2), get_turf(hat_loser), hat_loser)
 			//MonkeStation Edit End
-			L.confused += 2
 		if(iscyborg(user) && user.has_buckled_mobs())
 			var/mob/living/silicon/robot/R = user
 			var/datum/component/riding/riding_datum = R.GetComponent(/datum/component/riding)
@@ -106,3 +80,13 @@
 					riding_datum.force_dismount(M)
 			else
 				R.unbuckle_all_mobs()
+
+/datum/emote/inhale
+	key = "inhale"
+	key_third_person = "inhales"
+	message = "breathes in"
+
+/datum/emote/exhale
+	key = "exhale"
+	key_third_person = "exhales"
+	message = "breathes out"

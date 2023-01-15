@@ -63,6 +63,8 @@
 	var/center = FALSE	//Should we center the sprite?
 	var/limbs_id // The limbs id supplied for full-body replacing features.
 
+	var/head_icon = "" //the icon for the decapped head needed because yippee
+
 //////////////////////
 // Hair Definitions //
 //////////////////////
@@ -1652,7 +1654,7 @@
 /////////////////////////////
 
 /datum/sprite_accessory/body_markings
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/mob/species/lizard/bodymarks.dmi'
 
 /datum/sprite_accessory/body_markings/none
 	name = "None"
@@ -1679,6 +1681,11 @@
 /datum/sprite_accessory/tails_animated
 	icon = 'icons/mob/mutant_bodyparts.dmi'
 
+/datum/sprite_accessory/tails/lizard
+	icon = 'icons/mob/species/lizard/tails.dmi'
+
+/datum/sprite_accessory/tails_animated/lizard
+	icon = 'icons/mob/species/lizard/tails.dmi'
 /datum/sprite_accessory/tails/lizard/smooth
 	name = "Smooth"
 	icon_state = "smooth"
@@ -1687,6 +1694,9 @@
 	name = "Smooth"
 	icon_state = "smooth"
 
+/datum/sprite_accessory/tails/lizard/curved
+	name = "Curved"
+	icon_state = "curved"
 /datum/sprite_accessory/tails/lizard/dtiger
 	name = "Dark Tiger"
 	icon_state = "dtiger"
@@ -1722,12 +1732,12 @@
 /datum/sprite_accessory/tails/human/cat
 	name = "Cat"
 	icon_state = "cat"
-	color_src = HAIR
+	color_src = CUSTOM
 
 /datum/sprite_accessory/tails_animated/human/cat
 	name = "Cat"
 	icon_state = "cat"
-	color_src = HAIR
+	color_src = CUSTOM
 
 /datum/sprite_accessory/tails/human/clock
 	name = "Clockwork"
@@ -1742,26 +1752,30 @@
 	color_src = null
 
 /datum/sprite_accessory/snouts
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/mob/species/lizard/snouts.dmi'
 
 /datum/sprite_accessory/snouts/sharp
 	name = "Sharp"
 	icon_state = "sharp"
+	head_icon = "m_snout_sharp_ADJ"
 
 /datum/sprite_accessory/snouts/round
 	name = "Round"
 	icon_state = "round"
+	head_icon = "m_snout_round_ADJ"
 
 /datum/sprite_accessory/snouts/sharplight
 	name = "Sharp + Light"
 	icon_state = "sharplight"
+	head_icon = "m_snout_sharplight_ADJ"
 
 /datum/sprite_accessory/snouts/roundlight
 	name = "Round + Light"
 	icon_state = "roundlight"
+	head_icon = "m_snout_roundlight_ADJ"
 
 /datum/sprite_accessory/horns
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/mob/species/lizard/horns.dmi'
 
 /datum/sprite_accessory/horns/none
 	name = "None"
@@ -1770,22 +1784,27 @@
 /datum/sprite_accessory/horns/simple
 	name = "Simple"
 	icon_state = "simple"
+	head_icon = "m_horns_simple_ADJ"
 
 /datum/sprite_accessory/horns/short
 	name = "Short"
 	icon_state = "short"
+	head_icon = "m_horns_short_ADJ"
 
 /datum/sprite_accessory/horns/curled
 	name = "Curled"
 	icon_state = "curled"
+	head_icon = "m_horns_curled_ADJ"
 
 /datum/sprite_accessory/horns/ram
 	name = "Ram"
 	icon_state = "ram"
+	head_icon = "m_horns_ram_ADJ"
 
 /datum/sprite_accessory/horns/angler
 	name = "Angeler"
 	icon_state = "angler"
+	head_icon = "m_horns_angler_ADJ"
 
 /datum/sprite_accessory/ears
 	icon = 'icons/mob/mutant_bodyparts.dmi'
@@ -1798,7 +1817,7 @@
 	name = "Cat"
 	icon_state = "cat"
 	hasinner = 1
-	color_src = HAIR
+	color_src = CUSTOM
 
 /datum/sprite_accessory/wings/none
 	name = "None"
@@ -1875,7 +1894,7 @@
 	dimension_y = 34
 
 /datum/sprite_accessory/frills
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/mob/species/lizard/frills.dmi'
 
 /datum/sprite_accessory/frills/none
 	name = "None"
@@ -1884,20 +1903,23 @@
 /datum/sprite_accessory/frills/simple
 	name = "Simple"
 	icon_state = "simple"
+	head_icon = "m_frills_simple_ADJ"
 
 /datum/sprite_accessory/frills/short
 	name = "Short"
 	icon_state = "short"
+	head_icon = "m_frills_short_ADJ"
 
 /datum/sprite_accessory/frills/aquatic
 	name = "Aquatic"
 	icon_state = "aqua"
+	head_icon = "m_frills_aqua_ADJ"
 
 /datum/sprite_accessory/spines
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/mob/species/lizard/spines.dmi'
 
 /datum/sprite_accessory/spines_animated
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/mob/species/lizard/spines.dmi'
 
 /datum/sprite_accessory/spines/none
 	name = "None"
@@ -1968,7 +1990,17 @@
 	icon = 'icons/mob/moth_wings.dmi'
 	color_src = null
 
+/datum/sprite_accessory/moth_wingsopen
+	icon = 'icons/mob/moth_wingsopen.dmi'
+	color_src = null
+	dimension_x = 76
+	center = TRUE
+
 /datum/sprite_accessory/moth_wings/plain
+	name = "Plain"
+	icon_state = "plain"
+
+/datum/sprite_accessory/moth_wingsopen/plain
 	name = "Plain"
 	icon_state = "plain"
 
@@ -1976,7 +2008,15 @@
 	name = "Monarch"
 	icon_state = "monarch"
 
+/datum/sprite_accessory/moth_wingsopen/monarch
+	name = "Monarch"
+	icon_state = "monarch"
+
 /datum/sprite_accessory/moth_wings/luna
+	name = "Luna"
+	icon_state = "luna"
+
+/datum/sprite_accessory/moth_wingsopen/luna
 	name = "Luna"
 	icon_state = "luna"
 
@@ -1984,7 +2024,15 @@
 	name = "Atlas"
 	icon_state = "atlas"
 
+/datum/sprite_accessory/moth_wingsopen/atlas
+	name = "Atlas"
+	icon_state = "atlas"
+
 /datum/sprite_accessory/moth_wings/reddish
+	name = "Reddish"
+	icon_state = "redish"
+
+/datum/sprite_accessory/moth_wingsopen/reddish
 	name = "Reddish"
 	icon_state = "redish"
 
@@ -1992,7 +2040,15 @@
 	name = "Royal"
 	icon_state = "royal"
 
+/datum/sprite_accessory/moth_wingsopen/royal
+	name = "Royal"
+	icon_state = "royal"
+
 /datum/sprite_accessory/moth_wings/gothic
+	name = "Gothic"
+	icon_state = "gothic"
+
+/datum/sprite_accessory/moth_wingsopen/gothic
 	name = "Gothic"
 	icon_state = "gothic"
 
@@ -2000,7 +2056,15 @@
 	name = "Lovers"
 	icon_state = "lovers"
 
+/datum/sprite_accessory/moth_wingsopen/lovers
+	name = "Lovers"
+	icon_state = "lovers"
+
 /datum/sprite_accessory/moth_wings/whitefly
+	name = "White Fly"
+	icon_state = "whitefly"
+
+/datum/sprite_accessory/moth_wingsopen/whitefly
 	name = "White Fly"
 	icon_state = "whitefly"
 
@@ -2014,7 +2078,16 @@
 	icon_state = "punished"
 	locked = TRUE
 
+/datum/sprite_accessory/moth_wingsopen/punished
+	name = "Burnt Off"
+	icon_state = "punished"
+	locked = TRUE
+
 /datum/sprite_accessory/moth_wings/firewatch
+	name = "Firewatch"
+	icon_state = "firewatch"
+
+/datum/sprite_accessory/moth_wingsopen/firewatch
 	name = "Firewatch"
 	icon_state = "firewatch"
 
@@ -2022,7 +2095,15 @@
 	name = "Deathshead"
 	icon_state = "deathhead"
 
+/datum/sprite_accessory/moth_wingsopen/deathhead
+	name = "Deathshead"
+	icon_state = "deathhead"
+
 /datum/sprite_accessory/moth_wings/poison
+	name = "Poison"
+	icon_state = "poison"
+
+/datum/sprite_accessory/moth_wingsopen/poison
 	name = "Poison"
 	icon_state = "poison"
 
@@ -2030,7 +2111,15 @@
 	name = "Ragged"
 	icon_state = "ragged"
 
+/datum/sprite_accessory/moth_wingsopen/ragged
+	name = "Ragged"
+	icon_state = "ragged"
+
 /datum/sprite_accessory/moth_wings/moonfly
+	name = "Moon Fly"
+	icon_state = "moonfly"
+
+/datum/sprite_accessory/moth_wingsopen/moonfly
 	name = "Moon Fly"
 	icon_state = "moonfly"
 
@@ -2038,7 +2127,10 @@
 	name = "Snow"
 	icon_state = "snow"
 
-/* MonkeStation Edit: Commented out nonexistent moth wing
+/datum/sprite_accessory/moth_wingsopen/snow
+	name = "Snow"
+	icon_state = "snow"
+
 /datum/sprite_accessory/moth_wings/angel
 	name = "Angel"
 	icon_state = "angel"
@@ -2047,7 +2139,6 @@
 	center = TRUE
 	dimension_y = 34
 	locked = TRUE
-*/
 
 // IPC accessories.
 
@@ -2255,38 +2346,44 @@
 	limbs_id = "mcgipc"
 	color_src = MUTCOLORS
 
-/datum/sprite_accessory/ipc_chassis/bishopcyberkinetics
+/datum/sprite_accessory/ipc_chassis/bishop_cyberkinetics
 	name = "Bishop Cyberkinetics"
 	limbs_id = "bshipc"
 
-/datum/sprite_accessory/ipc_chassis/bishopcyberkinetics2
+/datum/sprite_accessory/ipc_chassis/bishop_cyberkinetics_2
 	name = "Bishop Cyberkinetics 2.0"
 	limbs_id = "bs2ipc"
 
-/datum/sprite_accessory/ipc_chassis/hephaestussindustries
+/datum/sprite_accessory/ipc_chassis/hephaestuss_industries
 	name = "Hephaestus Industries"
 	limbs_id = "hsiipc"
 
-/datum/sprite_accessory/ipc_chassis/hephaestussindustries2
+/datum/sprite_accessory/ipc_chassis/hephaestuss_industries_2
 	name = "Hephaestus Industries 2.0"
 	limbs_id = "hi2ipc"
 
-/datum/sprite_accessory/ipc_chassis/shellguardmunitions
+/datum/sprite_accessory/ipc_chassis/shellguard_munitions
 	name = "Shellguard Munitions Standard Series"
 	limbs_id = "sgmipc"
 
-/datum/sprite_accessory/ipc_chassis/wardtakahashimanufacturing
+/datum/sprite_accessory/ipc_chassis/ward_takahashi_manufacturing
 	name = "Ward-Takahashi Manufacturing"
 	limbs_id = "wtmipc"
 
-/datum/sprite_accessory/ipc_chassis/xionmanufacturinggroup
+/datum/sprite_accessory/ipc_chassis/xion_manufacturing_group
 	name = "Xion Manufacturing Group"
 	limbs_id = "xmgipc"
 
-/datum/sprite_accessory/ipc_chassis/xionmanufacturinggroup2
+/datum/sprite_accessory/ipc_chassis/xion_manufacturing_group_2
 	name = "Xion Manufacturing Group 2.0"
 	limbs_id = "xm2ipc"
 
-/datum/sprite_accessory/ipc_chassis/zenghupharmaceuticals
+/datum/sprite_accessory/ipc_chassis/zeng_hu_pharmaceuticals
 	name = "Zeng-Hu Pharmaceuticals"
 	limbs_id = "zhpipc"
+
+// MONKESTATION CHANGE: Adds staripc chassis by MilkForever
+/datum/sprite_accessory/ipc_chassis/star_industrial
+	name = "Star Industrial"
+	limbs_id = "staripc"
+// MONKESTATION CHANGE END

@@ -12,7 +12,7 @@
 	key_third_person = "daps"
 	message = "sadly can't find anybody to give daps to, and daps themself. Shameful"
 	message_param = "give daps to %t"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 
 /datum/emote/living/carbon/human/eyebrow
 	key = "eyebrow"
@@ -28,7 +28,7 @@
 	key = "handshake"
 	message = "shakes their own hand"
 	message_param = "shakes hands with %t"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/carbon/human/hug
@@ -36,7 +36,7 @@
 	key_third_person = "hugs"
 	message = "hugs themself"
 	message_param = "hugs %t"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/living/carbon/human/mumble
@@ -128,14 +128,14 @@
 	key = "raise"
 	key_third_person = "raises"
 	message = "raises a hand"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 
 /datum/emote/living/carbon/human/salute
 	key = "salute"
 	key_third_person = "salutes"
 	message = "salutes"
 	message_param = "salutes to %t"
-	restraint_check = TRUE
+	hands_use_check = TRUE
 
 /datum/emote/living/carbon/human/shrug
 	key = "shrug"
@@ -202,7 +202,7 @@
 /datum/emote/living/carbon/human/wing/select_message_type(mob/user, intentional)
 	. = ..()
 	var/mob/living/carbon/human/H = user
-	if("wings" in H.dna.species.mutant_bodyparts)
+	if(("wings" in H.dna.species.mutant_bodyparts) || ("moth_wings" in H.dna.species.mutant_bodyparts))
 		. = "opens " + message
 	else
 		. = "closes " + message
@@ -211,14 +211,20 @@
 	if(!..())
 		return FALSE
 	var/mob/living/carbon/human/H = user
-	if(H.dna && H.dna.species && (H.dna.features["wings"] != "None"))
-		return TRUE
+	if(H.dna && H.dna.species)
+		if(H.dna.features["wings"] != "None")
+			return TRUE
+		if(H.dna.features["moth_wings"] != "None")
+			var/obj/item/organ/wings/wings = H.getorganslot(ORGAN_SLOT_WINGS)
+			if(istype(wings))
+				if(wings.flight_level >= WINGS_FLYING)
+					return TRUE
 
 /mob/living/carbon/human/proc/Togglewings()
 	if(!dna || !dna.species)
 		return FALSE
 	var/obj/item/organ/wings/wings = getorganslot(ORGAN_SLOT_WINGS)
-	if(getorgan(/obj/item/organ/wings))
+	if(istype(wings))
 		if(wings.toggleopen(src))
 			return TRUE
 	return FALSE

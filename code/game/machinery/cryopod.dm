@@ -41,7 +41,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 	attack_hand()
 
 /obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 
 	user.set_machine(src)
@@ -231,7 +231,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		"<span class='notice'>You climb out of [src]!</span>")
 	open_machine()
 
-/obj/machinery/cryopod/relaymove(mob/user)
+/obj/machinery/cryopod/relaymove(mob/living/user, direction)
 	container_resist(user)
 
 /obj/machinery/cryopod/process()
@@ -294,7 +294,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 		visible_message("<span class='notice'>\The [src] hums and hisses as it moves [mob_occupant.real_name] into storage.</span>")
 
 
-	for(var/obj/item/W in mob_occupant.GetAllContents())
+	for(var/obj/item/W in mob_occupant.get_all_contents_type())
 		if(W.loc.loc && (( W.loc.loc == loc ) || (W.loc.loc == control_computer)))
 			continue//means we already moved whatever this thing was in
 			//I'm a professional, okay
@@ -306,7 +306,7 @@ GLOBAL_LIST_EMPTY(cryopod_computers)
 				else
 					mob_occupant.transferItemToLoc(W, loc, TRUE)
 
-	for(var/obj/item/W in mob_occupant.GetAllContents())
+	for(var/obj/item/W in mob_occupant.get_all_contents_type())
 		qdel(W)//because we moved all items to preserve away
 		//and yes, this totally deletes their bodyparts one by one, I just couldn't bother
 

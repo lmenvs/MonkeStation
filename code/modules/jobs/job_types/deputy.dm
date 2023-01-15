@@ -22,6 +22,7 @@
 	mind_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_DEPUTY  //see code/__DEFINES/jobs.dm
+	bounty_types = CIV_JOB_SEC
 	departments = DEPARTMENT_SECURITY
 
 /datum/outfit/job/deputy
@@ -36,7 +37,7 @@
 	shoes = /obj/item/clothing/shoes/sneakers/black
 	glasses = /obj/item/clothing/glasses/hud/security/deputy
 	head = /obj/item/clothing/head/soft/sec
-	l_pocket = /obj/item/pda/security
+	l_pocket = /obj/item/pda/deputy
 
 	backpack = /obj/item/storage/backpack/security
 	satchel = /obj/item/storage/backpack/satchel/sec

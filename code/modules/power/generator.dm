@@ -4,6 +4,7 @@
 	icon_state = "teg"
 	density = TRUE
 	use_power = NO_POWER_USE
+	circuit = /obj/item/circuitboard/machine/generator
 
 	var/obj/machinery/atmospherics/components/binary/circulator/cold_circ
 	var/obj/machinery/atmospherics/components/binary/circulator/hot_circ
@@ -17,9 +18,8 @@
 	. = ..()
 	find_circs()
 	connect_to_network()
-	SSair.atmos_machinery += src
+	SSair.start_processing_machine(src)
 	update_icon()
-	component_parts = list(new /obj/item/circuitboard/machine/generator)
 
 /obj/machinery/power/generator/ComponentInitialize()
 	. = ..()
@@ -27,12 +27,12 @@
 
 /obj/machinery/power/generator/Destroy()
 	kill_circs()
-	SSair.atmos_machinery -= src
+	SSair.stop_processing_machine(src)
 	return ..()
 
 /obj/machinery/power/generator/update_icon()
 
-	if(stat & (NOPOWER|BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		cut_overlays()
 	else
 		cut_overlays()
@@ -115,7 +115,7 @@
 
 		t += "<div class='statusDisplay'>"
 
-		t += "Output: [DisplayPower(lastgenlev)]"
+		t += "Output: [display_power(lastgenlev)]"
 
 		t += "<BR>"
 
