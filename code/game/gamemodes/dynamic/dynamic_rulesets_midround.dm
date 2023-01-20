@@ -97,6 +97,9 @@
 		log_game("DYNAMIC: FAIL: [src] is not ready, because there are not enough enemies: [required_enemies[threat]] needed, [job_check] found")
 		return FALSE
 
+	if (mode.check_lowpop_lowimpact_injection())
+		return FALSE
+
 	return TRUE
 
 /datum/dynamic_ruleset/midround/from_ghosts/execute()
@@ -190,9 +193,9 @@
 	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	restricted_roles = list("Cyborg", "AI", "Positronic Brain")
 	required_candidates = 1
-	weight = 35
-	cost = 3
-	requirements = list(3,3,3,3,3,3,3,3,3,3)
+	weight = 20
+	cost = 8
+	requirements = list(8,8,8,8,8,8,8,8,8,8)
 	repeatable = TRUE
 
 /datum/dynamic_ruleset/midround/autotraitor/trim_candidates()
@@ -212,8 +215,6 @@
 	var/candidates_amt = length(candidates)
 	if (required_candidates > candidates_amt)
 		log_game("DYNAMIC: FAIL: [src] does not have enough candidates ([required_candidates] needed, [candidates_amt] found)")
-		return FALSE
-	if (mode.check_lowpop_lowimpact_injection())
 		return FALSE
 	return ..()
 
@@ -241,13 +242,17 @@
 	antag_flag = ROLE_MALF
 	enemy_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Scientist", "Chemist", "Research Director", "Chief Engineer")
 	exclusive_roles = list("AI")
-	required_enemies = list(4,4,4,4,4,4,2,2,2,0)
+	required_enemies = list(3,3,2,2,2,1,1,1,1,0)
 	required_candidates = 1
 	minimum_players = 25
 	weight = 2
-	cost = 10
+	cost = 13
 
 	required_type = /mob/living/silicon/ai
+	blocking_rules = list(/datum/dynamic_ruleset/roundstart/nuclear)
+	flags = HIGH_IMPACT_RULESET
+	var/ion_announce = 33
+	var/removeDontImproveChance = 10
 
 /datum/dynamic_ruleset/midround/malf/trim_candidates()
 	..()
@@ -299,7 +304,7 @@
 	required_enemies = list(2,2,1,1,1,1,1,1,1,1)
 	required_candidates = 1
 	weight = 1
-	cost = 10
+	cost = 15
 	minimum_players = 30
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
 	flags = HIGH_IMPACT_RULESET
@@ -329,10 +334,10 @@
 	antag_flag = ROLE_OPERATIVE
 	antag_datum = /datum/antagonist/nukeop
 	enemy_roles = list("AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain")
-	required_enemies = list(3,3,3,3,3,2,1,1,0,0)
+	required_enemies = list(3,3,2,2,2,2,1,1,0,0)
 	required_candidates = 5
 	weight = 5
-	cost = 7
+	cost = 15
 	minimum_players = 30
 	minimum_round_time = 45 MINUTES
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
@@ -378,9 +383,9 @@
 	required_candidates = 1
 	minimum_round_time = 35 MINUTES
 	weight = 3
-	cost = 8
+	cost = 12
 	minimum_players = 30
-	repeatable = TRUE
+	flags = HIGH_IMPACT_RULESET
 
 /datum/dynamic_ruleset/midround/from_ghosts/blob/generate_ruleset_body(mob/applicant)
 	var/body = applicant.become_overmind()
@@ -402,9 +407,9 @@
 	required_candidates = 1
 	minimum_round_time = 40 MINUTES
 	weight = 3
-	cost = 10
+	cost = 12
 	minimum_players = 30
-	repeatable = TRUE
+	flags = HIGH_IMPACT_RULESET
 	var/list/vents = list()
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/execute()
@@ -447,10 +452,10 @@
 	antag_flag = "Nightmare"
 	antag_flag_override = ROLE_ALIEN
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = list(1,1,1,1,1,1,1,0,0,0)
 	required_candidates = 1
-	weight = 3
-	cost = 5
+	weight = 5
+	cost = 6
 	minimum_players = 30
 	repeatable = TRUE
 	var/list/spawn_locs = list()
@@ -534,13 +539,13 @@
 	antag_flag = "Revenant"
 	antag_flag_override = ROLE_REVENANT
 	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
-	weight = 4
+	weight = 5
 	cost = 5
-	minimum_players = 15
+	minimum_players = 12
 	repeatable = TRUE
-	var/dead_mobs_required = 20
+	var/dead_mobs_required = 15
 	var/need_extra_spawns_value = 15
 	var/list/spawn_locs = list()
 
@@ -604,7 +609,7 @@
 	antag_flag = "Space Pirates"
 	required_type = /mob/dead/observer
 	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = list(2,2,2,1,1,1,1,0,0,0)
 	required_candidates = 0
 	weight = 4
 	cost = 8
@@ -628,10 +633,10 @@
 	antag_flag = ROLE_OBSESSED
 	restricted_roles = list("AI", "Cyborg", "Positronic Brain")
 	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
-	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
+	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
-	weight = 4
-	cost = 3 // Doesn't have the same impact on rounds as revenants, dragons, sentient disease (10) or syndicate infiltrators (5).
+	weight = 3
+	cost = 5
 	repeatable = TRUE
 
 /datum/dynamic_ruleset/midround/obsessed/trim_candidates()
@@ -650,8 +655,6 @@
 
 /datum/dynamic_ruleset/midround/obsessed/ready(forced = FALSE)
 	if(!check_candidates())
-		return FALSE
-	if(mode.check_lowpop_lowimpact_injection())
 		return FALSE
 	return ..()
 
