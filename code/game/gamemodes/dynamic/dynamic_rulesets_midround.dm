@@ -247,7 +247,6 @@
 	minimum_players = 25
 	weight = 2
 	cost = 13
-
 	required_type = /mob/living/silicon/ai
 	blocking_rules = list(/datum/dynamic_ruleset/roundstart/nuclear)
 	flags = HIGH_IMPACT_RULESET
@@ -452,7 +451,7 @@
 	antag_flag = "Nightmare"
 	antag_flag_override = ROLE_ALIEN
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
-	required_enemies = list(1,1,1,1,1,1,1,0,0,0)
+	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
 	weight = 5
 	cost = 6
