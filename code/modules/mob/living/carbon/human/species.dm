@@ -929,29 +929,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	// off loading this to a secondary proc for easier reading of the code
 	bodyparts_to_add = handle_mutant_bodylist(human_host)
 
-	////PUT ALL YOUR WEIRD ASS REAL-LIMB HANDLING HERE
-	// ///Digi handling
-	// if(H.dna.species.bodytype & BODYTYPE_DIGITIGRADE)
-	// 	var/uniform_compatible = FALSE
-	// 	var/suit_compatible = FALSE
-	// 	if(!(H.w_uniform) || (H.w_uniform.supports_variations & DIGITIGRADE_VARIATION) || (H.w_uniform.supports_variations & DIGITIGRADE_VARIATION_NO_NEW_ICON)) //Checks uniform compatibility
-	// 		uniform_compatible = TRUE
-	// 	if((!H.wear_suit) || (H.wear_suit.supports_variations & DIGITIGRADE_VARIATION) || !(H.wear_suit.body_parts_covered & LEGS) || (H.wear_suit.supports_variations & DIGITIGRADE_VARIATION_NO_NEW_ICON)) //Checks suit compatability
-	// 		suit_compatible = TRUE
-
-	// 	if((uniform_compatible && suit_compatible) || (suit_compatible && H.wear_suit?.flags_inv & HIDEJUMPSUIT)) //If the uniform is hidden, it doesnt matter if its compatible
-	// 		for(var/obj/item/bodypart/BP as() in H.bodyparts)
-	// 			if(BP.bodytype & BODYTYPE_DIGITIGRADE)
-	// 				BP.limb_id = "digitigrade"
-
-	// 	else
-	// 		for(var/obj/item/bodypart/BP as() in H.bodyparts)
-	// 			if(BP.bodytype & BODYTYPE_DIGITIGRADE)
-	// 				BP.limb_id = "lizard"
-	// ///End digi handling
-
-
-	////END REAL-LIMB HANDLING
 	human_host.update_body_parts()
 
 
