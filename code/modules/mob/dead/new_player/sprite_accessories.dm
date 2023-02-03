@@ -1987,11 +1987,11 @@
 	icon_state = "round"
 
 /datum/sprite_accessory/moth_wings
-	icon = 'icons/mob/moth_wings.dmi'
+	icon = 'icons/mob/species/moth/moth_wings.dmi'
 	color_src = null
 
 /datum/sprite_accessory/moth_wingsopen
-	icon = 'icons/mob/moth_wingsopen.dmi'
+	icon = 'icons/mob/species/moth/moth_wingsopen.dmi'
 	color_src = null
 	dimension_x = 76
 	center = TRUE
