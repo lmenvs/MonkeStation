@@ -295,7 +295,7 @@ Auto Patrol: []"},
 
 			SSmove_manager.stop_looping(src)
 			look_for_perp()	// see if any criminals are in range
-			if(!mode && auto_patrol)	// still idle, and set to patrol
+			if(mode == BOT_IDLE && auto_patrol)	// still idle, and set to patrol
 				mode = BOT_START_PATROL	// switch to patrol mode
 
 		if(BOT_HUNT)		// hunting for perp
