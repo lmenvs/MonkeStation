@@ -252,7 +252,7 @@ Auto Patrol: []"},
 	if(!C.handcuffed)
 		C.set_handcuffed(new /obj/item/restraints/handcuffs/cable/zipties/used(C))
 		C.update_handcuffed()
-		if(EMAGGED && prob(50)) //if it's emagged, there's a chance it'll play a special sound instead
+		if(emagged == 1  && prob(50)) //if it's emagged, there's a chance it'll play a special sound instead
 			playsound(src, emagsounds, 50, 0)
 		else
 			playsound(src, arrestsounds, 50, 0)//monkestation edit for custom arrest sounds
