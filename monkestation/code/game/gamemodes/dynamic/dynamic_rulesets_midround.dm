@@ -6,6 +6,7 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/mimic
 	name = "Mimic"
+	midround_ruleset_style = MIDROUND_RULESET_HEAVY
 	antag_datum = /datum/antagonist/mimic
 	antag_flag = "Mimic"
 	antag_flag_override = ROLE_ALIEN
