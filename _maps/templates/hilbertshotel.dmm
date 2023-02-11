@@ -49,36 +49,8 @@
 /obj/item/flashlight/lamp/green,
 /turf/open/indestructible/hotelwood,
 /area/hilbertshotel)
-"ak" = (
-/obj/structure/chair/fancy/comfy{
-	dir = 4
-	},
-/obj/machinery/light/small{
-	dir = 8
-	},
-/turf/open/indestructible/hotelwood,
-/area/hilbertshotel)
-"al" = (
-/obj/structure/table/wood/poker,
-/turf/open/indestructible/hotelwood,
-/area/hilbertshotel)
-"am" = (
-/obj/structure/chair/fancy/comfy{
-	dir = 8
-	},
-/obj/machinery/light/small{
-	dir = 4
-	},
-/turf/open/indestructible/hotelwood,
-/area/hilbertshotel)
 "an" = (
 /obj/effect/spawner/xmastree,
-/turf/open/indestructible/hotelwood,
-/area/hilbertshotel)
-"ao" = (
-/obj/structure/chair/fancy/comfy{
-	dir = 1
-	},
 /turf/open/indestructible/hotelwood,
 /area/hilbertshotel)
 "ap" = (
@@ -94,11 +66,6 @@
 /obj/structure/closet/cabinet{
 	anchored = 1
 	},
-/turf/open/indestructible/hotelwood,
-/area/hilbertshotel)
-"as" = (
-/obj/structure/table/wood/fancy,
-/obj/item/reagent_containers/food/snacks/grown/poppy,
 /turf/open/indestructible/hotelwood,
 /area/hilbertshotel)
 "at" = (
