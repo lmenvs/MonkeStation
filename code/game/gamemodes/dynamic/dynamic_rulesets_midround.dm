@@ -193,9 +193,10 @@
 	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	restricted_roles = list("Cyborg", "AI", "Positronic Brain")
 	required_candidates = 1
-	weight = 20
-	cost = 8
-	requirements = list(8,8,8,8,8,8,8,8,8,8)
+	weight = 5
+	cost = 1
+	minimum_players = 8
+	requirements = list(20,20,20,20,20,20,20,20,20,20)
 	repeatable = TRUE
 
 /datum/dynamic_ruleset/midround/autotraitor/trim_candidates()
@@ -303,8 +304,8 @@
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain", "Research Director") //RD doesn't believe in magic
 	required_enemies = list(2,2,1,1,1,1,1,1,1,1)
 	required_candidates = 1
-	weight = 1
-	cost = 15
+	weight = 3
+	cost = 20
 	minimum_players = 30
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
 	flags = HIGH_IMPACT_RULESET
@@ -334,10 +335,10 @@
 	antag_flag = ROLE_OPERATIVE
 	antag_datum = /datum/antagonist/nukeop
 	enemy_roles = list("AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain")
-	required_enemies = list(3,3,2,2,2,2,1,1,0,0)
-	required_candidates = 5
-	weight = 5
-	cost = 15
+	required_enemies = list(3,3,3,3,3,2,1,1,0,0)
+	required_candidates = 3
+	weight = 4
+	cost = 20
 	minimum_players = 30
 	minimum_round_time = 45 MINUTES
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
@@ -383,7 +384,7 @@
 	required_candidates = 1
 	minimum_round_time = 35 MINUTES
 	weight = 3
-	cost = 12
+	cost = 25
 	minimum_players = 30
 	flags = HIGH_IMPACT_RULESET
 
@@ -403,11 +404,11 @@
 	antag_datum = /datum/antagonist/xeno
 	antag_flag = ROLE_ALIEN
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
-	required_enemies = list(2,2,2,1,1,1,1,0,0,0)
+	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
 	minimum_round_time = 40 MINUTES
 	weight = 3
-	cost = 12
+	cost = 25
 	minimum_players = 30
 	flags = HIGH_IMPACT_RULESET
 	var/list/vents = list()
@@ -454,8 +455,8 @@
 	enemy_roles = list("Security Officer", "Detective", "Warden", "Head of Security", "Captain")
 	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
-	weight = 5
-	cost = 6
+	weight = 3
+	cost = 15
 	minimum_players = 30
 	repeatable = TRUE
 	var/list/spawn_locs = list()
@@ -504,9 +505,10 @@
 	required_candidates = 2
 	required_applicants = 2
 	weight = 4
-	cost = 7
+	cost = 15
 	minimum_players = 20
 	repeatable = TRUE
+	requirements = list(101,101,101,40,30,30,30,20,10,10)
 	var/datum/team/abductor_team/new_team
 
 /datum/dynamic_ruleset/midround/from_ghosts/abductors/ready(forced = FALSE)
@@ -541,9 +543,10 @@
 	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
 	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
-	weight = 5
-	cost = 5
+	weight = 4
+	cost = 10
 	minimum_players = 12
+	requirements = list(101,101,101,70,50,40,20,15,10,10)
 	repeatable = TRUE
 	var/dead_mobs_required = 15
 	var/need_extra_spawns_value = 15
@@ -609,11 +612,12 @@
 	antag_flag = "Space Pirates"
 	required_type = /mob/dead/observer
 	enemy_roles = list("Security Officer", "Detective", "Warden","Head of Security", "Captain")
-	required_enemies = list(2,2,2,1,1,1,1,0,0,0)
+	required_enemies = list(2,2,2,2,2,2,2,2,2,2)
 	required_candidates = 0
-	weight = 4
-	cost = 8
-	minimum_players = 27
+	weight = 5
+	cost = 10
+	minimum_players = 25
+	requirements = list(101,101,101,80,60,50,30,20,10,10)
 	repeatable = FALSE
 
 /datum/dynamic_ruleset/midround/pirates/acceptable(population=0, threat=0)

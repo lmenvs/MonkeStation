@@ -71,10 +71,10 @@
 	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel")
 	restricted_roles = list("AI","Cyborg")
 	required_candidates = 1
-	weight = 7
+	weight = 4
 	cost = 8
 	minimum_players = 8
-	requirements = list(5,5,5,5,5,5,5,5,5,5)
+	requirements = list(101,30,20,20,20,20,20,10,10,10)
 	repeatable = TRUE
 
 //////////////////////////////////////////////
@@ -95,9 +95,9 @@
 	required_candidates = 1
 	weight = 2
 	delay = 1 MINUTES // Prevents rule start while head is offstation.
-	cost = 13
+	cost = 20
 	minimum_players = 30
-	requirements = list(101,101,70,40,30,20,20,20,20,20)
+	requirements = list(101,101,101,101,101,20,20,20,20,20)
 	flags = HIGH_IMPACT_RULESET
 	blocking_rules = list(/datum/dynamic_ruleset/roundstart/revs)
 	var/required_heads_of_staff = 3
@@ -168,8 +168,8 @@
 	protected_roles = list("Security Officer", "Warden", "Head of Personnel", "Detective", "Head of Security", "Captain")
 	restricted_roles = list("AI","Cyborg")
 	required_candidates = 1
-	weight = 4
+	weight = 2
 	cost = 10
 	minimum_players = 25
-	requirements = list(101,101,101,10,10,10,10,10,10,10)
+	requirements = list(101,101,101,101,40,30,30,30,20,20)
 	repeatable = TRUE
