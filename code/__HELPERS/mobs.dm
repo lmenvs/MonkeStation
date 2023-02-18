@@ -76,8 +76,8 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/body_markings, GLOB.body_markings_list)
 	if(!GLOB.wings_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/wings, GLOB.wings_list)
-	if(!GLOB.moth_wings_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_wings, GLOB.moth_wings_list)
+	if(!GLOB.roundstart_moth_wings_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_wings, GLOB.roundstart_moth_wings_list)
 	if(!GLOB.ipc_screens_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_screens, GLOB.ipc_screens_list)
 	if(!GLOB.ipc_antennas_list.len)
@@ -109,7 +109,7 @@
 		"body_markings" = pick(GLOB.body_markings_list),
 		"legs" = "Normal Legs",
 		"caps" = pick(GLOB.caps_list),
-		"moth_wings" = pick(GLOB.moth_wings_list),
+		"moth_wings" = pick(GLOB.roundstart_moth_wings_list),
 		"ipc_screen" = pick(GLOB.ipc_screens_list),
 		"ipc_antenna" = pick(GLOB.ipc_antennas_list),
 		"ipc_chassis" = pick(GLOB.ipc_chassis_list),
