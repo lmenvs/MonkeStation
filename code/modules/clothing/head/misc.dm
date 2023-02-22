@@ -54,7 +54,6 @@
 	name = "nurse's hat"
 	desc = "It allows quick identification of trained medical personnel."
 	icon_state = "nursehat"
-	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/nurse
 
@@ -153,14 +152,12 @@
 	desc = "Yarr."
 	icon_state = "bandana"
 	item_state = "bandana"
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/bowler
 	name = "bowler-hat"
 	desc = "Gentleman, elite aboard!"
 	icon_state = "bowler"
 	item_state = "bowler"
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/witchwig
 	name = "witch costume wig"
@@ -274,7 +271,6 @@
 	w_class = WEIGHT_CLASS_SMALL
 	attack_verb = list("warned", "cautioned", "smashed")
 	resistance_flags = NONE
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/santa
 	name = "santa hat"
@@ -289,7 +285,6 @@
 	name = "jester hat"
 	desc = "A hat with bells, to add some merriness to the suit."
 	icon_state = "jester_hat"
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/rice_hat
 	name = "rice hat"
@@ -320,7 +315,6 @@
 	icon_state = "crown"
 	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 15, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 50, "stamina" = 40)
 	resistance_flags = FIRE_PROOF
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/crown/fancy
 	name = "magnificent crown"
@@ -355,7 +349,6 @@
 	name = "jester hat"
 	desc = "A hat with bells, to add some merriness to the suit."
 	icon_state = "jester_hat2"
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/nemes
 	name = "headdress of Nemes"
@@ -372,7 +365,6 @@
 	name = "french beret"
 	desc = "A quality beret, infused with the aroma of chain-smoking, wine-swilling Parisians. You feel less inclined to engage military conflict, for some reason."
 	icon_state = "beret"
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/frenchberet/equipped(mob/M, slot)
 	. = ..()
@@ -442,7 +434,6 @@
 /obj/item/clothing/head/rainbowbunchcrown
 	name = "rainbow flower crown"
 	desc = "A flower crown made out of the flowers of the rainbow bunch plant."
-	dynamic_hair_suffix = ""
 	attack_verb = list("crowned")
 
 /obj/item/clothing/head/rainbowbunchcrown/Initialize(mapload)
@@ -466,21 +457,18 @@
 	name = "sunflower crown"
 	desc = "A bright flower crown made out sunflowers that is sure to brighten up anyone's day!"
 	icon_state = "sunflower_crown"
-	dynamic_hair_suffix = ""
 	attack_verb = list("crowned")
 
 /obj/item/clothing/head/poppycrown
 	name = "poppy crown"
 	desc = "A flower crown made out of a string of bright red poppies."
 	icon_state = "poppy_crown"
-	dynamic_hair_suffix = ""
 	attack_verb = list("crowned")
 
 /obj/item/clothing/head/lilycrown
 	name = "lily crown"
 	desc = "A leafy flower crown with a cluster of large white lilies at at the front."
 	icon_state = "lily_crown"
-	dynamic_hair_suffix = ""
 	attack_verb = list("crowned")
 
 /////////////////

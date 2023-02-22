@@ -62,8 +62,6 @@ Contains:
 	desc = "An armored beret commonly used by special operations officers. Uses advanced force field technology to protect the head from space."
 	icon_state = "dsberet"
 	greyscale_colors = "#972A2A#F2F2F2"
-	dynamic_hair_suffix = "+generic"
-	dynamic_fhair_suffix = "+generic"
 	flags_inv = 0
 	armor = list("melee" = 80, "bullet" = 80, "laser" = 50, "energy" = 50, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 100, "stamina" = 100)
 	strip_delay = 130

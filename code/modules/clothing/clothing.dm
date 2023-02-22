@@ -46,13 +46,6 @@
 
 	var/pocket_storage_component_path
 
-	//These allow head/mask items to dynamically alter the user's hair
-	// and facial hair, checking hair_extensions.dmi and facialhair_extensions.dmi
-	// for a state matching hair_state+dynamic_hair_suffix
-	// THESE OVERRIDE THE HIDEHAIR FLAGS
-	var/dynamic_hair_suffix = ""//head > mask for head hair
-	var/dynamic_fhair_suffix = ""//mask > head for facial hair
-
 	var/high_pressure_multiplier = 1
 	var/static/list/high_pressure_multiplier_types = list("melee", "bullet", "laser", "energy", "bomb")
 	///These are armor values that protect the wearer, taken from the clothing's armor datum. List updates on examine because it's currently only used to print armor ratings to chat in Topic().

@@ -12,7 +12,6 @@
 	desc = "The commander in chef's head wear."
 	strip_delay = 10
 	equip_delay_other = 10
-	dynamic_hair_suffix = ""
 	dog_fashion = /datum/dog_fashion/head/chef
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/chefhat
 
@@ -118,8 +117,6 @@
 	desc = "A beret, a mime's favorite headwear."
 	icon_state = "beret"
 	dog_fashion = /datum/dog_fashion/head/beret
-	dynamic_hair_suffix = "+generic"
-	dynamic_fhair_suffix = "+generic"
 	w_class = WEIGHT_CLASS_SMALL
 	greyscale_config = /datum/greyscale_config/beret
 	greyscale_config_worn = /datum/greyscale_config/beret/worn
@@ -147,7 +144,6 @@
 	icon_state = "hoscap"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 30, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "stamina" = 30)
 	strip_delay = 80
-	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/hos/syndicate
 	name = "syndicate cap"
