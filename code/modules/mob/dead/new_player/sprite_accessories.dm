@@ -2154,6 +2154,19 @@
 	name = "Snow"
 	icon_state = "snow"
 
+//Monkestation moff wings
+
+/datum/sprite_accessory/moth_wings/winter
+	icon = 'monkestation/icons/mob/species/moth/moth_wings.dmi'
+	name = "Winter"
+	icon_state = "snowy"
+
+/datum/sprite_accessory/moth_wings/moonlight
+	icon = 'monkestation/icons/mob/species/moth/moth_wings.dmi'
+	name = "Moonlight"
+	icon_state = "moon"
+
+
 /datum/sprite_accessory/moth_wings/angel
 	name = "Angel"
 	icon_state = "angel"
