@@ -579,6 +579,7 @@
 	icon = 'monkestation/icons/mob/human_face.dmi'
 	name = "Polnareff"
 	icon_state = "polnareff"
+
 /datum/sprite_accessory/hair/pompadour
 	name = "Pompadour"
 	icon_state = "hair_pompadour"
