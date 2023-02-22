@@ -575,6 +575,10 @@
 	name = "Pixie Cut"
 	icon_state = "hair_pixie"
 
+/datum/sprite_accessory/hair/polnareff
+	icon = 'monkestation/icons/mob/human_face.dmi'
+	name = "Polnareff"
+	icon_state = "polnareff"
 /datum/sprite_accessory/hair/pompadour
 	name = "Pompadour"
 	icon_state = "hair_pompadour"
@@ -742,11 +746,6 @@
 /datum/sprite_accessory/hair/skinhead
 	name = "Skinhead"
 	icon_state = "hair_skinhead"
-
-/datum/sprite_accessory/hair/polnareff
-	icon = 'monkestation/icons/mob/human_face.dmi'
-	name = "Polnareff"
-	icon_state = "polnareff"
 
 /datum/sprite_accessory/hair/protagonist
 	name = "Slightly Long Hair"
