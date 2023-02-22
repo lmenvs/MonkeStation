@@ -609,7 +609,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(M.flags_inv & HIDEHAIR)
 			hair_hidden = TRUE
 
-	if(!hair_hidden || dynamic_hair_suffix)
+	if(!hair_hidden)
 		var/mutable_appearance/hair_overlay = mutable_appearance(layer = -HAIR_LAYER)
 		var/mutable_appearance/gradient_overlay = mutable_appearance(layer = -HAIR_LAYER)
 		if(!hair_hidden && !human_host.getorgan(/obj/item/organ/brain)) //Applies the debrained overlay if there is no brain
