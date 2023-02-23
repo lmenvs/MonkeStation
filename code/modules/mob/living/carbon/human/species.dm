@@ -33,6 +33,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/fixed_mut_color = ""
 	//Blood color for decals
 	var/blood_color // this may become un-needed we should be able to read the color of the reagent
+	//For GAGS items
+	var/greyscale_suffix //any GAGS items applicable to your species will need a child config with this suffix as the child name, ex /datum/greyscale_config/sneakers/simian
 //----------------------------------------------------------
 
 //LISTS-----------------------------------------------------
@@ -1151,10 +1153,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				return FALSE
 			if(human_host.num_legs < 2)
 				return FALSE
-			// if((bodytype & BODYTYPE_DIGITIGRADE) && !(I.supports_variations & DIGITIGRADE_VARIATION))
-			// 	if(!disable_warning)
-			// 		to_chat(H, "<span class='warning'>The footwear around here isn't compatible with your feet!</span>")
-				// return FALSE
 			return equip_delay_self_check(I, human_host, bypass_equip_delay_self)
 		if(ITEM_SLOT_BELT)
 			if(human_host.belt)

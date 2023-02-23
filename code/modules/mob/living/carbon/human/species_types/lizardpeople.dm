@@ -27,6 +27,8 @@
 	species_language_holder = /datum/language_holder/lizard
 	digitigrade_customization = DIGITIGRADE_FORCED
 
+	greyscale_suffix = "lizard"
+
 	mutanteyes = /obj/item/organ/eyes/glowing
 
 	species_chest = /obj/item/bodypart/chest/lizard
