@@ -34,7 +34,7 @@
 
 //SLACKS//
 
-/datum/greyscale_config/slacks_worn
+/datum/greyscale_config/slacks_worn/lizard
 	name = "Worn Slacks"
 	icon_file = 'monkestation/icons/mob/species/lizard/lizard_uniforms.dmi'
 	json_config = 'code/datums/greyscale/json_configs/slacks_worn.json'
@@ -42,7 +42,7 @@
 
 //SHORTS//
 
-/datum/greyscale_config/shorts_worn
+/datum/greyscale_config/shorts_worn/lizard
 	name = "Worn Shorts"
 	icon_file = 'monkestation/icons/mob/species/lizard/lizard_uniforms.dmi'
 	json_config = 'code/datums/greyscale/json_configs/shorts_worn.json'
@@ -50,7 +50,7 @@
 
 //JEANS//
 
-/datum/greyscale_config/jeans_worn
+/datum/greyscale_config/jeans_worn/lizard
 	name = "Worn Jeans"
 	icon_file = 'monkestation/icons/mob/species/lizard/lizard_uniforms.dmi'
 	json_config = 'code/datums/greyscale/json_configs/jeans_worn.json'
@@ -58,7 +58,7 @@
 
 //JEAN SHORTS//
 
-/datum/greyscale_config/jeanshorts_worn
+/datum/greyscale_config/jeanshorts_worn/lizard
 	name = "Worn Jean Shorts"
 	icon_file = 'monkestation/icons/mob/species/lizard/lizard_uniforms.dmi'
 	json_config = 'code/datums/greyscale/json_configs/jeanshorts_worn.json'
