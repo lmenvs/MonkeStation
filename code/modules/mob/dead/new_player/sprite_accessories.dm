@@ -245,6 +245,11 @@
 	name = "Business Hair 4"
 	icon_state = "hair_business4"
 
+/datum/sprite_accessory/hair/butters
+	icon = 'monkestation/icons/mob/human_face.dmi'
+	name = "Butters"
+	icon_state = "butters"
+
 /datum/sprite_accessory/hair/buzz
 	name = "Buzzcut"
 	icon_state = "hair_buzzcut"
@@ -743,6 +748,11 @@
 /datum/sprite_accessory/hair/shoulderlength
 	name = "Shoulder-length Hair"
 	icon_state = "hair_b"
+
+/datum/sprite_accessory/hair/shrinepriestess
+	icon = 'monkestation/icons/mob/human_face.dmi'
+	name = "Shrine Priestess"
+	icon_state = "shrine_priestess"
 
 /datum/sprite_accessory/hair/sidecut
 	name = "Sidecut"
