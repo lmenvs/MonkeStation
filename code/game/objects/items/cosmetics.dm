@@ -272,6 +272,16 @@
 		if(H.bleed_rate >= 10)
 			to_chat(M, "<span class='userdanger'>You're losing blood fast!</span>")
 
+/obj/item/razor/attackby(obj/item/item, mob/user, params)
+	.=..()
+	if(istype(item, /obj/item/stack/sheet/mineral/bananium))
+		if(unlocked)
+			to_chat(user, "<span class='userdanger'>[src] is already powered by bananium!</span>")
+			return
+		item.use_tool(src, user, amount=1)
+		unlocked = TRUE
+		to_chat(user, "<span class='userdanger'>You insert the bananium into the battery pack.</span>")
+
 /obj/item/razor/straightrazor/attack_self(mob/user)
 	extended = !extended
 	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, 1)
