@@ -97,6 +97,12 @@
 	name = "Afro (Large)"
 	icon_state = "hair_bigafro"
 
+/datum/sprite_accessory/hair/gigafro
+	icon = 'monkestation/icons/mob/human_face.dmi'
+	name = "GigAfro"
+	icon_state = "giga_fro"
+	locked = TRUE
+
 /datum/sprite_accessory/hair/antenna
 	name = "Ahoge"
 	icon_state = "hair_antenna"
@@ -584,10 +590,11 @@
 	name = "Pixie Cut"
 	icon_state = "hair_pixie"
 
-/datum/sprite_accessory/hair/polnareff
+/datum/sprite_accessory/hair/poooooooooolnareff
 	icon = 'monkestation/icons/mob/human_face.dmi'
-	name = "Polnareff"
-	icon_state = "polnareff"
+	name = "Poooooooooolnareff"
+	icon_state = "poooooooooolnareff"
+	locked = TRUE
 
 /datum/sprite_accessory/hair/pompadour
 	name = "Pompadour"
@@ -600,6 +607,12 @@
 /datum/sprite_accessory/hair/hugepompadour
 	name = "Pompadour (Huge)"
 	icon_state = "hair_hugepompadour"
+
+/datum/sprite_accessory/hair/gigapomp
+	icon = 'monkestation/icons/mob/human_face.dmi'
+	name = "Gigapompadour"
+	icon_state = "gigapomp"
+	locked = TRUE
 
 /datum/sprite_accessory/hair/ponytail1
 	name = "Ponytail"

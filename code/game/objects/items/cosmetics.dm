@@ -107,6 +107,7 @@
 	flags_1 = CONDUCT_1
 	w_class = WEIGHT_CLASS_TINY
 	var/extended = 1
+	var/unlocked = FALSE //for unlocking super hairstyles
 
 /obj/item/razor/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins shaving [user.p_them()]self without the razor guard! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -210,7 +211,11 @@
 		return
 	if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
-	var/new_style = input(user, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list
+	var/new_style
+	if(src.unlocked)
+		new_style = input(user, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list
+	else
+		new_style = input(user, "Select a hair style", "Grooming")  as null|anything in GLOB.roundstart_hair_styles_list
 	if(!get_location_accessible(H, location))
 		to_chat(user, "<span class='warning'>The headgear is in the way!</span>")
 		return
@@ -305,3 +310,8 @@
 	to_chat(user, "<span class='notice'>You look into the mirror</span>")
 	sleep(150)
 	REMOVE_TRAIT(user, TRAIT_SELF_AWARE, "mirror_trait")
+
+/obj/item/razor/gigarazor
+	name = "shmick 9000"
+	desc = "It gets the job done."
+	unlocked = TRUE

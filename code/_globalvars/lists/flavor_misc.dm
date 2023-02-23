@@ -1,5 +1,6 @@
 //Preferences stuff
 	//Hairstyles
+GLOBAL_LIST_EMPTY(roundstart_hair_styles_list)			//stores /datum/sprite_accessory/hair indexed by name, available at roundstart
 GLOBAL_LIST_EMPTY(hair_styles_list)			//stores /datum/sprite_accessory/hair indexed by name
 GLOBAL_LIST_EMPTY(hair_styles_male_list)		//stores only hair names
 GLOBAL_LIST_EMPTY(hair_styles_female_list)	//stores only hair names
