@@ -6,7 +6,7 @@
 		ssd_indicator = new
 		ssd_indicator.icon = 'monkestation/icons/mob/ssd_indicator.dmi'
 		ssd_indicator.icon_state = "default0"
-		ssd_indicator.layer = ABOVE_MOB_LAYER
+		ssd_indicator.layer = FLY_LAYER
 
 	ssd_indicator.invisibility = invisibility
 	if(state && stat != DEAD)
