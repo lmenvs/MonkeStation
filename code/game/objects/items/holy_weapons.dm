@@ -190,6 +190,7 @@
 	desc = "The ideal outfit for burning the unfaithful."
 	icon_state = "crusader"
 	item_state = "crusader"
+	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/storage/box/holy/follower
 	name = "Followers of the Chaplain Kit"
