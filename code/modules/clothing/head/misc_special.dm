@@ -161,6 +161,7 @@
 	icon_state = "kitty"
 	clothing_flags = SNUG_FIT
 	color = "#999999"
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/kitty
 
@@ -181,6 +182,7 @@
 	flags_inv = 0
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "stamina" = 0)
 	light_range = 1 //luminosity when on
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/reindeer
 
@@ -193,6 +195,7 @@
 	desc = "Wearing these makes you look useless, and only good for your sex appeal."
 	icon_state = "bunny"
 	clothing_flags = SNUG_FIT
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/rabbit
 
@@ -384,6 +387,8 @@
 	light_on = TRUE
 	var/on = FALSE
 	actions_types = list(/datum/action/item_action/toggle_helmet_light)
+	dynamic_hair_suffix = ""
+	dynamic_fhair_suffix = ""
 	flash_protect = 2
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	bang_protect = 1 //make this consistent with other plasmaman helmets

@@ -15,6 +15,7 @@
 	desc = "It just latches right in place!"
 	icon_state = "slime"
 	clothing_flags = SNUG_FIT
+	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/collectable/xenom
 	name = "collectable xenomorph helmet!"
@@ -27,6 +28,7 @@
 	desc = "A rare chef's hat meant for hat collectors!"
 	icon_state = "chef"
 	item_state = "chef"
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/chef
 
@@ -55,6 +57,7 @@
 	name = "collectable police officer's hat"
 	desc = "A collectable police officer's Hat. This hat emphasizes that you are THE LAW."
 	icon_state = "policehelm"
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/warden
 
@@ -105,6 +108,7 @@
 	icon_state = "kitty"
 	item_state = "kitty"
 	clothing_flags = SNUG_FIT
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/kitty
 
@@ -114,6 +118,7 @@
 	icon_state = "bunny"
 	item_state = "bunny"
 	clothing_flags = SNUG_FIT
+	dynamic_hair_suffix = ""
 
 	dog_fashion = /datum/dog_fashion/head/rabbit
 
@@ -137,6 +142,7 @@
 	name = "collectable HoS hat"
 	desc = "Now you too can beat prisoners, set silly sentences, and arrest for no reason!"
 	icon_state = "hoscap"
+	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/collectable/HoP
 	name = "collectable HoP hat"

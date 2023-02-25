@@ -88,11 +88,6 @@
 	name = "Afro 2"
 	icon_state = "hair_afro2"
 
-/datum/sprite_accessory/hair/afro3
-	icon = 'monkestation/icons/mob/human_face.dmi'
-	name = "Bigger Afro"
-	icon_state = "big_afro"
-
 /datum/sprite_accessory/hair/afro_large
 	name = "Afro (Large)"
 	icon_state = "hair_bigafro"
@@ -372,11 +367,6 @@
 	name = "Father"
 	icon_state = "hair_father"
 
-/datum/sprite_accessory/hair/flippyfringe
-	icon = 'monkestation/icons/mob/human_face.dmi'
-	name = "Flippy Fringe"
-	icon_state = "flippy_fringe"
-
 /datum/sprite_accessory/hair/sargeant
 	name = "Flat Top"
 	icon_state = "hair_sargeant"
@@ -492,11 +482,6 @@
 /datum/sprite_accessory/hair/sidepartlongalt
 	name = "Long Side Part"
 	icon_state = "hair_longsidepart"
-
-/datum/sprite_accessory/hair/marge
-	icon = 'monkestation/icons/mob/human_face.dmi'
-	name = "Marge"
-	icon_state = "marge"
 
 /datum/sprite_accessory/hair/megaeyebrows
 	name = "Mega Eyebrows"
@@ -850,11 +835,6 @@
 /datum/sprite_accessory/hair/unkept
 	name = "Unkept"
 	icon_state = "hair_unkept"
-
-/datum/sprite_accessory/hair/unkemptcurls
-	icon = 'monkestation/icons/mob/human_face.dmi'
-	name = "Unkempt Curls"
-	icon_state = "unkempt_curls"
 
 /datum/sprite_accessory/hair/updo
 	name = "Updo"
