@@ -560,6 +560,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/hair_hidden = FALSE //ignored if the matching dynamic_X_suffix is non-empty
 	var/facialhair_hidden = FALSE // ^
 
+	var/dynamic_hair_suffix = "" //if this is non-null, and hair+suffix matches an iconstate, then we render that hair instead
+	var/dynamic_fhair_suffix = ""
+
 	//for augmented heads
 	if(!IS_ORGANIC_LIMB(HD))
 		return
@@ -616,7 +619,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 			facial_overlay.alpha = hair_alpha
 
-			var/mutable_appearance/facial_em_blocker = mutable_appearance(S.icon, S.icon_state, plane = EMISSIVE_PLANE, alpha = hair_alpha, appearance_flags = KEEP_APART)
+			var/mutable_appearance/facial_em_blocker = mutable_appearance(fhair_file, fhair_state, plane = EMISSIVE_PLANE, alpha = hair_alpha, appearance_flags = KEEP_APART)
 			facial_em_blocker.color = GLOB.em_block_color
 			facial_overlay.overlays += facial_em_blocker
 
