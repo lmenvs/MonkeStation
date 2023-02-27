@@ -406,10 +406,7 @@ BLIND     // can't see anything
 						 "<span class='notice'>[user] turns your remote sensors to maximum.</span>", null, COMBAT_MESSAGE_RANGE)
 			wearer.update_sensors()
 			log_combat(user, wearer, "changed sensors to [switchMode]")
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		if(H.w_uniform == src)
-			H.update_sensors()
+	src.sensor_mode = sensor_selection
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
