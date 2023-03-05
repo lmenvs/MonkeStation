@@ -518,6 +518,7 @@
 	chat_color = "#FFDC9B"
 	breed_name_male = "Turkey"
 	breed_name_female = "Turkey"
+	aging_speed = 0 SECONDS
 
 	mutation_list = list()
 
@@ -542,3 +543,162 @@
 			add_visual("angry")
 	if(source)
 		set_friendship(source, amount * 0.1)
+
+/mob/living/simple_animal/chicken/crow
+	name = "\improper crow"
+	desc = "it's that time again."
+	breed_name = null
+	icon_state = "crow"
+	icon_living = "crow"
+	icon_dead = "crow_dead" //TODO make dead state
+	speak = list("CAW!","CORN!","KWEH!","CAW CAW CAW!!")
+	speak_emote = list("caws","quarks", "coos")
+	emote_hear = list("caws.")
+	emote_see = list("pecks at the ground.","flaps its wings viciously.")
+	density = FALSE
+	health = 15
+	maxHealth = 15
+	attacktext = "pecks"
+	attack_sound = 'monkestation/sound/creatures/crow.ogg' //TODO get sounds
+	ventcrawler = VENTCRAWLER_ALWAYS
+	feedMessages = list("It gobbles up the food voraciously.","It clucks happily.")
+	chat_color = "#1bbbbb"
+	breed_name_male = "Crow"
+	breed_name_female = "Crow"
+	aging_speed = 0 SECONDS
+
+	mutation_list = list()
+
+/mob/living/simple_animal/chicken/crow/LateInitialize()
+	. = ..()
+	icon_state = "crow"
+	icon_living = "crow"
+	icon_dead = "crow_dead"
+
+/mob/living/simple_animal/chicken/crow/Gary
+	name = "Gary"
+	desc = "Gary the Crow.  An inquisitive, yet cruel barterer."
+	speak = list("Pickle Pee!", "Pump-a-rum!","#The chaplain is a traitor.","#The stash is behind the bar.","")
+	gold_core_spawnable = NO_SPAWN
+	speak_chance = 3
+	var/memory_saved = FALSE
+	var/rounds_survived = 0
+	var/longest_survival = 0
+	var/longest_deathstreak = 0
+
+	var/barter_cost = 1 //initial space cash bartering cost
+	var/barter_failure_rate = 50 //will vary based on survival
+
+	var/obj/item/Held = //birb can carry some items
+
+/mob/living/simple_animal/chicken/crow/Gary/Initialize(mapload)
+	Read_Memory()
+	if(rounds_survived == longest_survival)
+		speak += pick("...[longest_survival].", "The things I've seen!", "I have lived many lives!", "What are you before me?")
+		desc += " Old as sin, and just as loud. Claimed to be [rounds_survived]."
+		speak_chance = 20 //His hubris has made him more annoying/easier to justify killing
+		barter_failure_rate = 25
+		add_atom_colour("#EEEE22", FIXED_COLOUR_PRIORITY)
+	else if(rounds_survived == longest_deathstreak)
+		speak += pick("What are you waiting for!", "Violence breeds violence!", "Blood! Blood!", "Strike me down if you dare!")
+		desc += " The squawks of [-rounds_survived] dead parrots ring out in your ears..."
+		barter_failure_rate = 75
+		add_atom_colour("#BB7777", FIXED_COLOUR_PRIORITY)
+	else if(rounds_survived > 0)
+		speak += pick("again?", "No, It was over!", "Let me out!", "It never ends!")
+		desc += " Over [rounds_survived] shifts without a \"terrible\" \"accident\"!"
+	else
+		speak += pick("alive?", "This isn't parrot heaven!", "I live, I die, I live again!", "The void fades!")
+	. = ..()
+
+/mob/living/simple_animal/chicken/crow/Gary/Life()
+	if(!stat && SSticker.current_state == GAME_STATE_FINISHED && !memory_saved)
+		Write_Memory(FALSE)
+		memory_saved = TRUE
+	..()
+
+/mob/living/simple_animal/chicken/crow/Gary/death(gibbed)
+	if(!memory_saved)
+		Write_Memory(TRUE)
+	..(gibbed)
+
+/mob/living/simple_animal/chicken/crow/Gary/proc/Read_Memory()
+	if(fexists("data/npc_saves/Gary.sav")) //legacy compatability to convert old format to new
+		var/savefile/S = new /savefile("data/npc_saves/Gary.sav")
+		S["phrases"] 			>> speech_buffer
+		S["roundssurvived"]		>> rounds_survived
+		S["longestsurvival"]	>> longest_survival
+		S["longestdeathstreak"] >> longest_deathstreak
+		fdel("data/npc_saves/Gary.sav")
+	else
+		var/json_file = file("data/npc_saves/Gary.json")
+		if(!fexists(json_file))
+			return
+		var/list/json = json_decode(rustg_file_read(json_file))
+		speech_buffer = json["phrases"]
+		rounds_survived = json["roundssurvived"]
+		longest_survival = json["longestsurvival"]
+		longest_deathstreak = json["longestdeathstreak"]
+	if(!islist(speech_buffer))
+		speech_buffer = list()
+
+/mob/living/simple_animal/chicken/crow/Gary/proc/Write_Memory(dead)
+	var/json_file = file("data/npc_saves/Gary.json")
+	var/list/file_data = list()
+	if(islist(speech_buffer))
+		file_data["phrases"] = speech_buffer
+	if(dead)
+		file_data["roundssurvived"] = min(rounds_survived - 1, 0)
+		file_data["longestsurvival"] = longest_survival
+		if(rounds_survived - 1 < longest_deathstreak)
+			file_data["longestdeathstreak"] = rounds_survived - 1
+		else
+			file_data["longestdeathstreak"] = longest_deathstreak
+	else
+		file_data["roundssurvived"] = rounds_survived + 1
+		if(rounds_survived + 1 > longest_survival)
+			file_data["longestsurvival"] = rounds_survived + 1
+		else
+			file_data["longestsurvival"] = longest_survival
+		file_data["longestdeathstreak"] = longest_deathstreak
+	fdel(json_file)
+	WRITE_FILE(json_file, json_encode(file_data))
+
+/mob/living/simple_animal/chicken/crow/Gary/proc/Barter(mob/user)
+	var/barter_items = GLOB.maintenance_loot // items that can be received
+	if(prob(barter_failure_rate))
+		if(user.eyeballs) //if user has eyes
+			//pick eye
+			//tear it out
+			//pick from whisper list
+		else
+			//attack user
+	else
+		//give item
+
+/mob/living/simple_animal/chicken/attackby(obj/item/given_item, mob/user, params)
+	if(istype(given_item, /obj/item/knife))//if its a knife
+		//if they already have a knife,
+			// 	. = ..()
+		//put knife in hand
+		//attack dmg inherits knife dmg
+		//attack verb becomes "shanks"
+	if(istype(given_item, /obj/item/food))//if its space cash
+		//if its enough
+			//pickle pee!
+			//remove stack equal to the stack required
+			//Barter()
+		//else
+			//that no pickle pee!
+			//chance to gouge eyes out and say something
+	else
+		//	. = ..()
+		//so you can, you know, keep feeding them
+
+
+
+
+
+
+
+
