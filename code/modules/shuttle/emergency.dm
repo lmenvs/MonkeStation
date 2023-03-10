@@ -188,7 +188,6 @@
 		if(emag_attempts <= emag_required_attempts)
 			return
 		var/reduced_time = TIME_LEFT / emag_multiplier * 10
-		say("reduced time = [reduced_time].  engines_start_time = [ENGINES_START_TIME]")
 		if(reduced_time < ENGINES_START_TIME)
 			SSshuttle.emergency.setTimer(ENGINES_START_TIME)
 		else
