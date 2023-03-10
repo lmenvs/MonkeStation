@@ -33,7 +33,7 @@
 	var/hijack_announce = TRUE
 
 
-	var/emag_multiplier 2 //speed at which emag reduces time, increase to reduce time more.
+	var/emag_multiplier = 2 //speed at which emag reduces time, increase to reduce time more.
 	var/emag_cooldown = 2 SECONDS //no spamming the emag ya dingus
 	var/emag_last_used = 0
 	var/emag_attempts = 0
