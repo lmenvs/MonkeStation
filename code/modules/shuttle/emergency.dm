@@ -1,6 +1,6 @@
 #define TIME_LEFT (SSshuttle.emergency.timeLeft())
 #define ENGINES_START_TIME 100
-#define EMAG_MULTIPLIER 2 //speed at which emag reduces time, increase to reduce time more.
+
 #define ENGINES_STARTED (SSshuttle.emergency.mode == SHUTTLE_IGNITING)
 #define IS_DOCKED (SSshuttle.emergency.mode == SHUTTLE_DOCKED || (ENGINES_STARTED))
 #define SHUTTLE_CONSOLE_ACTION_DELAY (5 SECONDS)
@@ -32,6 +32,8 @@
 	var/hijack_hacking = FALSE
 	var/hijack_announce = TRUE
 
+
+	var/emag_multiplier 2 //speed at which emag reduces time, increase to reduce time more.
 	var/emag_cooldown = 2 SECONDS //no spamming the emag ya dingus
 	var/emag_last_used = 0
 	var/emag_attempts = 0
@@ -186,7 +188,8 @@
 		if(emag_attempts <= emag_required_attempts)
 			return
 		var/current_time = TIME_LEFT
-		SSshuttle.emergency.setTimer(current_time > ENGINES_START_TIME? current_time / EMAG_MULTIPLIER * 10 : ENGINES_START_TIME)
+		//if it would take it below 10 seconds, make it 10 seconds.  Multiplies by 10 because byond
+		SSshuttle.emergency.setTimer(current_time > ENGINES_START_TIME? current_time / emag_multiplier * 10 : ENGINES_START_TIME)
 		minor_announce("The emergency shuttle will launch in \
 			[TIME_LEFT] seconds", "SYSTEM ERROR:", alert=TRUE)
 		emag_required_attempts++
