@@ -187,9 +187,12 @@
 	if(obj_flags & EMAGGED) //Check for emagging first because we want the silly console authorizations
 		if(emag_attempts <= emag_required_attempts)
 			return
-		var/current_time = TIME_LEFT
-		//if it would take it below 10 seconds, make it 10 seconds.  Multiplies by 10 because byond
-		SSshuttle.emergency.setTimer(current_time > ENGINES_START_TIME? current_time / emag_multiplier * 10 : ENGINES_START_TIME)
+		var/reduced_time = TIME_LEFT / emag_multiplier * 10
+		say("reduced time = [reduced_time].  engines_start_time = [ENGINES_START_TIME]")
+		if(reduced_time < ENGINES_START_TIME)
+			SSshuttle.emergency.setTimer(ENGINES_START_TIME)
+		else
+			SSshuttle.emergency.setTimer(reduced_time)
 		minor_announce("The emergency shuttle will launch in \
 			[TIME_LEFT] seconds", "SYSTEM ERROR:", alert=TRUE)
 		emag_required_attempts++
