@@ -32,8 +32,8 @@
 	var/hijack_hacking = FALSE
 	var/hijack_announce = TRUE
 
-	var/emag_cooldown = 5 SECONDS
-	var/emag_last_used = 0 //no spamming the emag ya dingus
+	var/emag_cooldown = 2 SECONDS //no spamming the emag ya dingus
+	var/emag_last_used = 0
 	var/emag_attempts = 0
 	var/emag_required_attempts = 0
 
@@ -186,7 +186,7 @@
 		if(emag_attempts <= emag_required_attempts)
 			return
 		var/current_time = TIME_LEFT
-		SSshuttle.emergency.setTimer(current_time / EMAG_MULTIPLIER * 10)
+		SSshuttle.emergency.setTimer(current_time > ENGINES_START_TIME? current_time / EMAG_MULTIPLIER * 10 : ENGINES_START_TIME)
 		minor_announce("The emergency shuttle will launch in \
 			[TIME_LEFT] seconds", "SYSTEM ERROR:", alert=TRUE)
 		emag_required_attempts++
