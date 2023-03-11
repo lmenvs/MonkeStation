@@ -5,7 +5,7 @@
 	bodyflag = FLAG_LIZARD
 	say_mod = "hisses"
 	default_color = "00FF00"
-	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,NO_UNDERWEAR)
+	species_traits = list(MUTCOLORS,EYECOLOR,LIPS)
 	inherent_biotypes = list(MOB_ORGANIC, MOB_HUMANOID, MOB_REPTILE)
 	mutant_bodyparts = list("tail_lizard", "snout", "spines", "horns", "frills", "body_markings", "legs")
 	mutanttongue = /obj/item/organ/tongue/lizard
@@ -69,5 +69,7 @@
 			return 'monkestation/icons/mob/species/lizard/lizard_shoes.dmi'
 		if("suit")
 			return 'monkestation/icons/mob/species/lizard/lizard_suits.dmi'
+		if("underwear")
+			return 'monkestation/icons/mob/species/lizard/lizard_underwear.dmi'
 		else
 			return

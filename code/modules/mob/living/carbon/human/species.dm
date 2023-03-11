@@ -772,9 +772,15 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			var/mutable_appearance/underwear_overlay
 			if(underwear)
 				if(human_host.dna.species.sexes && human_host.gender == FEMALE && (underwear.gender == MALE))
-					underwear_overlay = wear_female_version(underwear.icon_state, underwear.icon, BODY_LAYER, FEMALE_UNIFORM_FULL)
+					if(human_host.dna.species.get_custom_icons("underwear"))
+						underwear_overlay = wear_female_version(underwear.icon_state, human_host.dna.species.get_custom_icons("underwear"), BODY_LAYER, FEMALE_UNIFORM_FULL)
+					else
+						underwear_overlay = wear_female_version(underwear.icon_state, initial(underwear.icon_state), BODY_LAYER, FEMALE_UNIFORM_FULL)
 				else
-					underwear_overlay = mutable_appearance(underwear.icon, underwear.icon_state, -BODY_LAYER)
+					if(human_host.dna.species.get_custom_icons("underwear"))
+						underwear_overlay = mutable_appearance(human_host.dna.species.get_custom_icons("underwear"), underwear.icon_state, -BODY_LAYER)
+					else
+						underwear_overlay = mutable_appearance(initial(underwear.icon), underwear.icon_state, -BODY_LAYER)
 				if(!underwear.use_static)
 					underwear_overlay.color = "#" + human_host.underwear_color
 				standing += underwear_overlay
@@ -783,14 +789,23 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			var/datum/sprite_accessory/undershirt/undershirt = GLOB.undershirt_list[human_host.undershirt]
 			if(undershirt)
 				if(human_host.dna.species.sexes && human_host.gender == FEMALE)
-					standing += wear_female_version(undershirt.icon_state, undershirt.icon, BODY_LAYER)
+					if(human_host.dna.species.get_custom_icons("underwear"))
+						standing += wear_female_version(undershirt.icon_state, human_host.dna.species.get_custom_icons("underwear"), BODY_LAYER)
+					else
+						standing += wear_female_version(undershirt.icon_state, initial(undershirt.icon), BODY_LAYER)
 				else
-					standing += mutable_appearance(undershirt.icon, undershirt.icon_state, -BODY_LAYER)
+					if(human_host.dna.species.get_custom_icons("underwear"))
+						standing += mutable_appearance(human_host.dna.species.get_custom_icons("underwear"), undershirt.icon_state, -BODY_LAYER)
+					else
+						standing += mutable_appearance(initial(undershirt.icon), undershirt.icon_state, -BODY_LAYER)
 
-		if(human_host.socks && human_host.num_legs >= 2 && !(human_host.dna.species.bodytype & BODYTYPE_DIGITIGRADE) && !(NOSOCKS in species_traits))
+		if(human_host.socks && human_host.num_legs >= 2 && !(NOSOCKS in species_traits))
 			var/datum/sprite_accessory/socks/socks = GLOB.socks_list[human_host.socks]
 			if(socks)
-				standing += mutable_appearance(socks.icon, socks.icon_state, -BODY_LAYER)
+				if(human_host.dna.species.get_custom_icons("underwear"))
+					standing += mutable_appearance(human_host.dna.species.get_custom_icons("underwear"), socks.icon_state, -BODY_LAYER)
+				else
+					standing += mutable_appearance(initial(socks.icon), socks.icon_state, -BODY_LAYER)
 
 	if(standing.len)
 		human_host.overlays_standing[BODY_LAYER] = standing
