@@ -15,29 +15,40 @@
 
 
 //JUMPSUIT//
-
-/datum/greyscale_config/polycloak_worn/simian
-	name = "Wcloak"
-	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
-	json_config = 'monkestation/code/datums/greyscale/polycloakworn.json'
-
-/datum/greyscale_config/boatcloak_worn
-	name = "wboatcloak"
-	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
-	json_config = 'monkestation/code/datums/greyscale/boatcloakworn.json'
-
-
-//SIMIAN
 /datum/greyscale_config/jumpsuit_worn/simian
-	name = "Worn Jumpsuit"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
-	json_config = 'code/datums/greyscale/json_configs/jumpsuit_worn.json'
 
 /datum/greyscale_config/jumpsuit_prison_worn/simian
-	name = "Worn Prison Jumpsuit"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
-	json_config = 'code/datums/greyscale/json_configs/jumpsuit_prison_worn.json'
 
+//CLOWN SUIT//
+/datum/greyscale_config/clown_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+/datum/greyscale_config/plaidskirt_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+/datum/greyscale_config/turtleskirt_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+
+/datum/greyscale_config/tango_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+/datum/greyscale_config/sundress_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+/datum/greyscale_config/slacks_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+/datum/greyscale_config/shorts_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+/datum/greyscale_config/jeans_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
+
+
+/datum/greyscale_config/jeanshorts_worn
+	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
 
 
 /////////
@@ -45,19 +56,13 @@
 /////////
 
 /datum/greyscale_config/sneakers_worn/simian
-	name = "Worn Sneakers"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_shoes.dmi'
-	json_config = 'code/datums/greyscale/json_configs/sneakers_worn.json'
 
 /datum/greyscale_config/sneakers_orange_worn/simian
-	name = "Worn Orange Sneakers"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_shoes.dmi'
-	json_config = 'code/datums/greyscale/json_configs/sneakers_orange_worn.json'
 
 /datum/greyscale_config/sneakers_marisa/simian
-	name = "Sneakers marisa"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_shoes.dmi'
-	json_config = 'code/datums/greyscale/json_configs/sneakers_marisa.json'
 
 /////////
 //SUITS//
@@ -66,9 +71,7 @@
 //KIMONO//
 
 /datum/greyscale_config/kimono_fancy_worn/simian
-	name = "Fancy Kimono Worn"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_suits.dmi'
-	json_config = 'code/datums/greyscale/json_configs/kimono_fancy_worn.json'
 
 
 //////////
@@ -79,21 +82,31 @@
 //CATGLOVES//
 
 /datum/greyscale_config/catgloves_worn/simian
-	name = "Catgloves Worn"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_gloves.dmi'
-	json_config = 'code/datums/greyscale/json_configs/catgloves_worn.json'
 
-/datum/greyscale_config/clown_worn/simian
-	name = "Clown Suit Worn"
-	icon_file = 'monkestation/icons/mob/species/simian/simian_uniforms.dmi'
-	json_config = 'code/datums/greyscale/json_configs/clown_worn.json'
+////////////
+//NECKWEAR//
+////////////
 
-/datum/greyscale_config/boatcloak_worn/simian
-	name = "wboatcloak"
+
+//SCARF//
+
+/datum/greyscale_config/scarf_worn/simian
 	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
-	json_config = 'monkestation/code/datums/greyscale/boatcloakworn.json'
+
+//LARGE SCARF//
+
+/datum/greyscale_config/large_scarf_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
+
+//TIE//
+
+/datum/greyscale_config/ties_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
+
+//CLOAKS//
+/datum/greyscale_config/boatcloak_worn/simian
+	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
 
 /datum/greyscale_config/polycloak_worn/simian
-	name = "Wcloak"
 	icon_file = 'monkestation/icons/mob/species/simian/simian_neck.dmi'
-	json_config = 'monkestation/code/datums/greyscale/polycloakworn.json'
