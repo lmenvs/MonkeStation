@@ -11,6 +11,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	layer = GHOST_LAYER
 	stat = DEAD
 	density = FALSE
+	appearance_flags = KEEP_TOGETHER
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
@@ -233,7 +234,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				facial_hair_overlay.alpha = 200
 				add_overlay(facial_hair_overlay)
 		if(hair_style)
-			S = GLOB.hair_styles_list[hair_style]
+			S = GLOB.roundstart_hair_styles_list[hair_style]
 			if(S)
 				hair_overlay = mutable_appearance(S.icon, "[S.icon_state]", -HAIR_LAYER)
 				if(hair_color)
@@ -653,11 +654,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	target.faction = list("neutral")
 	return 1
 
-/mob/dead/observer/_pointed(atom/pointed_at)
+//this is a mob verb instead of atom for performance reasons
+//see /mob/verb/examinate() in mob.dm for more info
+//overridden here and in /mob/living for different point span classes and sanity checks
+/mob/dead/observer/pointed(atom/A as mob|obj|turf in view())
 	if(!..())
-		return FALSE
-
-	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [pointed_at].</span>")
+		return 0
+	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A].</span>")
+	return 1
 
 /mob/dead/observer/verb/view_manifest()
 	set name = "View Crew Manifest"
