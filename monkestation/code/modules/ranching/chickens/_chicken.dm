@@ -545,7 +545,7 @@
 
 /mob/living/simple_animal/chicken/crow
 	name = "\improper crow"
-	desc = "it's that time again."
+	desc = "I wuv my fwiends!"
 	breed_name = null
 	icon_state = "crow"
 	icon_living = "crow"
@@ -588,6 +588,10 @@
 	var/longest_survival = 0
 	var/longest_deathstreak = 0
 	var/held_coins = 0
+
+/mob/living/simple_animal/chicken/crow/LateInitialize()
+	. = ..()
+	name = "Gary"
 
 /mob/living/simple_animal/chicken/crow/attackby(obj/item/given_item, mob/user, params)
 	if(istype(given_item, /obj/item/kitchen/knife))//if its a knife
@@ -671,6 +675,7 @@
 
 /obj/item/storage/backpack/satchel/flat/crow/ComponentInitialize()
 	. = ..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.can_hold = typecacheof(list(/obj/item/coin)) //will spawn with contraband but can only add coins to it
 	STR.max_combined_w_class = 100
 	STR.max_w_class = WEIGHT_CLASS_TINY
@@ -679,7 +684,7 @@
 /obj/item/storage/backpack/satchel/flat/crow/PopulateContents()
 	var/json_file = file("data/npc_saves/Gary.json")
 	if(!fexists(json_file))
-		new /obj/item/
+		new /obj/item/trash //you get NOTHING because there ain't nothing!
 		return
 	var/list/file_data = json_decode(rustg_file_read(json_file))
 	var/amount = file_data["heldcoins"]
