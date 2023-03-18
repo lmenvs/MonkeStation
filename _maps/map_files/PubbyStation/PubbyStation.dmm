@@ -9749,16 +9749,6 @@
 /obj/item/bedsheet/dorms,
 /turf/open/floor/carpet,
 /area/crew_quarters/dorms)
-"ayk" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/structure/sign/plaques/deempisi{
-	pixel_y = 28
-	},
-/mob/living/simple_animal/chicken/crow/Gary,
-/turf/open/floor/carpet,
-/area/crew_quarters/dorms)
 "ayl" = (
 /obj/machinery/button/door{
 	id = "Dorm2";
@@ -50290,6 +50280,18 @@
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer2,
 /turf/open/floor/plasteel/dark,
 /area/chapel/dock)
+"jca" = (
+/obj/docking_port/stationary{
+	dheight = 4;
+	dwidth = 4;
+	height = 9;
+	id = "aux_base_zone";
+	name = "aux base zone";
+	roundstart_template = /datum/map_template/shuttle/aux_base/small;
+	width = 9
+	},
+/turf/open/floor/plating,
+/area/construction/mining/aux_base)
 "jcB" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
@@ -52440,6 +52442,16 @@
 	},
 /turf/open/floor/plating,
 /area/engine/engineering)
+"lZA" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/structure/sign/plaques/deempisi{
+	pixel_y = 28
+	},
+/mob/living/simple_animal/chicken/crow/Gary,
+/turf/open/floor/carpet,
+/area/crew_quarters/dorms)
 "mau" = (
 /obj/structure/lattice,
 /obj/structure/grille/broken,
@@ -57058,18 +57070,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/aft)
-"rJZ" = (
-/obj/docking_port/stationary{
-	dheight = 3;
-	dwidth = 3;
-	height = 7;
-	id = "aux_base_zone";
-	name = "aux base zone";
-	roundstart_template = /datum/map_template/shuttle/aux_base/small;
-	width = 7
-	},
-/turf/open/floor/plating,
-/area/construction/mining/aux_base)
 "rKr" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
@@ -84058,7 +84058,7 @@ oEA
 uoS
 uoS
 uoS
-rJZ
+jca
 uoS
 uoS
 tCP
@@ -99208,7 +99208,7 @@ apX
 avf
 awo
 apX
-ayk
+lZA
 azs
 apX
 aBN
