@@ -22,6 +22,8 @@
 		        /obj/item/clothing/head/fedora = 1,
 				/obj/item/clothing/head/sombrero = 1,
 				/obj/item/clothing/head/wig = 4,
+				/obj/item/clothing/head/widered = 3,
+				/obj/item/clothing/head/polycowboyhat = 3,
 			),
 		),
 
@@ -92,6 +94,8 @@
 				/obj/item/clothing/shoes/sneakers/black = 4,
 		        /obj/item/clothing/shoes/laceup = 2,
 		        /obj/item/clothing/shoes/sandal = 2,
+				/obj/item/clothing/shoes/cowboyboots = 3,
+				/obj/item/clothing/shoes/cowboyboots/black = 3,
 			),
 		),
 
@@ -105,6 +109,7 @@
 		        /obj/item/clothing/under/dress/striped = 1,
 		        /obj/item/clothing/under/dress/sailor = 1,
 		        /obj/item/clothing/under/dress/redeveninggown = 1,
+				/obj/item/clothing/suit/heartcoat = 1,
 		        /obj/item/clothing/suit/kimono = 1,
 			),
 		),
@@ -118,7 +123,8 @@
 		              /obj/item/clothing/suit/jacket/letterman_syndie = 1,
 		              /obj/item/clothing/under/costume/jabroni = 1,
 		              /obj/item/clothing/suit/vapeshirt = 1,
-		              /obj/item/clothing/under/costume/geisha = 1)
+		              /obj/item/clothing/under/costume/geisha = 1,
+					  /obj/item/clothing/under/bloodred = 1)
 	premium = list(/obj/item/clothing/under/suit/checkered = 1,
 		           /obj/item/clothing/head/mailman = 1,
 		           /obj/item/clothing/under/misc/mailman = 1,
@@ -130,6 +136,8 @@
 	default_price = 40
 	extra_price = 60
 	payment_department = NO_FREEBIES
+	light_mask = "wardrobe-light-mask"
+	light_color = "#00FF00"
 
 /obj/item/vending_refill/clothing
 	machine_name = "ClothesMate"

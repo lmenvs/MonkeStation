@@ -18,4 +18,20 @@
 	item_state = "invisible"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	can_adjust = FALSE
+<<<<<<< HEAD
 	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
+=======
+<<<<<<< HEAD
+	sprite_sheets = null
+
+/obj/item/clothing/under/dress/shrine_priestess
+	name = "shrine priestess kimono"
+	desc = "Ceremonial garb worn by shrine priestesses."
+	icon = 'monkestation/icons/obj/clothing/uniforms.dmi'
+	worn_icon = 'monkestation/icons/mob/uniform.dmi'
+	icon_state = "shrine_priestess"
+	item_state = "shrine_priestess"
+=======
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
+>>>>>>> parent of d8f64ec216a (remove plantigrade, add digi sprites)
+>>>>>>> 4b9060d6134ffc9e8d75f9169fe30fae0f820084

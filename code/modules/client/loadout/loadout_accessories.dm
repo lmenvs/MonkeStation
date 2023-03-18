@@ -13,6 +13,14 @@
 	display_name = "scarf, red"
 	path = /obj/item/clothing/neck/scarf/red
 
+/datum/gear/accessory/scarf/pink
+	display_name = "scarf, pink"
+	path = /obj/item/clothing/neck/scarf/pink
+
+/datum/gear/accessory/scarf/cyan
+	display_name = "scarf, cyan"
+	path = /obj/item/clothing/neck/scarf/cyan
+
 /datum/gear/accessory/scarf/green
 	display_name = "scarf, green"
 	path = /obj/item/clothing/neck/scarf/green
@@ -35,6 +43,16 @@
 	display_name = "scarf, striped blue"
 	path = /obj/item/clothing/neck/large_scarf/blue
 	cost = 1200
+
+/datum/gear/accessory/neck/bizzare
+	display_name = "bizzare scarf"
+	path = /obj/item/clothing/neck/bizzarescarf
+	cost = 1500
+
+/datum/gear/accessory/neck/conductive
+	display_name = "conductive scarf"
+	path = /obj/item/clothing/neck/conductivescarf
+	cost = 1500
 
 //armbands
 /datum/gear/accessory/armband_red
@@ -147,6 +165,10 @@
 	display_name = "red glasses"
 	path = /obj/item/clothing/glasses/red
 
+/datum/gear/accessory/glasses/phantom
+	display_name = "phantom glasses"
+	path = /obj/item/clothing/glasses/phantom
+
 //LIPSTICK
 
 /datum/gear/accessory/cosmetics
@@ -184,3 +206,49 @@
 	display_name = "black bishop's cloak"
 	path = /obj/item/clothing/neck/cloak/chap/bishop/black
 	allowed_roles = list("Chaplain")
+
+/datum/gear/accessory/cloak/polycloak
+	display_name = "polychromatic cloak"
+	path = /obj/item/clothing/neck/polycloak
+
+/datum/gear/accessory/cloak/boatcloak
+	display_name = "boat cloak"
+	path = /obj/item/clothing/neck/boatcloak
+
+//Masks
+
+/datum/gear/accessory/mask
+	subtype_path = /datum/gear/accessory/mask
+	cost = 1500
+
+/datum/gear/accessory/mask/gondola
+	display_name = "gondola mask :D"
+	description = "Fugg :DDDDD"
+	cost = 2000
+	path = /obj/item/clothing/mask/gondola
+
+/datum/gear/accessory/mask/clown
+	display_name = "clown mask"
+	description = "Dress up just like your hero! The... clown...?"
+	path = /obj/item/clothing/mask/gas/clown_hat
+
+/datum/gear/accessory/mask/mime
+	display_name = "mime mask"
+	description = "..."
+	path = /obj/item/clothing/mask/gas/mime
+
+/datum/gear/accessory/mask/gas/driscoll
+	display_name = "driscoll mask"
+	path = /obj/item/clothing/mask/gas/driscoll_mask
+
+/datum/gear/accessory/mask/russian_balaclava
+	display_name = "russian balaclava"
+	path = /obj/item/clothing/mask/russian_balaclava
+
+/datum/gear/accessory/mask/kitsune
+	display_name = "white kitsune mask"
+	path = /obj/item/clothing/mask/kitsunewhite
+
+/datum/gear/accessory/mask/black_kitsune
+	display_name = "black kitsune mask"
+	path = /obj/item/clothing/mask/kitsuneblack

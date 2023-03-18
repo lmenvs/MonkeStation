@@ -26,6 +26,13 @@
 	deathsound = 'sound/voice/lizard/deathsound.ogg'
 	species_language_holder = /datum/language_holder/lizard
 	digitigrade_customization = DIGITIGRADE_OPTIONAL
+<<<<<<< HEAD
+=======
+
+	greyscale_suffix = "lizard"
+
+	mutanteyes = /obj/item/organ/eyes/glowing
+>>>>>>> 4b9060d6134ffc9e8d75f9169fe30fae0f820084
 
 	species_chest = /obj/item/bodypart/chest/lizard
 	species_head = /obj/item/bodypart/head/lizard

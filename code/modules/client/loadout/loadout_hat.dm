@@ -59,6 +59,22 @@
 	display_name = "green sombrero"
 	path = /obj/item/clothing/head/sombrero/green
 
+/datum/gear/hat/cowboyhat_poly
+	display_name = "polychromatic Cowboy Hat"
+	path = /obj/item/clothing/head/polycowboyhat
+
+/datum/gear/hat/sunflower_crown
+	display_name = "sunflower crown"
+	path = /obj/item/clothing/head/sunflowercrown
+
+/datum/gear/hat/poppy_crown
+	display_name = "poppy crown"
+	path = /obj/item/clothing/head/poppycrown
+
+/datum/gear/hat/lily_crown
+	display_name = "lily crown"
+	path = /obj/item/clothing/head/lilycrown
+
 //SOFT CAPS
 
 /datum/gear/hat/soft
@@ -179,6 +195,11 @@
 	path = /obj/item/clothing/head/delinquent
 	cost = 5000
 
+/datum/gear/donator/head/gangster_wig
+	display_name = "gangster wig"
+	path = /obj/item/clothing/head/gangsterwig
+	cost = 5000
+
 /datum/gear/hat/cueball
 	display_name = "cubeball helmet"
 	path = /obj/item/clothing/head/cueball
@@ -190,6 +211,22 @@
 	path = /obj/item/clothing/head/pirate
 	cost = 5000
 
+/datum/gear/hat/deckers
+	display_name = "decker headphones"
+	path = /obj/item/clothing/head/deckers
+
+/datum/gear/hat/morningstar
+	display_name = "morningstar beret"
+	path = /obj/item/clothing/head/morningstar
+
+/datum/gear/hat/saints
+	display_name = "saints hat"
+	path = /obj/item/clothing/head/saints
+
+/datum/gear/hat/widered
+	display_name = "wide red hat"
+	path = /obj/item/clothing/head/widered
+
 //CHAPLAIN HATS
 
 /datum/gear/hat/blackbishop
@@ -197,3 +234,52 @@
 	path = /obj/item/clothing/head/bishopmitre/black
 	cost = 5000
 	allowed_roles = list("Chaplain")
+
+//JOB BERETS
+
+
+/datum/gear/hat/job_beret
+	subtype_path = /datum/gear/hat/job_beret
+	cost = 2500
+
+/datum/gear/hat/job_beret/eng
+	display_name = "engineering beret"
+	path = /obj/item/clothing/head/beret/eng
+	allowed_roles = list("Chief Engineer", "Station Engineer", "Atmospheric Technician")
+
+/datum/gear/hat/job_beret/atmos
+	display_name = "atmospherics beret"
+	path = /obj/item/clothing/head/beret/atmos
+	allowed_roles = list("Chief Engineer", "Station Engineer", "Atmospheric Technician")
+
+/datum/gear/hat/job_beret/supply
+	display_name = "supply beret"
+	path = /obj/item/clothing/head/beret/supply
+	allowed_roles = list("Quartermaster", "Cargo Technician", "Shaft Miner")
+
+/datum/gear/hat/job_beret/science
+	display_name = "fancy science beret"
+	path = /obj/item/clothing/head/beret/science/fancy
+	allowed_roles = list("Scientist", "Roboticist", "Research Director")
+	cost = 3000
+
+//SECURITY BERETS
+
+/datum/gear/hat/sec_beret
+	display_name = "security beret"
+	path = /obj/item/clothing/head/beret/sec
+	cost = 4000
+	allowed_roles = list("Security Officer","Warden","Head of Security")
+
+/datum/gear/hat/warden_beret
+	display_name = "warden beret"
+	path = /obj/item/clothing/head/beret/sec/navywarden
+	cost = 4000
+	allowed_roles = list("Warden","Head of Security")
+
+/datum/gear/hat/hos_beret
+	display_name = "head of security beret"
+	path = /obj/item/clothing/head/hos/beret/navyhos
+	cost = 4000
+	allowed_roles = list("Head of Security")
+

@@ -5,6 +5,11 @@
 	sort_category = "General"
 	cost = 1000
 
+/datum/gear/misc/clown_toy
+	display_name = "clown toy"
+	description = "Our top scientists at NanoTrasen managed to turn the clown into a marketable action figure."
+	path = /obj/item/toy/figure/clown
+
 /datum/gear/misc/d20
 	display_name = "d20"
 	path = /obj/item/dice/d20
@@ -15,6 +20,29 @@
 	description = "Says \"Made in China\" on the back. Seems fishy."
 	path = /obj/item/coin/antagtoken
 	cost = 10000
+
+/datum/gear/misc/katana
+	display_name = "toy katana"
+	description = "This plastic was folded over 10 times."
+	path = /obj/item/toy/katana
+	cost = 750
+
+/datum/gear/misc/bikehorn
+	display_name = "bikehorn"
+	path = /obj/item/bikehorn
+	cost = 750
+
+/datum/gear/misc/golden_bikehorn
+	display_name = "golden bikehorn"
+	description = "Nanotrasen gives it's wealthiest clowns it's most expensive bikehorns."
+	path = /obj/item/bikehorn/golden
+	cost = 25000
+
+/datum/gear/misc/contraband_poster
+	display_name = "contraband poster"
+	description = "The cause of only the best revolutions."
+	path = /obj/item/poster/random_contraband
+	cost = 2500
 
 //LIGHTERS & CIGARETTES
 
@@ -62,3 +90,87 @@
 	display_name = "cigar, premium Havanian"
 	path = /obj/item/clothing/mask/cigarette/cigar/havana
 	cost = 2400
+
+//PLUSHIES
+
+/datum/gear/misc/plush
+	subtype_path = /datum/gear/misc/plush
+	cost = 1000
+
+/datum/gear/misc/plush/runtime
+	display_name = "runtime plushie"
+	path = /obj/item/toy/plush/runtime
+
+/datum/gear/misc/plush/snakeplushie
+	display_name = "snake plushie"
+	path = /obj/item/toy/plush/snakeplushie
+
+/datum/gear/misc/plush/moth
+	display_name = "moth plushie"
+	path = /obj/item/toy/plush/moth
+
+/datum/gear/misc/plush/carpplushie
+	display_name = "carp plushie"
+	path = /obj/item/toy/plush/carpplushie
+
+/datum/gear/misc/plush/beeplushie
+	display_name = "bee plushie"
+	path = /obj/item/toy/plush/beeplushie
+
+/datum/gear/misc/plush/plush_ian
+	display_name = "ian plushie"
+	path = /obj/item/toy/plush/ian
+
+/datum/gear/misc/plush/plush_lisa
+	display_name = "lisa plushie"
+	path = /obj/item/toy/plush/lisa
+
+/datum/gear/misc/plush/plush_renault
+	display_name  = "renault plushie"
+	path = /obj/item/toy/plush/renault
+
+/datum/gear/misc/plush/plush_opa
+	display_name = "metal opa plushie"
+	path = /obj/item/toy/plush/opa
+
+/datum/gear/misc/plush/tyriaplush
+	display_name = "tyria plushie"
+	description = "The cryptid has breached containment."
+	path = /obj/item/toy/plush/moth/tyriaplush
+	cost = 10000
+
+/datum/gear/misc/plush/duckyplush
+	display_name = "ducky plushie"
+	path = /obj/item/toy/plush/duckyplush
+	cost = 10000
+
+/datum/gear/misc/plush/ookplush
+	display_name = "ook plushie"
+	path = /obj/item/toy/plush/moth/ookplush
+	cost = 10000
+
+//BACKPACKS
+/datum/gear/misc/backpack
+	subtype_path = /datum/gear/misc/backpack
+	slot = ITEM_SLOT_BACK
+	cost = 10000
+
+/datum/gear/misc/backpack/ian
+	display_name = "ian backpack"
+	path = /obj/item/storage/backpack/ian
+
+/datum/gear/misc/backpack/lisa
+	display_name = "lisa backpack"
+	path = /obj/item/storage/backpack/lisa
+
+/datum/gear/misc/backpack/renault
+	display_name = "renault backpack"
+	path = /obj/item/storage/backpack/renault
+
+/datum/gear/misc/backpack/cak
+	display_name = "cak catpack"
+	path = /obj/item/storage/backpack/cak
+
+/datum/gear/donator/backpack/runtime
+	display_name = "runtime catpack"
+	path = /obj/item/storage/backpack/runtime

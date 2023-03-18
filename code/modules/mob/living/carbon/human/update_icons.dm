@@ -55,6 +55,7 @@ There are several things that need to be remembered:
 //used when putting/removing clothes that hide certain mutant body parts to just update those and not update the whole body.
 /mob/living/carbon/human/proc/update_mutant_bodyparts()
 	dna.species.handle_mutant_bodyparts(src)
+	update_body_parts(forced_update = TRUE)
 
 
 /mob/living/carbon/human/update_body()
@@ -67,9 +68,10 @@ There are several things that need to be remembered:
 
 /* --------------------------------------- */
 //For legacy support.
-/mob/living/carbon/human/regenerate_icons()
-
+/mob/living/carbon/human/regenerate_icons(forcing_update = FALSE)
 	if(!..())
+		if(forcing_update)
+			update_body_parts(forced_update = forcing_update)
 		update_body()
 		update_hair()
 		update_inv_w_uniform()
@@ -170,7 +172,7 @@ There are several things that need to be remembered:
 					U.greyscale_config_worn = text2path("[initial(U.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
 					U.update_greyscale()
 			else
-				if(U.worn_icon != initial(U.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(U.worn_icon != initial(U.worn_icon) && initial(U.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					U.worn_icon = initial(U.worn_icon)
 				if(U.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					U.greyscale_config_worn = initial(U.greyscale_config_worn)
@@ -233,18 +235,18 @@ There are several things that need to be remembered:
 		if(!dna.species.get_custom_icons("gloves"))//monkestation edit: add simians
 			bloody_overlay += mutable_appearance('icons/effects/blood.dmi', "bloodyhands", -GLOVES_LAYER)
 		else
-			bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.name)]_bloodyhands")
-		if(get_num_arms(FALSE) < 2)
+			bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.greyscale_suffix)]_bloodyhands")
+		if(num_hands < 2)
 			if(has_left_hand(FALSE))
 				if(!dna.species.get_custom_icons("gloves"))
 					bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands_left", -GLOVES_LAYER)
 				else
-					bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.name)]_bloodyhands_left")
+					bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.greyscale_suffix)]_bloodyhands_left")
 			else if(has_right_hand(FALSE))
 				if(!dna.species.get_custom_icons("gloves"))
 					bloody_overlay = mutable_appearance('icons/effects/blood.dmi', "bloodyhands_right", -GLOVES_LAYER)
 				else
-					bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.name)]_bloodyhands_right")
+					bloody_overlay = mutable_appearance('monkestation/icons/effects/blood.dmi', "[lowertext(dna.species.greyscale_suffix)]_bloodyhands_right")
 
 		overlays_standing[GLOVES_LAYER] = bloody_overlay
 
@@ -258,10 +260,10 @@ There are several things that need to be remembered:
 				if(findtextEx("[G.worn_icon]", "monkestation")) //checks if the item is modular
 					G.worn_icon = icon_file
 				if(G.greyscale_config_worn)
-					G.greyscale_config_worn = text2path("[initial(G.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+					G.greyscale_config_worn = text2path("[initial(G.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.greyscale_suffix)]") //sprite sheets and GAGS will have to follow this naming convention.
 					G.update_greyscale()
 			else
-				if(G.worn_icon != initial(G.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(G.worn_icon != initial(G.worn_icon) && initial(G.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					G.worn_icon = initial(G.worn_icon)
 				if(G.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					G.greyscale_config_worn = initial(G.greyscale_config_worn)
@@ -362,6 +364,17 @@ There are several things that need to be remembered:
 				var/obj/item/N = wear_neck
 				if(N.sprite_sheets & dna?.species.bodyflag)
 					icon_file = dna.species.get_custom_icons("neck")
+					if(findtextEx("[N.worn_icon]", "monkestation"))
+						N.worn_icon = icon_file
+					if(N.greyscale_config)
+						N.greyscale_config_worn = text2path("[initial(N.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]")
+						N.update_greyscale()
+					else
+						if(N.worn_icon != initial(N.worn_icon) && initial(N.worn_icon) != null)
+							N.worn_icon = initial(N.worn_icon)
+						if(N.greyscale_config_worn)
+							N.greyscale_config_worn = initial(N.greyscale_config_worn)
+							N.update_greyscale()
 			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = icon_file)
 			var/mutable_appearance/neck_overlay = overlays_standing[NECK_LAYER]
 			if(OFFSET_NECK in dna.species.offset_features)
@@ -373,7 +386,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_shoes()
 	remove_overlay(SHOES_LAYER)
 
-	if(get_num_legs(FALSE) <2)
+	if(num_legs <2)
 		return
 
 	if(client && hud_used)
@@ -389,11 +402,11 @@ There are several things that need to be remembered:
 				//monkestation edit: make GAGS work with sprite sheets, and modular items
 				if(findtextEx("[S.worn_icon]", "monkestation")) //for modular items
 					S.worn_icon = icon_file
-				if(S.greyscale_config)
-					S.greyscale_config_worn = text2path("[initial(S.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+				if(S.greyscale_config_worn)
+					S.greyscale_config_worn = text2path("[initial(S.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.greyscale_suffix)]") //sprite sheets and GAGS will have to follow this naming convention.
 					S.update_greyscale()
 			else
-				if(S.worn_icon != initial(S.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(S.worn_icon != initial(S.worn_icon) && initial(S.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					S.worn_icon = initial(S.worn_icon)
 				if(S.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					S.greyscale_config_worn = initial(S.greyscale_config_worn)
@@ -464,7 +477,7 @@ There are several things that need to be remembered:
 					HE.worn_icon = icon_file
 				//monkestation edit: add more functionality to sprite sheets for modular and GAGS usage
 			else
-				if(HE.worn_icon != initial(HE.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(HE.worn_icon != initial(HE.worn_icon) && initial(HE.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					HE.worn_icon = initial(HE.worn_icon)
 				if(HE.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					HE.greyscale_config_worn = initial(HE.greyscale_config_worn)
@@ -496,7 +509,7 @@ There are several things that need to be remembered:
 					B.worn_icon = icon_file
 				//monkestation edit: add more functionality to sprite sheets for modular and GAGS usage
 			else
-				if(B.worn_icon != initial(B.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(B.worn_icon != initial(B.worn_icon) && initial(B.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					B.worn_icon = initial(B.worn_icon)
 				if(B.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					B.greyscale_config_worn = initial(B.greyscale_config_worn)
@@ -534,10 +547,10 @@ There are several things that need to be remembered:
 				if(findtextEx("[S.worn_icon]", "monkestation")) //for modular items
 					S.worn_icon = icon_file
 				if(S.greyscale_config_worn)
-					S.greyscale_config_worn = text2path("[initial(S.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.name)]") //sprite sheets and GAGS will have to follow this naming convention.
+					S.greyscale_config_worn = text2path("[initial(S.greyscale_config_worn)]"+"/"+"[lowertext(dna.species.greyscale_suffix)]") //sprite sheets and GAGS will have to follow this naming convention.
 					S.update_greyscale()
 			else
-				if(S.worn_icon != initial(S.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(S.worn_icon != initial(S.worn_icon) && initial(S.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					S.worn_icon = initial(S.worn_icon)
 				if(S.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					S.greyscale_config_worn = initial(S.greyscale_config_worn)
@@ -610,7 +623,7 @@ There are several things that need to be remembered:
 					M.worn_icon = icon_file
 				//monkestation edit: add more functionality to sprite sheets for modular and GAGS usage
 			else
-				if(M.worn_icon != initial(M.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(M.worn_icon != initial(M.worn_icon) && initial(M.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					M.worn_icon = initial(M.worn_icon)
 				if(M.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					M.greyscale_config_worn = initial(M.greyscale_config_worn)
@@ -644,7 +657,7 @@ There are several things that need to be remembered:
 					B.worn_icon = icon_file
 				//monkestation edit: add more functionality to sprite sheets for modular and GAGS usage
 			else
-				if(B.worn_icon != initial(B.worn_icon)) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
+				if(B.worn_icon != initial(B.worn_icon) && initial(B.worn_icon) != null) //for modular usage, if we DONT use sprite sheets, but the previous owner's species did, then we need to put it back to the original worn icon
 					B.worn_icon = initial(B.worn_icon)
 				if(B.greyscale_config_worn) //to put it back to initial if a sprite sheet species and a non sprite sheet species trade GAGS clothes
 					B.greyscale_config_worn = initial(B.greyscale_config_worn)
@@ -663,10 +676,13 @@ There are several things that need to be remembered:
 	remove_overlay(LEGCUFF_LAYER)
 	clear_alert("legcuffed")
 	if(legcuffed)
-		var/path = dna?.species.get_custom_icons("generic")
-		if(!path)
-			path = 'icons/mob/mob.dmi'
-		overlays_standing[LEGCUFF_LAYER] = mutable_appearance(path, "legcuff1", -LEGCUFF_LAYER)
+		var/mutable_appearance/legcuff_overlay = mutable_appearance('icons/mob/mob.dmi', "legcuff1", -LEGCUFF_LAYER)
+		if(legcuffed.blocks_emissive)
+			var/mutable_appearance/legcuff_blocker = mutable_appearance('icons/mob/mob.dmi', "legcuff1", plane = EMISSIVE_PLANE, appearance_flags = KEEP_APART)
+			legcuff_blocker.color = GLOB.em_block_color
+			legcuff_overlay.overlays += legcuff_blocker
+
+		overlays_standing[LEGCUFF_LAYER] = legcuff_overlay
 		apply_overlay(LEGCUFF_LAYER)
 		throw_alert("legcuffed", /atom/movable/screen/alert/restrained/legcuffed, new_master = src.legcuffed)
 
@@ -926,6 +942,14 @@ generate/load female uniform sprites matching all previously decided variables
 				eye_overlay.pixel_x += dna.species.offset_features[OFFSET_FACE][1]
 				eye_overlay.pixel_y += dna.species.offset_features[OFFSET_FACE][2]
 			add_overlay(eye_overlay)
+
+			if (E && E.is_emissive)
+				var/mutable_appearance/emissive_appearance = emissive_appearance('icons/mob/human_face.dmi', E ? E.eye_icon_state : "eyes_missing", -BODY_LAYER)
+				emissive_appearance.appearance_flags &= ~RESET_TRANSFORM
+				if(OFFSET_FACE in dna.species.offset_features)
+					emissive_appearance.pixel_x += dna.species.offset_features[OFFSET_FACE][1]
+					emissive_appearance.pixel_y += dna.species.offset_features[OFFSET_FACE][2]
+				add_overlay(emissive_appearance)
 
 	dna.species.handle_hair(src)
 

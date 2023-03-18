@@ -57,6 +57,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/preferred_map = null
 	var/pda_style = MONO
 	var/pda_color = "#808000"
+	var/pointed_color = "#FF0000"
 	var/show_credits = TRUE
 
 	// Custom Keybindings
@@ -91,6 +92,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/features = list(
 							"body_size" = "Normal",
 							"mcolor" = "FFF",
+							"bellycolor" = "FFF",
 							"ethcolor" = "9c3030",
 							"tail_lizard" = "Smooth",
 							"tail_human" = "None",
@@ -101,7 +103,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							"frills" = "None",
 							"spines" = "None",
 							"body_markings" = "None",
-							"legs" = "Normal Legs",
 							"moth_wings" = "Plain",
 							"ipc_screen" = "Blue",
 							"ipc_antenna" = "None",
@@ -159,6 +160,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/gear_tab = "General"
 
 	var/action_buttons_screen_locs = list()
+
+	var/datum/ui_module/volume_mixer/pref_mixer
+	var/list/channel_volume = list()
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -312,6 +316,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				mutant_colors = TRUE
 
+			if(istype(pref_species, /datum/species/lizard))
+				if(!use_skintones)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Belly Color</h3>"
+				dat += "<span style='border: 1px solid #161616; background-color: #[features["bellycolor"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=belly_color;task=input'>Change</a><BR>"
+
+
 			if(istype(pref_species, /datum/species/ethereal)) //not the best thing to do tbf but I dont know whats better.
 
 				if(!use_skintones)
@@ -448,19 +460,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "</td>"
 					mutant_category = 0
 
-			if("legs" in pref_species.default_features)
-				if(!mutant_category)
-					dat += APPEARANCE_CATEGORY_COLUMN
-
-				dat += "<h3>Legs</h3>"
-
-				dat += "<a href='?_src_=prefs;preference=legs;task=input'>[features["legs"]]</a><BR>"
-
-				mutant_category++
-				if(mutant_category >= MAX_MUTANT_ROWS)
-					dat += "</td>"
-					mutant_category = 0
-
 			if("moth_wings" in pref_species.default_features)
 				if(!mutant_category)
 					dat += APPEARANCE_CATEGORY_COLUMN
@@ -582,7 +581,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			if(CONFIG_GET(flag/join_with_mutant_humans))
 
-				if("wings" in pref_species.default_features && GLOB.r_wings_list.len >1)
+				if("wings" in pref_species.default_features && GLOB.roundstart_wings_list.len >1)
 					if(!mutant_category)
 						dat += APPEARANCE_CATEGORY_COLUMN
 
@@ -617,6 +616,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Action Buttons:</b> <a href='?_src_=prefs;preference=action_buttons'>[(buttons_locked) ? "Locked In Place" : "Unlocked"]</a><br>"
 			dat += "<b>Hotkey Mode:</b> <a href='?_src_=prefs;preference=hotkeys'>[(hotkeys) ? "Hotkeys" : "No Hotkeys"]</a><br>" //MONKESTATION CHANGE: makes hotkey mode on by default
 			dat += "<br>"
+			dat += "<b>Pointed Color:</b><span style='border:1px solid #161616; background-color: [pointed_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=pointed_color;task=input'>Change</a><BR>"
 			dat += "<b>PDA Color:</b> <span style='border:1px solid #161616; background-color: [pda_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=pda_color;task=input'>Change</a><BR>"
 			dat += "<b>PDA Style:</b> <a href='?_src_=prefs;task=input;preference=pda_style'>[pda_style]</a><br>"
 			dat += "<br>"
@@ -1597,6 +1597,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else
 							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
 
+				if("belly_color")
+					var/new_bellycolor = input(user, "Choose your character's mutant secondary color:", "Character Preference","#"+features["belly_color"]) as color|null
+					if(new_bellycolor)
+						var/temp_hsv = RGBtoHSV(new_bellycolor)
+						if(new_bellycolor == "#000000")
+							features["bellycolor"] = pref_species.default_color
+						else if((MUTCOLORS_PARTSONLY in pref_species.species_traits) || ReadHSV(temp_hsv)[3] >= ReadHSV("#7F7F7F")[3]) // mutantcolors must be bright, but only if they affect the skin
+							features["bellycolor"] = sanitize_hexcolor(new_bellycolor)
+						else
+							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+
 				if("color_ethereal")
 					var/new_etherealcolor = input(user, "Choose your ethereal color", "Character Preference") as null|anything in GLOB.color_list_ethereal
 					if(new_etherealcolor)
@@ -1647,7 +1658,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if("wings")
 					var/new_wings
-					new_wings = input(user, "Choose your character's wings:", "Character Preference") as null|anything in GLOB.r_wings_list
+					new_wings = input(user, "Choose your character's wings:", "Character Preference") as null|anything in GLOB.roundstart_wings_list
 					if(new_wings)
 						features["wings"] = new_wings
 
@@ -1669,16 +1680,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_body_markings)
 						features["body_markings"] = new_body_markings
 
-				if("legs")
-					var/new_legs
-					new_legs = input(user, "Choose your character's legs:", "Character Preference") as null|anything in GLOB.legs_list
-					if(new_legs)
-						features["legs"] = new_legs
-
 				if("moth_wings")
 					var/new_moth_wings
 
-					new_moth_wings = input(user, "Choose your character's wings:", "Character Preference") as null|anything in GLOB.moth_wings_list
+					new_moth_wings = input(user, "Choose your character's wings:", "Character Preference") as null|anything in GLOB.roundstart_moth_wings_list
 
 					if(new_moth_wings)
 						features["moth_wings"] = new_moth_wings
@@ -1798,6 +1803,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/pickedstyle = input(user, "Choose how you want balloon alerts displayed", "Balloon alert preference", BALLOON_ALERT_ALWAYS) as null|anything in list(BALLOON_ALERT_ALWAYS, BALLOON_ALERT_WITH_CHAT, BALLOON_ALERT_NEVER)
 					if (!isnull(pickedstyle))
 						see_balloon_alerts = pickedstyle
+				if("pointed_color")
+					var/pickedPointedColor = input(user, "Choose the color of the arrow you point with.", "Character Preference", pointed_color) as color|null
+					if(pickedPointedColor)
+						pointed_color = pickedPointedColor
 
 		else
 			switch(href_list["preference"])
