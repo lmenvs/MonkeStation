@@ -43,4 +43,3 @@
 	strip_delay = 80
 	equip_delay_other = 80
 	resistance_flags = NONE
-	sprite_sheets = FLAG_SIMIAN | FLAG_LIZARD

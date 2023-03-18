@@ -12,7 +12,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
-	sprite_sheets = FLAG_SIMIAN
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/rank/cargo/tech
 	name = "cargo technician's jumpsuit"
@@ -20,6 +20,7 @@
 	icon_state = "cargo"
 	item_state = "cargo"
 	body_parts_covered = CHEST|GROIN|ARMS
+	supports_variations = DIGITIGRADE_VARIATION
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/cargo/tech/skirt
@@ -30,7 +31,8 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
-	sprite_sheets = FLAG_SIMIAN
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
+
 /obj/item/clothing/under/rank/cargo/miner
 	desc = "It's a snappy jumpsuit with a sturdy set of overalls. It is very dirty."
 	name = "shaft miner's jumpsuit"

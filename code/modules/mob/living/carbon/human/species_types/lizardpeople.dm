@@ -25,7 +25,7 @@
 	inert_mutation = FIREBREATH
 	deathsound = 'sound/voice/lizard/deathsound.ogg'
 	species_language_holder = /datum/language_holder/lizard
-	digitigrade_customization = DIGITIGRADE_FORCED
+	digitigrade_customization = DIGITIGRADE_OPTIONAL
 
 	species_chest = /obj/item/bodypart/chest/lizard
 	species_head = /obj/item/bodypart/head/lizard
@@ -55,15 +55,4 @@
 	species_traits = list(MUTCOLORS,EYECOLOR,LIPS, NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_NOGUNS,TRAIT_NOBREATH)
 	species_language_holder = /datum/language_holder/lizard/ash
-
-
-/datum/species/lizard/get_custom_icons(var/part)
-	switch(part)
-		if("uniform")
-			return 'monkestation/icons/mob/species/lizard/lizard_uniforms.dmi'
-		if("shoes")
-			return 'monkestation/icons/mob/species/lizard/lizard_shoes.dmi'
-		if("suit")
-			return 'monkestation/icons/mob/species/lizard/lizard_suits.dmi'
-		else
-			return
+	digitigrade_customization = DIGITIGRADE_FORCED
