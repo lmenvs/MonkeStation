@@ -605,6 +605,7 @@
 			icon_state = "crow_knife"
 			qdel(given_item)
 	else if(istype(src, /mob/living/simple_animal/chicken/crow/Gary))
+		adjust_happiness(3, user)
 		var/mob/living/simple_animal/chicken/crow/Gary/gary_tide = src
 		if(istype(given_item, /obj/item/coin))
 			gary_tide.held_coins ++
