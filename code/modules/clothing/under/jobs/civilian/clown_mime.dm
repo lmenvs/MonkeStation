@@ -12,7 +12,8 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
 	fitted = FEMALE_UNIFORM_TOP
-	sprite_sheets = FLAG_SIMIAN
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
+
 
 /obj/item/clothing/under/rank/civilian/mime/sexy
 	name = "sexy mime outfit"
@@ -66,7 +67,6 @@
 	greyscale_config = null
 	greyscale_config_worn = null
 	greyscale_colors = null
-	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/rank/civilian/clown/Initialize(mapload)
 	. = ..()

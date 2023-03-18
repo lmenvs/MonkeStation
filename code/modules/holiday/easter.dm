@@ -98,7 +98,6 @@
 	slowdown = -1
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	sprite_sheets = FLAG_SIMIAN | FLAG_LIZARD
 
 //Egg prizes and egg spawns!
 /obj/item/food/egg

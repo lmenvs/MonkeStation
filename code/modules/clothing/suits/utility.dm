@@ -30,7 +30,6 @@
 	strip_delay = 60
 	equip_delay_other = 60
 	resistance_flags = FIRE_PROOF
-	sprite_sheets = FLAG_SIMIAN | FLAG_LIZARD
 
 /obj/item/clothing/suit/fire/firefighter
 	icon_state = "firesuit"
@@ -98,7 +97,6 @@
 	strip_delay = 70
 	equip_delay_other = 70
 	resistance_flags = NONE
-	sprite_sheets = FLAG_SIMIAN | FLAG_LIZARD
 
 
 /obj/item/clothing/head/bomb_hood/security
@@ -154,4 +152,3 @@
 	flags_inv = HIDEJUMPSUIT
 	resistance_flags = NONE
 	rad_flags = RAD_PROTECT_CONTENTS
-	sprite_sheets = FLAG_SIMIAN | FLAG_LIZARD

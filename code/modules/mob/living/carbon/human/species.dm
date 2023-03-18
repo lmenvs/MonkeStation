@@ -946,7 +946,101 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	// off loading this to a secondary proc for easier reading of the code
 	bodyparts_to_add = handle_mutant_bodylist(human_host)
 
-	human_host.update_body_parts()
+	if("tail_lizard" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_lizard"
+
+	if("waggingtail_lizard" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "waggingtail_lizard"
+		else if ("tail_lizard" in mutant_bodyparts)
+			bodyparts_to_add -= "waggingtail_lizard"
+
+	if("tail_human" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_human"
+
+	if("waggingtail_human" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "waggingtail_human"
+		else if ("tail_human" in mutant_bodyparts)
+			bodyparts_to_add -= "waggingtail_human"
+
+
+	if("spines" in mutant_bodyparts)
+		if(!H.dna.features["spines"] || H.dna.features["spines"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "spines"
+
+	if("waggingspines" in mutant_bodyparts)
+		if(!H.dna.features["spines"] || H.dna.features["spines"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "waggingspines"
+		else if ("tail" in mutant_bodyparts)
+			bodyparts_to_add -= "waggingspines"
+
+	if("snout" in mutant_bodyparts) //Take a closer look at that snout!
+		if((H.wear_mask?.flags_inv & HIDEFACE) || (H.head?.flags_inv & HIDEFACE) || !HD)
+			bodyparts_to_add -= "snout"
+
+	if("frills" in mutant_bodyparts)
+		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || (H.head?.flags_inv & HIDEEARS) || !HD)
+			bodyparts_to_add -= "frills"
+
+	if("horns" in mutant_bodyparts)
+		if(!H.dna.features["horns"] || H.dna.features["horns"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD)
+			bodyparts_to_add -= "horns"
+
+	if("ears" in mutant_bodyparts)
+		if(!H.dna.features["ears"] || H.dna.features["ears"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD)
+			bodyparts_to_add -= "ears"
+
+	if("wings" in mutant_bodyparts)
+		if(!H.dna.features["wings"] || H.dna.features["wings"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))
+			bodyparts_to_add -= "wings"
+
+	if("wings_open" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception)))
+			bodyparts_to_add -= "wings_open"
+		else if ("wings" in mutant_bodyparts)
+			bodyparts_to_add -= "wings_open"
+
+	if("ipc_screen" in mutant_bodyparts)
+		if(!H.dna.features["ipc_screen"] || H.dna.features["ipc_screen"] == "None" || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEYES)) || !HD)
+			bodyparts_to_add -= "ipc_screen"
+
+	if("ipc_antenna" in mutant_bodyparts)
+		if(!H.dna.features["ipc_antenna"] || H.dna.features["ipc_antenna"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD)
+			bodyparts_to_add -= "ipc_antenna"
+
+//monkestation edit: add simian species
+	if("tail_monkey" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_monkey"
+//monkestation edit end
+
+	////PUT ALL YOUR WEIRD ASS REAL-LIMB HANDLING HERE
+	///Digi handling
+	if(H.dna.species.bodytype & BODYTYPE_DIGITIGRADE)
+		var/uniform_compatible = FALSE
+		var/suit_compatible = FALSE
+		if(!(H.w_uniform) || (H.w_uniform.supports_variations & DIGITIGRADE_VARIATION) || (H.w_uniform.supports_variations & DIGITIGRADE_VARIATION_NO_NEW_ICON)) //Checks uniform compatibility
+			uniform_compatible = TRUE
+		if((!H.wear_suit) || (H.wear_suit.supports_variations & DIGITIGRADE_VARIATION) || !(H.wear_suit.body_parts_covered & LEGS) || (H.wear_suit.supports_variations & DIGITIGRADE_VARIATION_NO_NEW_ICON)) //Checks suit compatability
+			suit_compatible = TRUE
+
+		if((uniform_compatible && suit_compatible) || (suit_compatible && H.wear_suit?.flags_inv & HIDEJUMPSUIT)) //If the uniform is hidden, it doesnt matter if its compatible
+			for(var/obj/item/bodypart/BP as() in H.bodyparts)
+				if(BP.bodytype & BODYTYPE_DIGITIGRADE)
+					BP.limb_id = "digitigrade"
+
+		else
+			for(var/obj/item/bodypart/BP as() in H.bodyparts)
+				if(BP.bodytype & BODYTYPE_DIGITIGRADE)
+					BP.limb_id = "lizard"
+	///End digi handling
+
+
+	////END REAL-LIMB HANDLING
+	H.update_body_parts()
 
 
 	if(!bodyparts_to_add)
@@ -1153,7 +1247,11 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				return FALSE
 			if(human_host.num_legs < 2)
 				return FALSE
-			return equip_delay_self_check(I, human_host, bypass_equip_delay_self)
+			if((bodytype & BODYTYPE_DIGITIGRADE) && !(I.supports_variations & DIGITIGRADE_VARIATION))
+				if(!disable_warning)
+					to_chat(H, "<span class='warning'>The footwear around here isn't compatible with your feet!</span>")
+				return FALSE
+			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(ITEM_SLOT_BELT)
 			if(human_host.belt)
 				return FALSE

@@ -6,7 +6,6 @@
 	can_adjust = FALSE
 	strip_delay = 100
 	resistance_flags = NONE
-	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/costume/jabroni
 	name = "jabroni outfit"
@@ -42,6 +41,7 @@
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
 	sprite_sheets = FLAG_SIMIAN
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/costume/schoolgirl/red
 	name = "red schoolgirl uniform"
@@ -104,7 +104,7 @@
 	fitted = NO_FEMALE_UNIFORM
 	can_adjust = FALSE
 	resistance_flags = NONE
-	sprite_sheets = FLAG_SIMIAN
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/costume/gladiator/ash_walker
 	desc = "This gladiator uniform appears to be covered in ash and fairly dated."
@@ -118,7 +118,6 @@
 	body_parts_covered = CHEST|GROIN
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
-	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/costume/maid/Initialize(mapload)
 	. = ..()
@@ -131,7 +130,6 @@
 	icon_state = "geisha"
 	body_parts_covered = CHEST|GROIN|ARMS
 	can_adjust = FALSE
-	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/costume/kamishimo
 	name = "kamishimo"
@@ -152,7 +150,6 @@
 	icon_state = "sailor"
 	item_state = "b_suit"
 	can_adjust = FALSE
-	sprite_sheets = FLAG_SIMIAN
 
 /obj/item/clothing/under/costume/singer
 	desc = "Just looking at this makes you want to sing."
@@ -200,6 +197,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
+	supports_variations = DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/costume/drfreeze
 	name = "doctor freeze's jumpsuit"
