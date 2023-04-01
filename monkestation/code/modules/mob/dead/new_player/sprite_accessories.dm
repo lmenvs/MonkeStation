@@ -7,6 +7,13 @@
 	hasinner = 1
 	color_src = CUSTOM
 
+/datum/sprite_accessory/ears/pony
+	name = "Pony"
+	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "pony"
+	color_src = CUSTOM
+
+
 //TAILS
 /datum/sprite_accessory/tails/monkey
 	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
@@ -55,3 +62,10 @@
 	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
 	icon_state = "xeno"
 	color_src = 0
+
+/datum/sprite_accessory/tails/human/pony
+	name = "Pony"
+	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "pony"
+	color_src = CUSTOM
+

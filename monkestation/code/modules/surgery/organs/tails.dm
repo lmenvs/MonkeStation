@@ -57,4 +57,10 @@
 	tail_type = "Xeno"
 	mutant_bodypart_name = list("tail_human")
 
-
+/obj/item/organ/tail/pony
+	name = "pony tail"
+	desc = "This must have belonged to the prettiest pony!"
+	icon = 'monkestation/icons/mob/mutant_bodyparts.dmi'
+	icon_state = "pony"
+	tail_type = "Pony"
+	mutant_bodypart_name = list("tail_human")

@@ -67,6 +67,18 @@
 	weeb_screams = list('monkestation/sound/voice/screams/misc/shark_scream0.ogg')
 	weeb_laughs = list('monkestation/sound/voice/screams/misc/shark_scream0.ogg')
 
+/obj/item/anime/pony
+	name = "anime pony dermal implant"
+	desc = "manufactured for maximum horseplay"
+	icon_state = "pony"
+	ears = new /obj/item/organ/ears/pony
+	tail = new /obj/item/organ/tail/pony
+	food_likes = FRUIT | VEGETABLES | JUNKFOOD | GRAIN
+	food_dislikes =  MEAT | RAW | DAIRY
+	weeb_screams = list('monkestation/sound/voice/screams/misc/horse1.ogg','monkestation/sound/voice/screams/misc/horse2.ogg','monkestation/sound/voice/screams/misc/horse3.ogg')
+	weeb_laughs = list('monkestation/sound/voice/screams/misc/horse1.ogg','monkestation/sound/voice/screams/misc/horse2.ogg','monkestation/sound/voice/screams/misc/horse3.ogg')
+
+
 //ANIME TRAIT SPAWNER//
 /obj/item/choice_beacon/anime
 	name = "anime dermal implant kit"
